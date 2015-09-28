@@ -3,13 +3,13 @@
         <div class="item item-image">
             <img ng-src="{{image}}">
         </div>
-        <button class="button button-full button-large button-balanced">Start a new expedition</button>
+        <button class="button button-full button-large button-balanced" ng-click="openNewExpeditionModal()">Start a new expedition</button>
         <ion-list>
             <div class="item item-divider">
                 Recent Expeditions
             </div>
-            <ion-item class="item-icon-right" ng-repeat="expedition in recentExpeditions" ui-sref="expedition({id: expedition.id})">
-                {{expedition.name}}
+            <ion-item class="item-icon-right" ng-repeat="expedition in recentExpeditions" ui-sref="tab.expeditions({filter: expedition.id})">
+                {{expedition.title}}
                 <i class="icon ion-ios-arrow-right icon-accessory"></i>
             </ion-item>
         </ion-list>

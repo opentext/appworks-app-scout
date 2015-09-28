@@ -1,10 +1,10 @@
 <ion-view view-title="Expeditions">
     <ion-content>
         <ion-list>
-            <ion-item class="item-icon-right" ng-repeat="expedition in expeditions"
-                      type="item-text-wrap" ui-sref="expedition({id: expedition.id})">
+            <ion-item class="item-icon-right" ng-repeat="expedition in expeditions | filter: filterFn"
+                      type="item-text-wrap" ui-sref="tab.expedition({id: expedition.id})">
 
-                <h2>{{expedition.name}}</h2>
+                <h2>{{expedition.title}}</h2>
 
                 <i class="icon ion-ios-arrow-right icon-accessory"></i>
 
@@ -14,4 +14,9 @@
             </ion-item>
         </ion-list>
     </ion-content>
+    <ion-footer-bar>
+        <div class="buttons" ng-show="filterActive">
+            <button class="button button-clear button-positive" ng-click="clearFilter()">clear filter</button>
+        </div>
+    </ion-footer-bar>
 </ion-view>

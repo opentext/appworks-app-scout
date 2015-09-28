@@ -27,8 +27,10 @@ angular
                     }
                 }
             })
+
             .state('tab.expeditions', {
                 url: '/expeditions',
+                params: {filter: ''},
                 views: {
                     'tab-expeditions': {
                         templateUrl: 'templates/tab-expeditions.html',
@@ -36,20 +38,14 @@ angular
                     }
                 }
             })
-            .state('expedition', {
-                url: '/expeditions/:id'
-            })
-            .state('tab.chat-detail', {
-                url: '/chats/:chatId',
+            .state('tab.expedition', {
+                url: '/expeditions/:id',
                 views: {
-                    'tab-chats': {
-                        templateUrl: 'templates/chat-detail.html',
-                        controller: 'ChatDetailCtrl'
+                    'tab-expeditions': {
+                        templateUrl: 'templates/expeditions/show-expedition.html',
+                        controller: 'ExpeditionDetailController'
                     }
                 }
-            })
-            .state('asset', {
-                url: '/assets/:id'
             })
 
             .state('tab.assets', {
@@ -60,9 +56,18 @@ angular
                         controller: 'AssetsController'
                     }
                 }
+            })
+            .state('tab.asset', {
+                url: '/assets/:id',
+                views: {
+                    'tab-assets': {
+                        templateUrl: 'templates/assets/asset-detail.html',
+                        controller: 'AssetDetailController'
+                    }
+                }
             });
+
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');
-
     });

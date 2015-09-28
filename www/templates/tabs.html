@@ -5,20 +5,20 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/dash">
-    <ion-nav-view name="tab-dash"></ion-nav-view>
-  </ion-tab>
+    <!-- Dashboard Tab -->
+    <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" ui-sref="tab.dash">
+        <ion-nav-view name="tab-dash"></ion-nav-view>
+    </ion-tab>
 
-  <!-- Expeditions Tab -->
-  <ion-tab title="Expeditions" icon-off="ion-ios-albums-outline" icon-on="ion-ios-albums" href="#/tab/expeditions">
-    <ion-nav-view name="tab-expeditions"></ion-nav-view>
-  </ion-tab>
+    <!-- Expeditions Tab -->
+    <ion-tab title="Expeditions" icon-off="ion-ios-albums-outline" icon-on="ion-ios-albums" ui-sref="tab.expeditions" on-select="main.onTabSelected(this)">
+        <ion-nav-view name="tab-expeditions"></ion-nav-view>
+    </ion-tab>
 
-  <!-- Assets Tab -->
-  <ion-tab title="Assets" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" href="#/tab/assets">
-    <ion-nav-view name="tab-assets"></ion-nav-view>
-  </ion-tab>
+    <!-- Assets Tab -->
+    <ion-tab title="Assets" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" ui-sref="tab.assets">
+        <ion-nav-view name="tab-assets"></ion-nav-view>
+    </ion-tab>
 
 
 </ion-tabs>

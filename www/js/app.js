@@ -1,5 +1,8 @@
 angular
-    .module('scout', ['ionic', 'scout.controllers', 'scout.services'])
+    .module('scout', ['ionic', 'scout.controllers', 'scout.services']);
+
+angular
+    .module('scout')
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
