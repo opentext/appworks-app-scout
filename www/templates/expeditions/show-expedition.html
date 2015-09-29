@@ -1,1 +1,56 @@
-show expedition
+<ion-footer-bar>
+    <div class="buttons">
+        <button class="button button-clear item-button-right button-positive"
+                ng-disabled="expedition.status === 'complete'"
+                ng-click="completeExpedition()">
+            Complete Expedition
+        </button>
+    </div>
+</ion-footer-bar>
+<ion-content>
+    <div class="list">
+        <label class="item item-input">
+            <input type="text" placeholder="Expedition Title" ng-model="expedition.title">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Starts</span>
+            <input type="date" ng-model="expedition.starts">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Ends</span>
+            <input type="date" ng-model="expedition.ends">
+        </label>
+        <div style="text-transform: uppercase;"
+             ng-class="{
+            'item': true,
+            'item-stable': expedition.status === 'pending',
+            'item-energized': expedition.status === 'submitted',
+            'item-assertive': expedition.status === 'rejected',
+            'item-balanced': expedition.status === 'complete'
+            }">
+            Status: {{expedition.status}}
+        </div>
+        <button class="button button-block button-clear button-positive"
+                ng-click="openNewLocationModal()">
+            Add Location
+        </button>
+        <button class="button button-block button-clear button-positive"
+                ng-click="openExpensesModal()">
+            Record Expenses
+        </button>
+        <div class="spacer"></div>
+        <div class="item item-divider">
+            Locations
+        </div>
+        <div class="item" ng-show="expedition.locations.length === 0">
+            No locations added yet
+        </div>
+        <a class="item item-icon-right"
+           ui-sref="location({expeditionId: expedition.id})"
+           ng-repeat="location in expedition.locations">
+            {{location.name}}
+            <i class="icon ion-ios-arrow-right"></i>
+        </a>
+    </div>
+</ion-content>
+

@@ -19,6 +19,49 @@ angular.module('scout.services', [])
         }
     })
 
+    .factory('Locations', function ($q) {
+        var locations = [
+            {
+                id: 1,
+                expeditionId: 0,
+                name: 'New Zealand'
+            },
+            {
+                id:2,
+                expeditionId: 0,
+                name: 'Bali'
+            },
+            {
+                id: 3,
+                expeditionId: 1,
+                name: 'Papa New Guinea'
+            }
+        ];
+
+        return {
+            get: function (params) {
+                if (angular.isDefined(params.expeditionId)) {
+                    return locations.filter(function (location) {
+                        return location.expeditionId === params.expeditionId;
+                    });
+                } else if(angular.isDefined(params.id)) {
+                    return locations.filter(function (location) {
+                        return location.id === params.id;
+                    });
+                } else {
+                    return locations;
+                }
+            },
+            create: function (newLocation) {
+                var promise = $q.defer();
+                newLocation.id = Math.ceil(Math.random() * 1000);
+                locations.push(newLocation);
+                promise.resolve(newLocation);
+                return promise.promise;
+            }
+        }
+    })
+
     .factory('Expeditions', function ($q) {
         // Might use a resource here that returns a JSON array
 
@@ -26,28 +69,33 @@ angular.module('scout.services', [])
         var expeditions = [{
             id: 0,
             title: 'Ben Sparrow',
-            lastText: 'You on your way?',
-            face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
+            starts: new Date(2013, 9, 22),
+            ends: new Date(2013, 9, 25),
+            status: 'pending'
         }, {
             id: 1,
             title: 'Max Lynx',
-            lastText: 'Hey, it\'s me',
-            face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
+            starts: new Date(2013, 9, 22),
+            ends: new Date(2013, 9, 25),
+            status: 'submitted'
         }, {
             id: 2,
             title: 'Adam Bradleyson',
-            lastText: 'I should buy a boat',
-            face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
+            starts: new Date(2013, 9, 22),
+            ends: new Date(2013, 9, 25),
+            status: 'complete'
         }, {
             id: 3,
             title: 'Perry Governor',
-            lastText: 'Look at my mukluks!',
-            face: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png'
+            starts: new Date(2013, 9, 22),
+            ends: new Date(2013, 9, 25),
+            status: 'rejected'
         }, {
             id: 4,
             title: 'Mike Harrington',
-            lastText: 'This is wicked good ice cream.',
-            face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
+            starts: new Date(2013, 9, 22),
+            ends: new Date(2013, 9, 25),
+            status: 'pending'
         }];
 
         return {
@@ -64,16 +112,29 @@ angular.module('scout.services', [])
             recent: function () {
                 return expeditions;
             },
-            remove: function (chat) {
-                expeditions.splice(expeditions.indexOf(chat), 1);
+            remove: function (expedition) {
+                expeditions.splice(expeditions.indexOf(expedition), 1);
             },
-            get: function (chatId) {
+            get: function (id) {
                 for (var i = 0; i < expeditions.length; i++) {
-                    if (expeditions[i].id === parseInt(chatId)) {
+                    if (expeditions[i].id === parseInt(id)) {
                         return expeditions[i];
                     }
                 }
                 return null;
+            },
+            update: function (updated) {
+                angular.forEach(expeditions, function (expedition, i) {
+                    if (expedition.id === updated.id) {
+                        expeditions[i] = angular.copy(updated);
+                    }
+                });
+            },
+            complete: function (expedition) {
+                var promise = $q.defer();
+                expedition.status = 'submitted';
+                promise.resolve();
+                return promise.promise;
             }
         };
     });

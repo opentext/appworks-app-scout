@@ -1,4 +1,4 @@
-angular.module('scout.controllers', [])
+angular.module('scout.controllers', ['angular-appworks']);
 
     //.controller('DashCtrl', function ($scope, Expeditions) {
     //    $scope.recentExpeditions = Expeditions.all();
