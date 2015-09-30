@@ -2,9 +2,9 @@
     <ion-content>
         <ion-list>
             <div ng-repeat="asset in assets" ui-sref="tab.asset({id: asset.id})">
-                <img src="img/yosemite.jpg" height="200" width="100%">
+                <img ng-src="{{asset.imgSrc}}" height="200" width="100%">
                 <p class="padding">
-                    {{asset.title}}
+                    {{asset.name}}
                 </p>
             </div>
         </ion-list>

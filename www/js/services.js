@@ -24,17 +24,39 @@ angular.module('scout.services', [])
             {
                 id: 1,
                 expeditionId: 0,
-                name: 'New Zealand'
+                name: 'New Zealand',
+                coords: {
+                    latitude: 1,
+                    longitude: 1,
+                    altitude: 100,
+                    heading: 450,
+                    timestamp: new Date().getTime()
+                },
+                notes: 'Some generic notes for this location'
             },
             {
                 id:2,
                 expeditionId: 0,
-                name: 'Bali'
+                name: 'Bali',
+                coords: {
+                    latitude: 1,
+                    longitude: 1,
+                    altitude: 100,
+                    heading: 450,
+                    timestamp: new Date().getTime()
+                }
             },
             {
                 id: 3,
                 expeditionId: 1,
-                name: 'Papa New Guinea'
+                name: 'Papa New Guinea',
+                coords: {
+                    latitude: 1,
+                    longitude: 1,
+                    altitude: 100,
+                    heading: 450,
+                    timestamp: new Date().getTime()
+                }
             }
         ];
 
@@ -59,6 +81,40 @@ angular.module('scout.services', [])
                 locations.push(newLocation);
                 promise.resolve(newLocation);
                 return promise.promise;
+            }
+        }
+    })
+
+    .factory('Assets', function (StockImage) {
+        var assets = [{
+            id: 0,
+            locationId: 0,
+            imgSrc: StockImage.random(),
+            name: 'My Asset 1'
+        }, {
+            id: 1,
+            locationId: 0,
+            imgSrc: StockImage.random(),
+            name: 'My Asset 2'
+        }, {
+            id: 2,
+            locationId: 1,
+            imgSrc: StockImage.random(),
+            name: 'My Asset 3'
+        }, {
+            id: 3,
+            locationId: 2,
+            imgSrc: StockImage.random(),
+            name: 'My Asset 4'
+        }, {
+            id: 4,
+            locationId: 3,
+            imgSrc: StockImage.random(),
+            name: 'My Asset 5'
+        }];
+        return {
+            all: function () {
+                return assets;
             }
         }
     })

@@ -4,10 +4,16 @@
             Location Coordinates for {{location.name}}
         </div>
         <div class="item item-text-wrap">
-            {{location.coords}}
+            Latitude: {{location.coords.latitude}}
+            <br/>
+            Longitude: {{location.coords.longitude}}
+            <br/>
+            Altitude: {{location.coords.altitude}}
+            <br/>
+            Heading: {{location.coords.heading}}
         </div>
     </div>
-    <div class="card">
+    <div class="card" ng-show="location.notes">
         <div class="item item-divider">
             Notes
         </div>
