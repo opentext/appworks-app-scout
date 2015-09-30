@@ -1,0 +1,26 @@
+<ion-view view-title="Assets">
+    <ion-footer-bar>
+        <div class="buttons">
+            <button class="button button-clear item-button-right button-positive"
+                    ng-click="performAddAsset()">
+                Add a New Asset
+            </button>
+        </div>
+    </ion-footer-bar>
+    <ion-content>
+        <ion-list>
+            <div class="card" ng-show="assets.length === 0">
+                <div class="item item-text-wrap">
+                    No assets have beeen added yet
+                </div>
+            </div>
+            <div ng-repeat="asset in assets" ui-sref="tab.asset({id: asset.id})">
+                <img src="img/yosemite.jpg" height="200" width="100%">
+                <p class="padding">
+                    {{asset.title}}
+                </p>
+            </div>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

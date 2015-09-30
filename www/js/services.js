@@ -42,12 +42,13 @@ angular.module('scout.services', [])
             get: function (params) {
                 if (angular.isDefined(params.expeditionId)) {
                     return locations.filter(function (location) {
-                        return location.expeditionId === params.expeditionId;
+                        return parseInt(location.expeditionId) === parseInt(params.expeditionId);
                     });
                 } else if(angular.isDefined(params.id)) {
-                    return locations.filter(function (location) {
-                        return location.id === params.id;
+                    var list = locations.filter(function (location) {
+                        return parseInt(location.id) === parseInt(params.id);
                     });
+                    return list.pop();
                 } else {
                     return locations;
                 }
@@ -116,12 +117,10 @@ angular.module('scout.services', [])
                 expeditions.splice(expeditions.indexOf(expedition), 1);
             },
             get: function (id) {
-                for (var i = 0; i < expeditions.length; i++) {
-                    if (expeditions[i].id === parseInt(id)) {
-                        return expeditions[i];
-                    }
-                }
-                return null;
+                var list = expeditions.filter(function (expedition) {
+                    return parseInt(expedition.id) === parseInt(id);
+                });
+                return list.pop();
             },
             update: function (updated) {
                 angular.forEach(expeditions, function (expedition, i) {

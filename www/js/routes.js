@@ -47,6 +47,33 @@ angular
                     }
                 }
             })
+            .state('tab.locations', {
+                url: '/expeditions/:expeditionId/locations',
+                views: {
+                    'tab-expeditions': {
+                        template: 'not implemented yet'
+                    }
+                }
+            })
+            .state('tab.location', {
+                url: '/expeditions/:expeditionId/locations/:locationId',
+                views: {
+                    'tab-expeditions': {
+                        templateUrl: 'templates/locations/show-location.html',
+                        controller: 'LocationDetailController'
+                    }
+                }
+            })
+            .state('tab.assetsForLocation', {
+                url: '/expeditions/:expeditionId/locations/:locationId/assets',
+                views: {
+                    'tab-expeditions': {
+                        templateUrl: 'templates/assets/assets.html',
+                        controller: 'AssetsController'
+                    }
+                }
+            })
+
 
             .state('tab.assets', {
                 url: '/assets',

@@ -46,7 +46,7 @@
             No locations added yet
         </div>
         <a class="item item-icon-right"
-           ui-sref="location({expeditionId: expedition.id})"
+           ui-sref="tab.location({locationId: location.id, expeditionId: expedition.id})"
            ng-repeat="location in expedition.locations">
             {{location.name}}
             <i class="icon ion-ios-arrow-right"></i>
