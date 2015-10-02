@@ -85,7 +85,7 @@ angular.module('scout.services', [])
         }
     })
 
-    .factory('Assets', function (StockImage) {
+    .factory('Assets', function (StockImage, $q) {
         var assets = [{
             id: 0,
             locationId: 0,
@@ -115,6 +115,14 @@ angular.module('scout.services', [])
         return {
             all: function () {
                 return assets;
+            },
+            create: function (newAsset) {
+                var promise = $q.defer();
+                newAsset.id = Math.ceil(Math.random() * 1000);
+                newAsset.imgSrc = StockImage.random();
+                assets.push(newAsset);
+                promise.resolve(newAsset);
+                return promise.promise;
             }
         }
     })
