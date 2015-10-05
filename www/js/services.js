@@ -123,6 +123,11 @@ angular.module('scout.services', [])
                 assets.push(newAsset);
                 promise.resolve(newAsset);
                 return promise.promise;
+            },
+            get: function (id) {
+                return assets.filter(function (asset) {
+                    return parseInt(asset.id) === parseInt(id);
+                }).pop();
             }
         }
     })
