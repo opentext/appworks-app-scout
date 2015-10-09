@@ -54,6 +54,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
     function completeExpedition() {
         if (confirm('Are you sure you want to submit this expedition?')) {
             Expedition.complete($scope.expedition);
+            $scope.expedition.status = Expedition.STATUS.submitted;
         }
     }
 

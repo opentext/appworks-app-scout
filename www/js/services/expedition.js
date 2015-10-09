@@ -29,11 +29,15 @@
             return expeditions;
         }
 
-        function complete(expedition) {
+        function complete(completedExpedition) {
             var promise = $q.defer();
-            expedition.status = 'submitted';
-            save();
-            promise.resolve();
+            angular.forEach(expeditions, function (expedition) {
+                if (parseInt(expedition.id) === parseInt(completedExpedition.id)) {
+                    expedition.status = STATUS.submitted;
+                    save();
+                    promise.resolve();
+                }
+            });
             return promise.promise;
         }
 
@@ -76,7 +80,8 @@
             get: get,
             recent: all,
             update: update,
-            save: save
+            save: save,
+            STATUS: STATUS
         }
     }
 
