@@ -2,8 +2,8 @@ angular
     .module('scout.controllers')
     .controller('LocationDetailController', LocationDetailController);
 
-function LocationDetailController($scope, $stateParams, $ionicModal, Expeditions, Locations) {
+function LocationDetailController($scope, $stateParams, $ionicModal, Expedition, Location) {
 
-    $scope.location = Locations.get({id: $stateParams.locationId});
-    $scope.expedition = Expeditions.get($stateParams.expeditionId);
+    $scope.location = Location.get({id: $stateParams.locationId});
+    $scope.expedition = Expedition.get($stateParams.expeditionId);
 }

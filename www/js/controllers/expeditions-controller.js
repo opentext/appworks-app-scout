@@ -2,8 +2,8 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionsController', ExpeditionsController);
 
-function ExpeditionsController($scope, Expeditions, $stateParams, $state) {
-    $scope.expeditions = Expeditions.all();
+function ExpeditionsController($scope, Expedition, $stateParams, $state) {
+    $scope.expeditions = Expedition.all();
     $scope.remove = function ($index) {
         $scope.expeditions.splice($index, 1);
     };

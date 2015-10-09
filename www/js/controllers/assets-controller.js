@@ -2,16 +2,15 @@ angular
     .module('scout.controllers')
     .controller('AssetsController', AssetsController);
 
-function AssetsController($scope, Assets, $stateParams, $ionicModal, Locations) {
+function AssetsController($scope, Asset, $stateParams, $ionicModal, Location) {
     // we are viewing a list of assets for a location, or all of the assets for the app
     if ($stateParams.locationId) {
-        $scope.location = Locations.get({id: $stateParams.locationId});
-        $scope.assets = Assets.all().filter(function (expedition) {
-            return parseInt(expedition.id) === parseInt($stateParams.locationId);
-        });
+        $scope.location = Location.get({id: $stateParams.locationId});
+        $scope.assets = Asset.get({locationId: $stateParams.locationId});
+        console.log($scope.assets);
         $scope.newAsset = {};
     } else {
-        $scope.assets = Assets.all();
+        $scope.assets = Asset.all();
     }
 
     $ionicModal.fromTemplateUrl('templates/assets/new-asset.html', {
@@ -32,7 +31,7 @@ function AssetsController($scope, Assets, $stateParams, $ionicModal, Locations) 
 
     function saveAsset(asset) {
         asset.locationId = $scope.location.id;
-        Assets.create(asset).then(function (newAsset) {
+        Asset.create(asset, $stateParams.locationId, $stateParams.expeditionId).then(function (newAsset) {
             $scope.assets.push(newAsset);
             closeModal();
         });

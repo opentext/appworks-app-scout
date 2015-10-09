@@ -2,10 +2,10 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditions, Locations, $appworks) {
+function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expedition, Location) {
 
-    $scope.expedition = Expeditions.get($stateParams.id);
-    $scope.expedition.locations = Locations.get({expeditionId: $scope.expedition.id});
+    $scope.expedition = Expedition.get($stateParams.id);
+    console.log($scope.expedition);
 
     $ionicModal.fromTemplateUrl('templates/expeditions/new-location.html', {
         scope: $scope,
@@ -31,14 +31,13 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
 
     function updateExpedition(newVal) {
         if (newVal) {
-            Expeditions.update($scope.expedition);
+            Expedition.update($scope.expedition);
         }
     }
 
     function addNewLocation(newLocation) {
-        Locations.create(newLocation).then(function (location) {
+        Location.create(newLocation, $scope.expedition.id).then(function (location) {
             $scope.expedition.locations.push(location);
-            updateExpedition(true);
             closeNewLocationModal();
             $scope.newLocation = {};
         });
@@ -46,7 +45,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
 
     function completeExpedition() {
         if (confirm('Are you sure you want to submit this expedition?')) {
-            Expeditions.complete($scope.expedition);
+            Expedition.complete($scope.expedition);
         }
     }
 

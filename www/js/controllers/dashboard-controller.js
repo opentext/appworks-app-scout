@@ -2,8 +2,8 @@ angular
     .module('scout.controllers')
     .controller('DashCtrl', DashboardController);
 
-function DashboardController($scope, Expeditions, StockImage, $ionicModal, $state) {
-    $scope.recentExpeditions = Expeditions.recent();
+function DashboardController($scope, Expedition, StockImage, $ionicModal, $state) {
+    $scope.recentExpeditions = Expedition.recent();
     $scope.image = StockImage.random();
 
     $scope.newExpedition = {};
@@ -19,7 +19,7 @@ function DashboardController($scope, Expeditions, StockImage, $ionicModal, $stat
     });
 
     function startNewExpedition(expedition) {
-        Expeditions.create(expedition).then(function (expedition) {
+        Expedition.create(expedition).then(function (expedition) {
             $state.go('tab.expeditions', {filter: expedition.id});
             $scope.modal.hide();
         });
