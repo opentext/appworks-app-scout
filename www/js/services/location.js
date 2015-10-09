@@ -54,10 +54,33 @@
             }
         }
 
+        function update(updatedlocation) {
+            angular.forEach(locations, function (location, index) {
+                if (parseInt(location.id) === parseInt(updatedlocation.id)) {
+                    locations[index] = updatedlocation;
+                }
+            });
+            Expedition.save();
+        }
+
+        function remove(locationToRemove) {
+            angular.forEach(Expedition.all(), function (expedition) {
+                angular.forEach(expedition.locations, function (location, index) {
+                    if (parseInt(location.id) === parseInt(locationToRemove.id)) {
+                        console.log(location);
+                        expedition.locations.splice(index, 1);
+                    }
+                });
+            });
+            Expedition.save();
+        }
+
         return {
             all: all,
             create: create,
-            get: get
+            get: get,
+            update: update,
+            remove: remove
         }
     }
 

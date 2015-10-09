@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expedition, Location) {
+function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expedition, Location, $window) {
 
     $scope.expedition = Expedition.get($stateParams.id);
     console.log($scope.expedition);
@@ -23,6 +23,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
     $scope.completeExpedition = completeExpedition;
     $scope.recordCurrentLocation = recordCurrentLocation;
     $scope.addNewLocation = addNewLocation;
+    $scope.removeLocation = removeLocation;
 
     // update expedition if user changes title or dates
     $scope.$watch('expedition.title', updateExpedition);
@@ -41,6 +42,13 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
             closeNewLocationModal();
             $scope.newLocation = {};
         });
+    }
+
+    function removeLocation(location, $index) {
+        if ($window.confirm('Delete this location?')) {
+            Location.remove(location);
+            $scope.expedition.locations.splice($index, 1);
+        }
     }
 
     function completeExpedition() {

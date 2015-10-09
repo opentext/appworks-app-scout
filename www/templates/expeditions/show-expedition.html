@@ -8,7 +8,7 @@
     </div>
 </ion-footer-bar>
 <ion-content>
-    <div class="list">
+    <ion-list>
         <label class="item item-input">
             <input type="text" placeholder="Expedition Title" ng-model="expedition.title">
         </label>
@@ -45,12 +45,17 @@
         <div class="item" ng-show="expedition.locations.length === 0">
             No locations added yet
         </div>
-        <a class="item item-icon-right"
-           ui-sref="tab.location({locationId: location.id, expeditionId: expedition.id})"
-           ng-repeat="location in expedition.locations">
+        <ion-item ui-sref="tab.location({locationId: location.id, expeditionId: expedition.id})"
+                  class="item-icon-right"
+                  item="location"
+                  ng-repeat="location in expedition.locations">
+            <ion-option-button class="button-assertive"
+                               ng-click="removeLocation(location, $index)">
+                Delete
+            </ion-option-button>
             {{location.name}}
             <i class="icon ion-ios-arrow-right"></i>
-        </a>
-    </div>
+        </ion-item>
+    </ion-list>
 </ion-content>
 
