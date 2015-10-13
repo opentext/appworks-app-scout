@@ -2,12 +2,13 @@ angular
     .module('scout.controllers')
     .controller('AssetsController', AssetsController);
 
-function AssetsController($scope, Asset, $stateParams, $ionicModal, Location) {
+function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $appworks, StockImage) {
+    $scope.StockImage = StockImage;
+
     // we are viewing a list of assets for a location, or all of the assets for the app
     if ($stateParams.locationId) {
         $scope.location = Location.get({id: $stateParams.locationId});
         $scope.assets = Asset.get({locationId: $stateParams.locationId});
-        console.log($scope.assets);
         $scope.newAsset = {};
     } else {
         $scope.assets = Asset.all();
@@ -26,7 +27,16 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location) {
     $scope.saveAsset = saveAsset;
 
     function handleCamera(asset) {
-        // TODO open camera, save image to device, bind dataUrl to imgSrc property, store the path to retrieve the image from secure storage
+        var name = 'photo-' + new Date().getTime() + '.jpg';
+        if ($appworks.camera) {
+            asset.imgSrc = StockImage.random();
+            asset.assetName = name;
+            //$appworks.camera.takePicture(function (dataUrl) {
+            //    // TODO upload dataUrl to content server
+            //    asset.imgSrc = StockImage.random();
+            //    asset.assetName = name;
+            //});
+        }
     }
 
     function saveAsset(asset) {
@@ -35,6 +45,7 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location) {
             $scope.assets.push(newAsset);
             closeModal();
         });
+        $scope.newAsset = {};
     }
 
     function clearNewAsset() {

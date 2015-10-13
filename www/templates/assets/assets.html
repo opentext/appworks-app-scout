@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="list" ng-repeat="asset in assets" ui-sref="tab.asset({id: asset.id})">
-                <img ng-src="{{asset.imgSrc}}" width="100%">
+                <img ng-src="{{asset.imgSrc || StockImage.notes()}}" width="100%">
                 <a class="item item-icon-right">
                     <i class="icon ion-ios-arrow-right"></i>
                     {{asset.name}}

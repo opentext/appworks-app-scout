@@ -20,6 +20,9 @@
             },
             random: function () {
                 return images[Math.floor(Math.random() * images.length)];
+            },
+            notes: function () {
+                return 'img/notes.png';
             }
         }
     }

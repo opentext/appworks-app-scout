@@ -26,8 +26,6 @@
         function create(newAsset, locationId, expeditionId) {
             var promise = $q.defer();
 
-            // TODO upload image to content server if there is one
-            newAsset.imgSrc = StockImage.random();
             newAsset.id = Math.ceil(Math.random() * 1000);
             newAsset.locationId = locationId;
             newAsset.expeditionId = expeditionId;
@@ -42,7 +40,7 @@
             });
             Expedition.save();
             loadAssets();
-            promise.resolve(newAsset);
+            promise.resolve(angular.copy(newAsset));
             return promise.promise;
         }
 
