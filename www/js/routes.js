@@ -1,6 +1,5 @@
 angular
-    .module('scout', ['ionic', 'scout.controllers', 'scout.services'])
-
+    .module('scout')
     .config(function ($stateProvider, $urlRouterProvider) {
 
         // Ionic uses AngularUI Router which uses the concept of states
