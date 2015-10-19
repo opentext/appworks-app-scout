@@ -29,13 +29,11 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
     function handleCamera(asset) {
         var name = 'photo-' + new Date().getTime() + '.jpg';
         if ($appworks.camera) {
-            asset.imgSrc = StockImage.random();
-            asset.assetName = name;
-            //$appworks.camera.takePicture(function (dataUrl) {
-            //    // TODO upload dataUrl to content server
-            //    asset.imgSrc = StockImage.random();
-            //    asset.assetName = name;
-            //});
+            $appworks.camera.takePicture(function (dataUrl) {
+                // TODO upload dataUrl to content server
+                asset.imgSrc = dataUrl;
+                asset.assetName = name;
+            });
         }
     }
 

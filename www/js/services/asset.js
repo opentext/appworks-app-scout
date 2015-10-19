@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Asset', Asset);
 
-    function Asset(Expedition, Location, $q, StockImage) {
+    function Asset(Expedition, Location, $q, $http, $appworks) {
 
         var assets = [];
         loadAssets();
@@ -61,10 +61,14 @@
             }
         }
 
+        function upload(asset, data) {
+        }
+
         return {
             all: all,
             create: create,
-            get: get
+            get: get,
+            upload: upload
         }
     }
 

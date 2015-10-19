@@ -30,8 +30,8 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
     $scope.$watch('expedition.starts', updateExpedition);
     $scope.$watch('expedition.ends', updateExpedition);
 
-    function updateExpedition(newVal) {
-        if (newVal) {
+    function updateExpedition(newVal, oldVal) {
+        if (newVal && newVal !== oldVal) {
             Expedition.update($scope.expedition);
         }
     }

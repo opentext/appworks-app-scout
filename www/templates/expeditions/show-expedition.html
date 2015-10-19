@@ -1,7 +1,7 @@
 <ion-footer-bar>
     <div class="buttons">
         <button class="button button-clear item-button-right button-positive"
-                ng-disabled="expedition.status === 'complete'"
+                ng-disabled="expedition.status === 'complete' || expedition.status === 'submitted'"
                 ng-click="completeExpedition()">
             Complete Expedition
         </button>
