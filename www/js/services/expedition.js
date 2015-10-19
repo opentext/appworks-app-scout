@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Expedition', Expedition);
 
-    function Expedition($appworks, $q, $http, Blob) {
+    function Expedition($appworks, $q, $http, Blob, $auth) {
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             CS_STORAGE_FOLDER_ID = 54239,
@@ -115,7 +115,7 @@
 
         function generateUploadReq(file) {
             var formData = new FormData();
-            formData.append('cstoken', 'ABeiw8On+SUeqeIY6RfoEtJwDIvtlHkiQofZMa+Y7rwDVitAWnPNueHiAgSwK2rk');
+            formData.append('cstoken', $auth.getCSToken());
             formData.append('file', file, 'expeditions.json');
             return {
                 options: {

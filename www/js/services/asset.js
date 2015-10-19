@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Asset', Asset);
 
-    function Asset(Expedition, Location, $q, $http, $appworks) {
+    function Asset(Expedition, Location, $q, $http, $auth) {
 
         var assets = [],
             CS_STORAGE_FOLDER_ID = 54873;
@@ -99,7 +99,7 @@
 
         function generateUploadReq(file, name) {
             var formData = new FormData();
-            formData.append('cstoken', 'kMB1Ppf80q0isL9698AnBAY1/jIF6CuNFFGBHBt4hGGbz8oIGdWGSPKCB4eAD4q+');
+            formData.append('cstoken', $auth.getCSToken());
             formData.append('file', file, name);
             return {
                 options: {
