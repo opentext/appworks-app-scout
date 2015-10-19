@@ -35,7 +35,7 @@
             });
             Expedition.save();
             loadLocations();
-            promise.resolve(newLocation);
+            promise.resolve(angular.copy(newLocation));
             return promise.promise;
         }
 

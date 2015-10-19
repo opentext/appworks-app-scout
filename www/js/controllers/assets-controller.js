@@ -29,11 +29,18 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
     function handleCamera(asset) {
         var name = 'photo-' + new Date().getTime() + '.jpg';
         if ($appworks.camera) {
-            $appworks.camera.takePicture(function (dataUrl) {
-                // TODO upload dataUrl to content server
-                asset.imgSrc = dataUrl;
-                asset.assetName = name;
+            var dataUrl = 'data:image/gif;base64,R0lGODdhMAAwAPAAAAAAAP///ywAAAAAMAAwAAAC8IyPqcvt3wCcDkiLc7C0qwyGHhSWpjQu5yqmCYsapyuvUUlvONmOZtfzgFzByTB10QgxOR0TqBQejhRNzOfkVJ+5YiUqrXF5Y5lKh/DeuNcP5yLWGsEbtLiOSpa/TPg7JpJHxyendzWTBfX0cxOnKPjgBzi4diinWGdkF8kjdfnycQZXZeYGejmJlZeGl9i2icVqaNVailT6F5iJ90m6mvuTS4OK05M0vDk0Q4XUtwvKOzrcd3iq9uisF81M1OIcR7lEewwcLp7tuNNkM3uNna3F2JQFo97Vriy/Xl4/f1cf5VWzXyym7PHhhx4dbgYKAAA7';
+            Asset.upload(dataUrl, name).then(function (res) {
+                console.log(res);
             });
+            //$appworks.camera.takePicture(function (dataUrl) {
+            //    // TODO upload dataUrl to content server
+            //    Asset.upload(dataUrl, name).then(function (res) {
+            //        console.log(res);
+            //    });
+            //    asset.imgSrc = dataUrl;
+            //    asset.assetName = name;
+            //});
         }
     }
 

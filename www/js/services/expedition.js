@@ -80,7 +80,7 @@
 
         function save() {
             var blob = new Blob([JSON.stringify(expeditions)], {type: "application/json;charset=utf-8"}),
-                req = createUploadReq(blob),
+                req = generateUploadReq(blob),
                 nodeId = $appworks.cache.getItem(CS_STORAGE_KEY),
                 url;
 
@@ -113,7 +113,7 @@
             }
         }
 
-        function createUploadReq(file) {
+        function generateUploadReq(file) {
             var formData = new FormData();
             formData.append('cstoken', 'ABeiw8On+SUeqeIY6RfoEtJwDIvtlHkiQofZMa+Y7rwDVitAWnPNueHiAgSwK2rk');
             formData.append('file', file, 'expeditions.json');
