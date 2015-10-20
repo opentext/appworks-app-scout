@@ -18,11 +18,11 @@
     "angular-sanitize": "~1.4.4",
     "appworks": "appworks-js#*"
   },
-  "_release": "dfe1c38e85",
+  "_release": "5978bfb714",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "dfe1c38e85370c6c33cef70584cf5bf5a5e31c87"
+    "commit": "5978bfb71498007ca5d7268b4ce15996a549c95c"
   },
   "_source": "git://github.com/opentext/angular-appworks.git",
   "_target": "*",

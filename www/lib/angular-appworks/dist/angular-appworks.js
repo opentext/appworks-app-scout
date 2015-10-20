@@ -6,11 +6,6 @@ angular
     .module('angular-appworks')
     .factory('$appworks', ['$window', appworksService]);
 
-// content server service
-angular
-    .module('angular-appworks')
-    .service('$contentServer', ['$appworks', contentServerService]);
-
 function appworksService($window) {
     if ($window.appworks) {
         var $appworks = $window.appworks;
@@ -21,136 +16,45 @@ function appworksService($window) {
 
     };
 }
-function contentServerService($appworks) {
-    var self = this;
+function AppWorksAuth() {
+    'use strict';
 
-    self.items = {};
-    self.store = $appworks.cache;
+    var authObject;
 
-    function clear() {
-        self.items = {};
-        self.store.removeObj('$contentServer.items');
+    function bindGlobalAuthObject(auth) {
+        var event = new CustomEvent('appworksjs.auth');
+        window.otagtoken = auth.otagtoken;
+        window.otdsticket = auth.otdsticket;
+        window.gatewayUrl = auth.gatewayUrl;
+        authObject = auth;
+        event.data = auth;
+        document.dispatchEvent(event);
     }
 
-    function addItem(item, callback, err) {
-        // TODO make $http call to add item
-        item.id = Math.ceil(Math.random() * 10000);
-
-        self.items[item.parent] = self.items[item.parent] || [];
-        self.items[item.parent].push(item);
-
-        save();
-        return callback(item);
+    function getAuthObject() {
+        return authObject;
     }
 
-    function getRootItems(id, callback, refresh) {
-        var collection;
-        if (refresh) {
-            collection = mock(id);
-            // cache items for later retrieval
-            save(id, collection);
+    function authenticate() {
+        if (cordova) {
+            cordova.exec(onAuthenticationSuccess, onAuthenticationError, 'authenticateCordovaController', 'reAuthenticate');
         } else {
-            // check for items in cache, return deserialized collection from cache
-            // if collection with that parent key does not exist, recursively call this method with refresh enabled
-            collection = getRootItemsFromCache(id);
-            if (!collection) {
-                return getRootItems(id, callback, true);
-            }
-        }
-        // return all items with parent === id
-        return callback(collection);
-    }
-
-    function getRootItemsFromCache(id) {
-        var items = self.store.getObj('$contentServer.items');
-        if (items) {
-            self.items[id] = items[id];
-            return angular.copy(items[id]);
+            console.error('Cordova must be loaded before authenticating');
         }
     }
 
-    function save(id, collection) {
-        if (id !== undefined) {
-            self.items[id] = angular.copy(collection);
-        }
-        storeItemsInCache();
+    function onAuthenticationSuccess(data) {
+        console.log(data);
     }
 
-    function storeItemsInCache() {
-        self.store.setObj('$contentServer.items', self.items);
-    }
-
-    function collectItemsByParent(items, parentId) {
-        var collection = [];
-        for (var item in items) {
-            if (items[item].parent == parentId) {
-                collection.push(items[item]);
-            }
-        }
-        return collection;
-    }
-
-    function mock(id) {
-        var fakeItem1 = {
-                id: 1,
-                name: 'Fake Item 1',
-                description: 'A mocked out item',
-                parent: 3,
-                type: 0,
-                children: []
-            },
-            fakeItem2 = {
-                id: 2,
-                name: 'Fake Item 2',
-                description: 'Another mocked out item',
-                parent: 3,
-                type: 0,
-                children: []
-            },
-            fakeItem3 = {
-                id: 3,
-                name: 'Fake Item 3',
-                description: 'Yet another mocked out item',
-                parent: null,
-                type: 0,
-                children: [fakeItem2, fakeItem1]
-            },
-            fakeItem4 = {
-                id: 4,
-                name: 'Fake Item 4',
-                description: 'Yet another mocked out item',
-                parent: null,
-                type: 0,
-                children: []
-            },
-            fakeItem5 = {
-                id: 5,
-                name: 'Fake Item 5',
-                description: 'Yet another mocked out item',
-                type: 1,
-                parent: 4,
-                children: []
-            },
-            fakeItem6 = {
-                id: 6,
-                name: 'Fake Item 6',
-                description: 'Yet another mocked out item',
-                type: 1,
-                parent: null,
-                children: []
-            };
-
-
-        var fakeItems = [fakeItem1, fakeItem2, fakeItem3, fakeItem4, fakeItem5, fakeItem6];
-        return collectItemsByParent(fakeItems, id);
-
+    function onAuthenticationError(err) {
+        console.log(err);
     }
 
     return {
-        rootItems: getRootItems,
-        addItem: addItem,
-        save: save,
-        clear: clear
+        bindGlobalAuthObject: bindGlobalAuthObject,
+        getAuth: getAuthObject,
+        authenticate: authenticate
     };
 }
 // define the AMD module
@@ -1313,7 +1217,7 @@ function AppWorksOffline(aw) {
 
     return awOffline;
 }
-function AppWorksNotifications(aw) {
+function AppWorksNotifications(aw, awAuth) {
     'use strict';
 
     var wsProtocol = 'appworks',
@@ -1333,7 +1237,10 @@ function AppWorksNotifications(aw) {
             return off();
         }
         if (notification['appworksjs.auth']) {
-            return bindGlobalAuthObject(notification['appworksjs.auth']);
+            if (window.appworks && window.appworks.auth) {
+                return window.appworks.auth.bindGlobalAuthObject(notification['appworksjs.auth']);
+            }
+            return awAuth.bindGlobalAuthObject(notification['appworksjs.auth']);
         }
         // TODO determine if this notification is intended for this app
         notifications.push(notification);
@@ -1341,16 +1248,6 @@ function AppWorksNotifications(aw) {
         if (userCallback) {
             userCallback(notification);
         }
-    }
-
-    function bindGlobalAuthObject(auth) {
-        var event = new CustomEvent('appworksjs.auth');
-        window.otagtoken = auth.otagtoken;
-        window.otdsticket = auth.otdsticket;
-        window.gatewayUrl = auth.gatewayUrl;
-        aw.auth = auth;
-        event.data = auth;
-        document.dispatchEvent(event);
     }
 
     function registerUserCallback(callback) {
@@ -1396,7 +1293,8 @@ function AppWorksNotifications(aw) {
         aw.storage = new AppWorksStorage(aw);
         aw.comms = new AppWorksComms(aw);
         aw.offline = new AppWorksOffline(aw);
-        aw.notifications = new AppWorksNotifications(aw);
+        aw.auth = new AppWorksAuth(aw);
+        aw.notifications = new AppWorksNotifications(aw, aw.auth);
 
         // error checking
         if (!global.cordova) {

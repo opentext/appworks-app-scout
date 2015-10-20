@@ -80,20 +80,23 @@
 
         function save() {
             var blob = new Blob([JSON.stringify(expeditions)], {type: "application/json;charset=utf-8"}),
-                req = generateUploadReq(blob),
-                nodeId = $appworks.cache.getItem(CS_STORAGE_KEY),
+                req,
+                nodeId = CS_STORAGE_FOLDER_ID,
                 url;
 
-            $appworks.cache.setItem(STORAGE_KEY, expeditions);
+            $auth.reauth().then(function () {
+                req = generateUploadReq(blob);
+                // persist object to content server
+                if (nodeId) {
+                    url = generateUrl(nodeId, 'update');
+                    $http.post(url, req.request, req.options).success(onUploadSuccess);
+                } else {
+                    url = generateUrl(CS_STORAGE_FOLDER_ID);
+                    $http.post(url, req.request, req.options).success(onUploadSuccess);
+                }
+            });
 
-            // persist object to content server
-            if (nodeId) {
-                url = generateUrl(nodeId, 'update');
-                $http.post(url, req.request, req.options).success(onUploadSuccess);
-            } else {
-                url = generateUrl(CS_STORAGE_FOLDER_ID);
-                $http.post(url, req.request, req.options).success(onUploadSuccess);
-            }
+            $appworks.cache.setItem(STORAGE_KEY, expeditions);
         }
 
         function generateUrl(nodeId, addVersion) {

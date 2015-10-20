@@ -5,14 +5,30 @@
         .module('scout.services')
         .factory('$auth', authService);
 
-    function authService() {
+    function authService($appworks, $q) {
+
+        var authObject = {},
+            authPromise;
+
+        document.addEventListener('appworksjs.auth', function (data) {
+            authObject = data.data.authResponse;
+            authPromise.resolve(data.data);
+        });
+
+        function reauth() {
+            authPromise = $q.defer();
+            $appworks.auth.authenticate();
+            return authPromise.promise;
+        }
 
         function getCSToken() {
-            return '2Eym2HaZbnBqzHq4KSQsV8mmh/OvIon/Qr8RFZPtV9wIGKkzSYiaPL08gYu5di5Z';
+            console.log(authObject.cstoken);
+            return authObject.cstoken;
         }
 
         return {
-            getCSToken: getCSToken
+            getCSToken: getCSToken,
+            reauth: reauth
         };
     }
 })();

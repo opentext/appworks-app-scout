@@ -5,8 +5,3 @@ angular.module('angular-appworks', []);
 angular
     .module('angular-appworks')
     .factory('$appworks', ['$window', appworksService]);
-
-// content server service
-angular
-    .module('angular-appworks')
-    .service('$contentServer', ['$appworks', contentServerService]);
