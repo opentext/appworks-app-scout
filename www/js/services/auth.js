@@ -11,6 +11,8 @@
             authPromise;
 
         document.addEventListener('appworksjs.auth', function (data) {
+            console.log($appworks.auth);
+            console.log(data);
             authObject = data.data.authResponse;
             authPromise.resolve(data.data);
         });
@@ -26,9 +28,19 @@
             return authObject.cstoken;
         }
 
+        function getGatewayUrl() {
+            return window.gatewayUrl;
+        }
+
+        function getAuth() {
+            return authObject;
+        }
+
         return {
             getCSToken: getCSToken,
-            reauth: reauth
+            reauth: reauth,
+            gatewayUrl: getGatewayUrl,
+            getAuth: getAuth
         };
     }
 })();

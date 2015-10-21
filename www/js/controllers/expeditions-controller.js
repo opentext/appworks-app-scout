@@ -28,7 +28,7 @@ function ExpeditionsController($scope, Expedition, $stateParams, $state) {
 
     function filter(actual) {
         if ($scope.filterActive) {
-            return actual.id === $scope.filter;
+            return actual.objectId === $scope.filter;
         }
         return true;
     }

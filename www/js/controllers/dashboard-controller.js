@@ -19,9 +19,9 @@ function DashboardController($scope, Expedition, StockImage, $ionicModal, $state
     });
 
     function startNewExpedition(expedition) {
-        Expedition.create(expedition).then(function (expedition) {
+        Expedition.create(expedition).then(function () {
             $scope.newExpedition = {};
-            $state.go('tab.expeditions', {filter: expedition.id});
+            $state.go('tab.expeditions');
             $scope.modal.hide();
         });
     }

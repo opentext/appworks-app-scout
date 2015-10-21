@@ -2,7 +2,7 @@
     <ion-content>
         <ion-list>
             <ion-item class="item-icon-right" ng-repeat="expedition in expeditions | filter: filterFn"
-                      type="item-text-wrap" ui-sref="tab.expedition({id: expedition.id})">
+                      type="item-text-wrap" ui-sref="tab.expedition({id: expedition.objectId})">
 
                 <h2>{{expedition.title}}</h2>
 
