@@ -20,6 +20,7 @@ function DashboardController($scope, Expedition, StockImage, $ionicModal, $state
 
     function startNewExpedition(expedition) {
         Expedition.create(expedition).then(function (expedition) {
+            $scope.newExpedition = {};
             $state.go('tab.expeditions', {filter: expedition.id});
             $scope.modal.hide();
         });

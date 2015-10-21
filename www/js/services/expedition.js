@@ -55,10 +55,10 @@
             expedition.id = Math.ceil(Math.random() * 10000);
             expedition.locations = [];
             expedition.status = STATUS.pending;
-            expeditions.push(expedition);
+            expeditions.push(angular.copy(expedition));
             // TODO start workflow via api, store id in CS_STORAGE_FOLDER_ID
             save();
-            promise.resolve(expedition);
+            promise.resolve(angular.copy(expedition));
             return promise.promise;
         }
 
@@ -81,7 +81,7 @@
         function save() {
             var blob = new Blob([JSON.stringify(expeditions)], {type: "application/json;charset=utf-8"}),
                 req,
-                nodeId = CS_STORAGE_FOLDER_ID,
+                nodeId = 54850,
                 url;
 
             $auth.reauth().then(function () {
@@ -100,7 +100,7 @@
         }
 
         function generateUrl(nodeId, addVersion) {
-            var url = 'http://localhost:8080/content/v4/nodes/' + nodeId;
+            var url = 'http://localhost:8080/content/v4/nodes/' + 54850;
             if (addVersion) {
                 url += '/content';
             } else {

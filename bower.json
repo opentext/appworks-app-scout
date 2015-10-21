@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "angular-appworks": "*",
-    "angular-file-saver": "~0.7.1"
+    "angular-file-saver": "~0.7.1",
+    "ionic": "~1.1.0"
   }
 }
