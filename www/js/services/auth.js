@@ -10,15 +10,16 @@
         var authObject = {},
             authPromise;
 
-        document.addEventListener('appworksjs.auth', function (data) {
-            console.log($appworks.auth);
+        function onReauth(data) {
             console.log(data);
             authObject = data.data.authResponse;
             authPromise.resolve(data.data);
-        });
+            document.removeEventListener('appworksjs.auth', onReauth);
+        }
 
         function reauth() {
             authPromise = $q.defer();
+            document.addEventListener('appworksjs.auth', onReauth);
             $appworks.auth.authenticate();
             return authPromise.promise;
         }

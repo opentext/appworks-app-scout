@@ -41,10 +41,14 @@
             angular.forEach(expeditions, function (expedition) {
                 if (parseInt(expedition.objectId) === parseInt(completedExpedition.objectId)) {
                     expedition.status = STATUS.submitted;
-                    promise.resolve();
+                    showLoading();
+                    updateObject(expedition, expedition.objectId).then(function (res) {
+                        hideLoading();
+                        save();
+                        promise.resolve(res);
+                    });
                 }
             });
-            save();
             return promise.promise;
         }
 
@@ -68,31 +72,68 @@
 
             showLoading();
 
-            $auth.reauth().then(function () {
+            // reauthenticate, then start workflow via scout service
+            $auth.reauth().then(onAuthSuccess, onAuthFail);
 
-                expedition.locations = [];
-                expedition.status = STATUS.new;
-                expedition.scoutUsername = $auth.getAuth().csUsername;
-                expedition.scoutUserId = $auth.getAuth().csUserId;
-                expedition.expensesReportIncluded = false;
-
+            function onAuthSuccess() {
                 request = {
                     title: expedition.title,
-                    status: expedition.status,
-                    scoutUsername: expedition.scoutUsername,
-                    scoutUserId: expedition.scoutUserId,
+                    status: STATUS.new,
+                    scoutUsername: $auth.getAuth().csUsername,
+                    scoutUserId: $auth.getAuth().csUserId,
                     expensesReportIncluded: false
                 };
 
                 config.headers.cstoken = $auth.getCSToken();
-                $http.post(url, request, config).success(function (res) {
-                    console.log(res);
-                    expeditions.push(angular.copy(expedition));
-                    promise.resolve(res);
+
+                function onStartExpeditionWorkflowSuccess(res) {
+                    console.log('starting expedition workflow succeeded: ', res);
+
+                    // store expedition model from scout service call
+                    res.starts = expedition.starts;
+                    res.ends = expedition.ends;
+                    res.locations = [];
+                    expedition = angular.copy(res);
+
+                    function onCreateExpeditionObjectSuccess(res) {
+                        console.log('tried to create expedition.json', res);
+
+                        // store this id as it is essential, the expedition.json file in CS
+                        expedition.objectId = res.id;
+                        expeditions.push(angular.copy(expedition));
+
+                        // finally, save the expeditions to local storage
+                        $appworks.cache.setItem(STORAGE_KEY, expeditions);
+
+                        promise.resolve(expedition);
+                        hideLoading();
+                    }
+
+                    function onCreateExpeditionObjectError(err) {
+                        console.log(err);
+                        hideLoading();
+                        // retry
+                        createObject(expedition, res.folderId);
+                    }
+
+                    // upload the expedition.json file to CS
+                    createObject(expedition, res.folderId).then(onCreateExpeditionObjectSuccess, onCreateExpeditionObjectError);
+                }
+
+                function onStartExpeditionWorkflowError(err) {
+                    console.log('starting expedition workflow failed', err);
                     hideLoading();
-                    save();
-                });
-            });
+                    // retry
+                    create(expedition);
+                }
+
+                $http.post(url, request, config).success(onStartExpeditionWorkflowSuccess).error(onStartExpeditionWorkflowError);
+            }
+
+            function onAuthFail(err) {
+                console.log('authentication failed. retrying', err);
+                create(expedition);
+            }
 
             return promise.promise;
         }
@@ -106,41 +147,36 @@
 
         function update(updated) {
             angular.forEach(expeditions, function (expedition, i) {
+
                 if (expedition.objectId === updated.objectId) {
+                    // update the model
                     expeditions[i] = angular.copy(updated);
+                    // persist the model's json file in CS
+                    showLoading();
+                    updateObject(expeditions[i], expedition.objectId).then(function (res) {
+                        console.log('expedition updated', res);
+                        hideLoading();
+                        // save the model in local storage
+                        save();
+                    }, function (err) {
+                        console.log('update failed. retrying', err);
+                        // failed, retry
+                        update(updated);
+                    });
                 }
             });
-            save();
         }
 
-        function save() {
+        function save(updateBackend) {
+            $appworks.cache.setItem(STORAGE_KEY, expeditions);
 
-            showLoading();
-            convertDatesToDateString();
-            // get a fresh CS token, then iterate over the list of expeditions and
-            // persist each object in a expedition.json file in the backend
-            // if an expedition.json file exists, overwrite the existing one
-            // if an expedition.json file does not exist, create one, store the id
-            // to reference that json file in content server, and then update the json file once again with this new id attached to the object
-            $auth.reauth().then(function () {
-
-                hideLoading();
-
-                angular.forEach(expeditions, function (expedition) {
-                    // perform an update or create a new expedition.json file
-                    if (expedition.objectId) {
-                        // update existing expedition.json file with current object
-                        updateObject(expedition, expedition.objectId);
-                    } else {
-                        createObject(expedition, expedition.folderId).then(function (res) {
-                            console.log(res);
-                            expedition.objectId = res.id;
-                            update(expedition);
-                        });
-                    }
+            if (updateBackend) {
+                $auth.reauth().then(function () {
+                    angular.forEach(expeditions, function (expedition) {
+                        createObject(expedition, expedition.objectId, true);
+                    });
                 });
-                $appworks.cache.setItem(STORAGE_KEY, expeditions);
-            });
+            }
         }
 
         function updateObject(obj, objId) {

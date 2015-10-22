@@ -2,14 +2,325 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72c3c809-4e56-4e8f-a35b-66c34ff7a974" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-af-ZA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-AE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-BH.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-DZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-EG.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-IQ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-JO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-KW.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-LB.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-LY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-MA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-OM.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-QA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-SA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-SY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-TN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ar-YE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-az-Cyrl-AZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-az-Latn-AZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-be-BY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-bg-BG.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-bs-Latn-BA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ca-ES.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-cs-CZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-cy-GB.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-da-DK.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-de-AT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-de-CH.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-de-DE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-de-LI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-de-LU.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-dv-MV.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-el-GR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-029.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-AU.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-BZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-CA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-GB.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-IE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-JM.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-NZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-PH.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-TT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-US.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-ZA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-en-ZW.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-AR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-BO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-CL.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-CO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-CR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-DO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-EC.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-ES.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-GT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-HN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-MX.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-NI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-PA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-PE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-PR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-PY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-SV.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-UY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-es-VE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-et-EE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-eu-ES.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fa-IR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fi-FI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fo-FO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fr-BE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fr-CA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fr-CH.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fr-FR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fr-LU.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-fr-MC.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-gl-ES.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-gu-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-he-IL.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-hi-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-hr-BA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-hr-HR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-hu-HU.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-hy-AM.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-id-ID.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-is-IS.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-it-CH.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-it-IT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ja-JP.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ka-GE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-kk-KZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-kn-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ko-KR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-kok-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ky-KG.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-lt-LT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-lv-LV.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-mi-NZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-mk-MK.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-mn-MN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-mr-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ms-BN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ms-MY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-mt-MT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-nb-NO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-nl-BE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-nl-NL.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-nn-NO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ns-ZA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-pa-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-pl-PL.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-pt-BR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-pt-PT.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-quz-BO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-quz-EC.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-quz-PE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ro-RO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ru-RU.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sa-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-se-FI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-se-NO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-se-SE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sk-SK.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sl-SI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sma-NO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sma-SE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-smj-NO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-smj-SE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-smn-FI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sms-FI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sq-AL.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sr-Cyrl-BA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sr-Cyrl-CS.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sr-Latn-BA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sr-Latn-CS.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sv-FI.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sv-SE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-sw-KE.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-syr-SY.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ta-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-te-IN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-th-TH.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-tn-ZA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-tr-TR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-tt-RU.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-uk-UA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-ur-PK.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-uz-Cyrl-UZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-uz-Latn-UZ.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-vi-VN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-xh-ZA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-zh-CN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-zh-HK.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-zh-MO.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-zh-SG.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-zh-TW.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/date-zu-ZA.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-af-ZA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-AE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-BH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-DZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-EG.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-IQ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-JO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-KW.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-LB.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-LY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-MA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-OM.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-QA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-SA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-SY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-TN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ar-YE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-az-Cyrl-AZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-az-Latn-AZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-be-BY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-bg-BG.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-bs-Latn-BA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ca-ES.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-cs-CZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-cy-GB.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-da-DK.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-de-AT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-de-CH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-de-DE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-de-LI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-de-LU.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-dv-MV.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-el-GR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-029.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-AU.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-BZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-CA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-GB.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-IE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-JM.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-NZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-PH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-TT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-US.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-ZA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-en-ZW.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-AR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-BO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-CL.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-CO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-CR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-DO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-EC.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-ES.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-GT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-HN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-MX.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-NI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-PA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-PE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-PR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-PY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-SV.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-UY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-es-VE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-et-EE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-eu-ES.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fa-IR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fi-FI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fo-FO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fr-BE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fr-CA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fr-CH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fr-FR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fr-LU.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-fr-MC.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-gl-ES.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-gu-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-he-IL.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-hi-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-hr-BA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-hr-HR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-hu-HU.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-hy-AM.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-id-ID.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-is-IS.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-it-CH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-it-IT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ja-JP.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ka-GE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-kk-KZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-kn-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ko-KR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-kok-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ky-KG.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-lt-LT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-lv-LV.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-mi-NZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-mk-MK.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-mn-MN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-mr-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ms-BN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ms-MY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-mt-MT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-nb-NO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-nl-BE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-nl-NL.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-nn-NO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ns-ZA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-pa-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-pl-PL.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-pt-BR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-pt-PT.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-quz-BO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-quz-EC.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-quz-PE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ro-RO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ru-RU.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sa-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-se-FI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-se-NO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-se-SE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sk-SK.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sl-SI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sma-NO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sma-SE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-smj-NO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-smj-SE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-smn-FI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sms-FI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sq-AL.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sr-Cyrl-BA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sr-Cyrl-CS.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sr-Latn-BA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sr-Latn-CS.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sv-FI.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sv-SE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-sw-KE.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-syr-SY.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ta-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-te-IN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-th-TH.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-tn-ZA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-tr-TR.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-tt-RU.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-uk-UA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-ur-PK.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-uz-Cyrl-UZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-uz-Latn-UZ.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-vi-VN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-xh-ZA.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-zh-CN.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-zh-HK.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-zh-MO.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-zh-SG.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-zh-TW.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/lib/DateJS/build/production/date-zu-ZA.min.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/scoutApp_0.0.0.zip" afterPath="$PROJECT_DIR$/package/scoutApp_0.0.0.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/asset.js" afterPath="$PROJECT_DIR$/www/js/services/asset.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/auth.js" afterPath="$PROJECT_DIR$/www/js/services/auth.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/dashboard-controller.js" afterPath="$PROJECT_DIR$/www/js/controllers/dashboard-controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/expedition.js" afterPath="$PROJECT_DIR$/www/js/services/expedition.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/expeditions-controller.js" afterPath="$PROJECT_DIR$/www/js/controllers/expeditions-controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/tab-dash.html" afterPath="$PROJECT_DIR$/www/templates/tab-dash.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/tab-expeditions.html" afterPath="$PROJECT_DIR$/www/templates/tab-expeditions.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scoutApp.iws" />
@@ -35,7 +346,7 @@
         <entry file="file://$PROJECT_DIR$/www/js/controllers/dashboard-controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+              <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -45,7 +356,17 @@
         <entry file="file://$PROJECT_DIR$/www/js/services/auth.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+              <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="asset.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -54,8 +375,8 @@
       <file leaf-file-name="tab-dash.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.625">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state vertical-scroll-proportion="-8.125">
+              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -94,8 +415,8 @@
       <file leaf-file-name="expedition.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7385399">
-              <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.66213924">
+              <caret line="179" column="9" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -153,16 +474,16 @@
         <option value="$PROJECT_DIR$/www/js/services/location.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/assets-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
-        <option value="$PROJECT_DIR$/www/js/services/asset.js" />
         <option value="$PROJECT_DIR$/www/lib/angular-appworks/dist/appworks.js" />
         <option value="$PROJECT_DIR$/www/lib/angular-appworks/dist/angular-appworks.js" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/www/lib/ionic/js/ios9-browser-fix.js" />
-        <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/expeditions-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-expeditions.html" />
-        <option value="$PROJECT_DIR$/www/js/services/auth.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
+        <option value="$PROJECT_DIR$/www/js/services/auth.js" />
+        <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
+        <option value="$PROJECT_DIR$/www/js/services/asset.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/dashboard-controller.js" />
         <option value="$PROJECT_DIR$/www/js/services/expedition.js" />
       </list>
@@ -181,7 +502,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1637" />
+    <option name="x" value="1680" />
+    <option name="y" value="1" />
     <option name="width" value="1680" />
     <option name="height" value="1013" />
   </component>
@@ -345,6 +667,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scoutApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scoutApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DateJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="production" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -595,8 +947,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1637" y="0" width="1680" height="1013" extended-state="0" />
-    <editor active="true" />
+    <frame x="1680" y="1" width="1680" height="1013" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2983725" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -607,7 +959,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33152762" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33152762" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -889,14 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -961,26 +1305,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.375">
           <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -993,6 +1321,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/expeditions-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1001,18 +1337,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-dash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.125">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/dashboard-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+          <caret line="23" column="57" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7385399">
-          <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.66213924">
+          <caret line="179" column="9" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
           <folding />
         </state>
       </provider>

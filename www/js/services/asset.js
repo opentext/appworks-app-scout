@@ -38,8 +38,8 @@
                         }
                     });
                 }
+                Expedition.update(expedition);
             });
-            Expedition.save();
             loadAssets();
             promise.resolve(angular.copy(newAsset));
             return promise.promise;
