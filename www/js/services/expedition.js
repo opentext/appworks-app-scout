@@ -27,8 +27,8 @@
 
         function convertDatesToDateString() {
             expeditions.map(function (expedition) {
-                expedition.starts = new Date.parseExact(expedition.starts, 'dd-MM-yyyy');
-                expedition.ends = new Date.parseExact(expedition.ends, 'dd-MM-yyyy');
+                expedition.starts = new Date.parse(expedition.starts, 'dd-MM-yyyy');
+                expedition.ends = new Date.parse(expedition.ends, 'dd-MM-yyyy');
             });
         }
 
@@ -146,6 +146,8 @@
         }
 
         function update(updated) {
+            var promise = $q.defer();
+
             angular.forEach(expeditions, function (expedition, i) {
 
                 if (expedition.objectId === updated.objectId) {
@@ -153,11 +155,14 @@
                     expeditions[i] = angular.copy(updated);
                     // persist the model's json file in CS
                     showLoading();
-                    updateObject(expeditions[i], expedition.objectId).then(function (res) {
-                        console.log('expedition updated', res);
-                        hideLoading();
-                        // save the model in local storage
-                        save();
+                    $auth.reauth().then(function () {
+                        updateObject(expeditions[i], expedition.objectId).then(function (res) {
+                            console.log('expedition updated', res);
+                            hideLoading();
+                            // save the model in local storage
+                            save();
+                            promise.resolve(expeditions[i]);
+                        });
                     }, function (err) {
                         console.log('update failed. retrying', err);
                         // failed, retry
@@ -165,6 +170,7 @@
                     });
                 }
             });
+            return promise.promise;
         }
 
         function save(updateBackend) {

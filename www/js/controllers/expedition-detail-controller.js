@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expedition, Location, $window) {
+function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expedition, Location, $window, $appworks) {
 
     $scope.expedition = Expedition.get($stateParams.id);
     console.log($scope.expedition);
@@ -37,8 +37,9 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
     }
 
     function addNewLocation(newLocation) {
-        Location.create(newLocation, $scope.expedition.id).then(function () {
+        Location.create(newLocation, $scope.expedition.objectId).then(function (newLocation) {
             closeNewLocationModal();
+            $scope.expedition.locations.push(newLocation);
             $scope.newLocation = {};
         });
     }
@@ -58,10 +59,10 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
     }
 
     function getCurrentLocation() {
-        //return $appworks.geolocation.getCurrentPosition(function (coords) {
-        //    $scope.newLocation.coords = coords;
-        //});
-        return {x: 1, y: 1};
+        return $appworks.geolocation.getCurrentPosition(function (position) {
+            console.log('current position', position);
+            $scope.$apply($scope.newLocation.coords = angular.copy(position.coords));
+        });
     }
 
     function recordCurrentLocation(newLocation) {

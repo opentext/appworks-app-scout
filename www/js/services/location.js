@@ -29,13 +29,14 @@
             newLocation.id = Math.ceil(Math.random() * 1000);
             newLocation.assets = [];
             angular.forEach(Expedition.all(), function (expedition) {
-                if (parseInt(expeditionId) === parseInt(expedition.id)) {
+                if (parseInt(expeditionId) === parseInt(expedition.objectId)) {
                     expedition.locations.push(newLocation);
+                    Expedition.update(expedition).then(function () {
+                        loadLocations();
+                        promise.resolve(angular.copy(newLocation));
+                    });
                 }
             });
-            Expedition.save();
-            loadLocations();
-            promise.resolve(angular.copy(newLocation));
             return promise.promise;
         }
 
@@ -54,13 +55,13 @@
             }
         }
 
-        function update(updatedlocation) {
+        function update(updatedLocation) {
             angular.forEach(locations, function (location, index) {
-                if (parseInt(location.id) === parseInt(updatedlocation.id)) {
-                    locations[index] = updatedlocation;
+                if (parseInt(location.id) === parseInt(updatedLocation.id)) {
+                    locations[index] = updatedLocation;
+                    Expedition.update(Expedition.get(updatedLocation.expeditionId));
                 }
             });
-            Expedition.save();
         }
 
         function remove(locationToRemove) {
@@ -71,8 +72,8 @@
                         expedition.locations.splice(index, 1);
                     }
                 });
+                Expedition.update(expedition);
             });
-            Expedition.save();
         }
 
         return {
