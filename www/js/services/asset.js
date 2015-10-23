@@ -5,10 +5,10 @@
         .module('scout.services')
         .factory('Asset', Asset);
 
-    function Asset(Expedition, Location, $q, $http, $auth) {
+    function Asset(Expedition, Location, $q, $http, $auth, $ionicLoading) {
 
-        var assets = [],
-            CS_STORAGE_FOLDER_ID = 54873;
+        var assets = [];
+
         loadAssets();
 
         function loadAssets() {
@@ -31,7 +31,7 @@
             newAsset.locationId = locationId;
             newAsset.expeditionId = expeditionId;
             angular.forEach(Expedition.all(), function (expedition) {
-                if (parseInt(expeditionId) === parseInt(expedition.id)) {
+                if (parseInt(expeditionId) === parseInt(expedition.objectId)) {
                     angular.forEach(expedition.locations, function (location) {
                         if (parseInt(locationId) === parseInt(location.id)) {
                             location.assets.push(angular.copy(newAsset));
@@ -62,15 +62,52 @@
             }
         }
 
-        function upload(dataUrl, name) {
-            var blob = dataUrlToBlob(dataUrl),
-                req = generateUploadReq(blob, name),
-                url = generateUrl();
-            return $http.post(url, req.request, req.options);
+        function upload(folderId, name, dataUrl) {
+            var promise = $q.defer(),
+                blob,
+                req,
+                url;
+
+            function onUploadSuccess(res) {
+                hideLoading();
+                promise.resolve(res);
+            }
+
+            function onUploadFail(err) {
+                hideLoading();
+                promise.reject(err);
+            }
+
+            function onAuthFail(err) {
+                hideLoading();
+                console.log('couldnt reauth', err);
+            }
+
+            function onAuthSuccess() {
+                console.log('uploading image to content server...');
+                blob = dataUrlToBlob(dataUrl);
+                req = generateUploadReq(name, blob);
+                url = generateUrl(folderId);
+                $http.post(url, req.request, req.options).success(onUploadSuccess).error(onUploadFail);
+            }
+
+            showLoading();
+
+            $auth.reauth().then(onAuthSuccess, onAuthFail);
+
+            return promise.promise;
         }
 
-        function generateUrl() {
-            return 'http://localhost:8080/content/v4/nodes/' + CS_STORAGE_FOLDER_ID + '/children';
+        function showLoading() {
+            $ionicLoading.show({template: 'Loading...'});
+        }
+
+        function hideLoading() {
+            $ionicLoading.hide();
+        }
+
+        function generateUrl(folderId) {
+            return $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children';
         }
 
         function dataUrlToBlob(dataURL) {
@@ -97,7 +134,7 @@
             return new Blob([uInt8Array], {type: contentType});
         }
 
-        function generateUploadReq(file, name) {
+        function generateUploadReq(name, file) {
             var formData = new FormData();
             formData.append('cstoken', $auth.getCSToken());
             formData.append('file', file, name);
