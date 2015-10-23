@@ -34,7 +34,7 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
                 Asset.upload($scope.expedition.folderId, name, dataUrl).then(function (res) {
                     newAsset.attachments = newAsset.attachments || [];
                     newAsset.attachments.push(res.id);
-                    newAsset.coverImage = dataUrl;
+                    $scope.coverImage = dataUrl;
                 });
             });
         }
