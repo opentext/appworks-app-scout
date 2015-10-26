@@ -81,7 +81,9 @@
                     status: STATUS.new,
                     scoutUsername: $auth.getAuth().csUsername,
                     scoutUserId: $auth.getAuth().csUserId,
-                    expensesReportIncluded: false
+                    expensesReportIncluded: false,
+                    startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
+                    endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
                 };
 
                 config.headers.cstoken = $auth.getCSToken();
