@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expedition, Location, $window, $appworks) {
+function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks) {
 
     $scope.expedition = Expedition.get($stateParams.id);
     console.log($scope.expedition);
@@ -70,9 +70,24 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, Expeditio
     }
 
     function openExpensesModal() {
+        $scope.hideExpenseReportActionSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: 'Open Excel?' }
+            ],
+            titleText: 'Open Expense Report',
+            cancelText: 'Cancel',
+            cancel: function() {
+                closeExpensesModal();
+            },
+            buttonClicked: function() {
+                console.log('downloading spreadsheet (not implemented yet');
+                // TODO use $appworks to download the file to the device, open file in excel
+            }
+        });
     }
 
     function closeExpensesModal() {
+        $scope.hideExpenseReportActionSheet();
     }
 
     function openNewLocationModal() {
