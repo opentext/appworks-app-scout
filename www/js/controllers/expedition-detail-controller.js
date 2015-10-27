@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $document) {
+function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument) {
 
     $scope.expedition = Expedition.get($stateParams.id);
     console.log($scope.expedition);
@@ -81,7 +81,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
             },
             buttonClicked: function () {
                 console.log('downloading expense report spreadsheet...');
-                $document.get($scope.expedition.folderId, 'expense-tracking.xlsx').then(function (res) {
+                $csDocument.get($scope.expedition.folderId, 'expense-tracking.xlsx').then(function (res) {
                     console.log(res);
                 });
                 closeExpensesModal();

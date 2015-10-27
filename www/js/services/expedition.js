@@ -66,7 +66,7 @@
                 request,
                 config = {
                     headers: {
-                        otcsticket: $auth.getCSToken()
+                        otdsticket: $auth.getOTDSTicket()
                     }
                 };
 
@@ -86,7 +86,7 @@
                     endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
                 };
 
-                config.headers.otcsticket = $auth.getCSToken();
+                config.headers.otdsticket = $auth.getOTDSTicket();
 
                 function onStartExpeditionWorkflowSuccess(res) {
                     console.log('starting expedition workflow succeeded: ', res);
@@ -214,7 +214,7 @@
 
         function generateUploadReq(file, name) {
             var formData = new FormData();
-            formData.append('otcsticket', $auth.getCSToken());
+            formData.append('otdsticket', $auth.getOTDSTicket());
             formData.append('file', file, (name || 'expedition.json'));
             return {
                 options: {

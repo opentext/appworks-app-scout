@@ -136,7 +136,7 @@
 
         function generateUploadReq(name, file) {
             var formData = new FormData();
-            formData.append('otcsticket', $auth.getCSToken());
+            formData.append('otdsticket', $auth.getOTDSTicket());
             formData.append('file', file, name);
             return {
                 options: {
