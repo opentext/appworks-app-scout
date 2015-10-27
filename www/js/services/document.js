@@ -16,7 +16,7 @@
                 var url = $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/details',
                     config = {
                         headers: {
-                            otdsticket: $auth.getOTDSTicket()
+                            otcsticket: $auth.getOTCSTicket()
                         }
                     };
                 // find the node id for file named => filename

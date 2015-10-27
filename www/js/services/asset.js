@@ -136,11 +136,13 @@
 
         function generateUploadReq(name, file) {
             var formData = new FormData();
-            formData.append('otdsticket', $auth.getOTDSTicket());
             formData.append('file', file, name);
             return {
                 options: {
-                    headers: {'Content-Type': undefined},
+                    headers: {
+                        'Content-Type': undefined,
+                        'otcsticket': $auth.getOTCSTicket()
+                    },
                     transformRequest: angular.identity
                 },
                 request: formData
