@@ -19,11 +19,9 @@
 
         function downloadFile(fileId, filename, success, fail) {
             var downloadUrl = $auth.gatewayUrl() + '/content/v4/nodes/' + fileId + '/content?versionNum=1&cstoken=' + $auth.getOTCSTicket(),
-                options = {
-                    headers: {
-                        otcsticket: $auth.getOTCSTicket()
-                    }
-                };
+                options = new FileUploadOptions();
+
+            options.headers = {'otcsticket': $auth.getOTCSTicket()};
             $appworks.storage.storeFile(filename, downloadUrl, success, fail, options);
         }
 
