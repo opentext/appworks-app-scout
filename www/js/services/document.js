@@ -22,7 +22,7 @@
                 options = new FileUploadOptions();
 
             options.headers = {'otcsticket': $auth.getOTCSTicket()};
-            $appworks.storage.storeFile(filename, downloadUrl, success, fail, options);
+            $appworks.storage.storeFile(filename, downloadUrl, success, fail, options, true);
         }
 
         function getDocument(folderId, filename) {
