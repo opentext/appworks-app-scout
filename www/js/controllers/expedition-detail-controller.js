@@ -72,7 +72,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
     function openExpensesModal() {
         $scope.hideExpenseReportActionSheet = $ionicActionSheet.show({
             buttons: [
-                { text: 'Open Excel?' }
+                { text: 'Download Expense Report?' }
             ],
             titleText: 'Open Expense Report',
             cancelText: 'Cancel',
@@ -83,6 +83,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
                 console.log('downloading expense report spreadsheet...');
                 $csDocument.get($scope.expedition.folderId, 'expense-tracking.xlsx').then(function (res) {
                     console.log(res);
+                    alert('Download succeeded. Open Excel to view report');
                 });
                 closeExpensesModal();
             }

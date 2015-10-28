@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="72c3c809-4e56-4e8f-a35b-66c34ff7a974" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package/scoutApp_0.0.0.zip" afterPath="$PROJECT_DIR$/package/scoutApp_0.0.0.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/asset.js" afterPath="$PROJECT_DIR$/www/js/services/asset.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/document.js" afterPath="$PROJECT_DIR$/www/js/services/document.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/expedition.js" afterPath="$PROJECT_DIR$/www/js/services/expedition.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" afterPath="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
     </list>
     <ignored path="scoutApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="216" column="64" selection-start-line="216" selection-start-column="64" selection-end-line="216" selection-end-column="64" />
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="60" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -49,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expedition-detail-controller.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="expedition-detail-controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="83" selection-start-line="83" selection-start-column="83" selection-end-line="83" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.4384058">
+              <caret line="85" column="75" selection-start-line="85" selection-start-column="75" selection-end-line="85" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -69,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="document.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="document.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/services/document.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70652175">
-              <caret line="26" column="56" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="87" selection-start-line="26" selection-start-column="87" selection-end-line="26" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -151,10 +149,10 @@
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/www/lib/angular-appworks/dist/angular-appworks.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
         <option value="$PROJECT_DIR$/www/js/services/asset.js" />
         <option value="$PROJECT_DIR$/www/js/services/expedition.js" />
         <option value="$PROJECT_DIR$/www/js/services/document.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
       </list>
     </option>
   </component>
@@ -1020,14 +1018,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="83" selection-start-line="83" selection-start-column="83" selection-end-line="83" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1039,15 +1029,23 @@
     <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="216" column="64" selection-start-line="216" selection-start-column="64" selection-end-line="216" selection-end-column="64" />
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="60" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/document.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70652175">
-          <caret line="26" column="56" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="87" selection-start-line="26" selection-start-column="87" selection-end-line="26" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4384058">
+          <caret line="85" column="75" selection-start-line="85" selection-start-column="75" selection-end-line="85" selection-end-column="75" />
           <folding />
         </state>
       </provider>
