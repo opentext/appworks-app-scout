@@ -37,16 +37,59 @@
         }
 
         function complete(completedExpedition) {
-            var promise = $q.defer();
+            var promise = $q.defer(),
+                url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
+                config,
+                data,
+                existingStatus = completedExpedition.status;
+
             angular.forEach(expeditions, function (expedition) {
                 if (parseInt(expedition.objectId) === parseInt(completedExpedition.objectId)) {
-                    expedition.status = STATUS.submitted;
+
                     showLoading();
-                    updateObject(expedition, expedition.objectId).then(function (res) {
-                        hideLoading();
-                        save();
-                        promise.resolve(res);
-                    });
+
+                    $auth.reauth().then(function () {
+
+                        expedition.status = STATUS.submitted;
+
+                        data = {
+                            workflowId: expedition.workflowId,
+                            startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
+                            endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime(),
+                            status: expedition.status,
+                            scoutUsername: expedition.scoutUsername,
+                            scoutUserId: expedition.scoutUserId,
+                            expensesReportIncluded: expedition.expensesReportIncluded,
+                            reviewComments: expedition.reviewComments,
+                            title: expedition.title,
+                            folderId: expedition.folderId,
+                            completed: expedition.completed
+                        };
+
+                        config = {
+                            headers: {
+                                otdsticket: $auth.getOTDSTicket()
+                            }
+                        };
+
+                        // move the expedition along to the next step in the workflow
+                        $http.put(url, data, config).then(function (res) {
+                            console.log('expedition submission successful', res.data);
+
+                            // save expedition.json on device and in server
+                            updateObject(expedition, expedition.objectId).then(function (res) {
+                                hideLoading();
+                                save();
+                                promise.resolve(res);
+                            });
+
+                        }, function (err) {
+                            console.log('expedition submission failed', err);
+                            expedition.status = existingStatus;
+                            hideLoading();
+                        });
+
+                    }, hideLoading);
                 }
             });
             return promise.promise;
