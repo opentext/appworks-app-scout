@@ -119,11 +119,19 @@
             $auth.reauth().then(onAuthSuccess, onAuthFail);
 
             function onAuthSuccess() {
+                var authResponse = $auth.getAuth();
+
+                if (!authResponse.csUserId) {
+                    alert('auth response does not contain valid cs credentials');
+                    hideLoading();
+                    return promise.reject();
+                }
+
                 request = {
                     title: expedition.title,
                     status: STATUS.new,
-                    scoutUsername: $auth.getAuth().csUsername,
-                    scoutUserId: $auth.getAuth().csUserId,
+                    scoutUsername: authResponse.csUsername,
+                    scoutUserId: authResponse.csUserId,
                     expensesReportIncluded: false,
                     startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
                     endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
