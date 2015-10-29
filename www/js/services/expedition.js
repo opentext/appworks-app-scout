@@ -73,8 +73,9 @@
                         };
 
                         // move the expedition along to the next step in the workflow
+                        console.log('Attempting to submit expedition via scoutService...');
                         $http.put(url, data, config).then(function (res) {
-                            console.log('expedition submission successful', res.data);
+                            console.info('Submission of expedition via scoutService successful', res.data);
 
                             // save expedition.json on device and in server
                             updateObject(expedition, expedition.objectId).then(function (res) {
@@ -84,7 +85,7 @@
                             });
 
                         }, function (err) {
-                            console.log('expedition submission failed', err);
+                            console.error('Submission of expedition via scoutService failed', err);
                             expedition.status = existingStatus;
                             hideLoading();
                         });
@@ -140,7 +141,7 @@
                 config.headers.otdsticket = $auth.getOTDSTicket();
 
                 function onStartExpeditionWorkflowSuccess(res) {
-                    console.log('starting expedition workflow succeeded: ', res);
+                    console.log('Starting expedition workflow via scoutService success: ', res);
 
                     // store expedition model from scout service call
                     res.starts = expedition.starts;
@@ -149,7 +150,7 @@
                     expedition = angular.copy(res);
 
                     function onCreateExpeditionObjectSuccess(res) {
-                        console.log('tried to create expedition.json', res);
+                        console.info('Creating initial expedition.json file via contentService came back with successful response', res);
 
                         // store this id as it is essential, the expedition.json file in CS
                         expedition.objectId = res.id;
@@ -163,28 +164,30 @@
                     }
 
                     function onCreateExpeditionObjectError(err) {
-                        console.log(err);
+                        console.error('Creating initial expedition.json via contentService failed', err);
                         hideLoading();
                         // retry
                         createObject(expedition, res.folderId);
                     }
 
                     // upload the expedition.json file to CS
+                    console.log('Attempting to create initial expedition.json file via contentService...');
                     createObject(expedition, res.folderId).then(onCreateExpeditionObjectSuccess, onCreateExpeditionObjectError);
                 }
 
                 function onStartExpeditionWorkflowError(err) {
-                    console.log('starting expedition workflow failed', err);
+                    console.error('Starting expedition workflow via scoutService failed', err);
                     hideLoading();
                     // retry
                     create(expedition);
                 }
 
+                console.log('Attempting to start expedition workflow via scoutService...');
                 $http.post(url, request, config).success(onStartExpeditionWorkflowSuccess).error(onStartExpeditionWorkflowError);
             }
 
             function onAuthFail(err) {
-                console.log('authentication failed. retrying', err);
+                console.error('authentication failed. retrying', err);
                 create(expedition);
             }
 
@@ -209,15 +212,16 @@
                     // persist the model's json file in CS
                     showLoading();
                     $auth.reauth().then(function () {
+                        console.log('Updating expedition.json via contentService...');
                         updateObject(expeditions[i], expedition.objectId).then(function (res) {
-                            console.log('expedition updated', res);
+                            console.info('Update to expedition.json via contentService success', res);
                             hideLoading();
                             // save the model in local storage
                             save();
                             promise.resolve(expeditions[i]);
                         });
                     }, function (err) {
-                        console.log('update failed. retrying', err);
+                        console.error('Update to expedition.json via contentService failed. Retrying', err);
                         // failed, retry
                         update(updated);
                     });

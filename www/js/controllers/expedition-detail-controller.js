@@ -82,7 +82,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
             buttonClicked: function () {
                 console.log('downloading expense report spreadsheet...');
                 $csDocument.get($scope.expedition.folderId, 'expense-tracking.xlsx').then(function (res) {
-                    console.log(res);
+                    console.log('download of expense report succeeded', res);
                     alert('Download succeeded. Open Excel to view report');
                 });
                 closeExpensesModal();

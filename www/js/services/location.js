@@ -31,7 +31,9 @@
             angular.forEach(Expedition.all(), function (expedition) {
                 if (parseInt(expeditionId) === parseInt(expedition.objectId)) {
                     expedition.locations.push(newLocation);
+                    console.log('Adding location, will now update expedition.json...');
                     Expedition.update(expedition).then(function () {
+                        console.info('Expedition update from within location add successful');
                         loadLocations();
                         promise.resolve(angular.copy(newLocation));
                     });
@@ -59,7 +61,12 @@
             angular.forEach(locations, function (location, index) {
                 if (parseInt(location.id) === parseInt(updatedLocation.id)) {
                     locations[index] = updatedLocation;
-                    Expedition.update(Expedition.get(updatedLocation.expeditionId));
+                    console.log('Location updated, will now update expedition.json');
+                    Expedition.update(Expedition.get(updatedLocation.expeditionId)).then(function () {
+                        console.info('Expedition update from within location update successful');
+                    }, function (err) {
+                        console.error('Expedition update from within location update failed', err);
+                    });
                 }
             });
         }
@@ -68,11 +75,15 @@
             angular.forEach(Expedition.all(), function (expedition) {
                 angular.forEach(expedition.locations, function (location, index) {
                     if (parseInt(location.id) === parseInt(locationToRemove.id)) {
-                        console.log(location);
+                        console.log('Location being removed from device, will now update expedition.json');
                         expedition.locations.splice(index, 1);
+                        Expedition.update(expedition).then(function () {
+                            console.info('Expedition update from within location removal successful');
+                        }, function () {
+                            console.error('Expedition update from within location removal failed');
+                        });
                     }
                 });
-                Expedition.update(expedition);
             });
         }
 

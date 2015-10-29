@@ -35,10 +35,15 @@
                     angular.forEach(expedition.locations, function (location) {
                         if (parseInt(locationId) === parseInt(location.id)) {
                             location.assets.push(angular.copy(newAsset));
+                            console.log('Added a new asset, will now update expedition.json...');
+                            Expedition.update(expedition).then(function () {
+                                console.info('Expedition update from within asset add successful');
+                            }, function () {
+                                console.error('Expedition update from within asset add failed');
+                            });
                         }
                     });
                 }
-                Expedition.update(expedition);
             });
             loadAssets();
             promise.resolve(angular.copy(newAsset));
@@ -69,11 +74,13 @@
                 url;
 
             function onUploadSuccess(res) {
+                console.info('Image upload via contentService succeeded', res);
                 hideLoading();
                 promise.resolve(res);
             }
 
             function onUploadFail(err) {
+                console.error('Image upload via contentService failed', err);
                 hideLoading();
                 promise.reject(err);
             }
@@ -84,7 +91,7 @@
             }
 
             function onAuthSuccess() {
-                console.log('uploading image to content server...');
+                console.log('Uploading image via contentService...');
                 blob = dataUrlToBlob(dataUrl);
                 req = generateUploadReq(name, blob);
                 url = generateUrl(folderId);

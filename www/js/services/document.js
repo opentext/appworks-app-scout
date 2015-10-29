@@ -22,6 +22,7 @@
                 options = new FileUploadOptions();
 
             options.headers = {'otcsticket': $auth.getOTCSTicket()};
+            console.log('Attempting to download file via contentService...');
             $appworks.storage.storeFile(filename, downloadUrl, success, fail, options, true);
         }
 
@@ -39,8 +40,9 @@
                         }
                     };
                 // find the node id for file named => filename
+                console.log('Attempting to fetch children of expedition root folder via contentService');
                 $http.get(url, config).then(function (res) {
-                    console.log(res.data);
+                    console.info('Got children of expedition root folder via contentService', res.data);
                     angular.forEach(res.data.contents, function (item) {
                         if (item.name === filename) {
                             downloadFile(item.id, filename, promise.resolve, promise.reject);
