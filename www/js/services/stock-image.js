@@ -7,11 +7,7 @@
 
     function StockImage() {
         var images = [
-            'img/yosemite.jpg',
-            'img/new-zealand.jpg',
-            'img/bali.jpg',
-            'img/iceland.jpg',
-            'img/belize.jpg'
+            'img/iceland.jpg'
         ];
 
         return {

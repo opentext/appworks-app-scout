@@ -20,7 +20,7 @@
             <span class="input-label">Ends</span>
             <input type="date" ng-model="expedition.ends">
         </label>
-        <div style="text-transform: uppercase;"
+        <div
              ng-class="{
             'item': true,
             'item-stable': expedition.status === 'PENDING',
@@ -28,7 +28,7 @@
             'item-assertive': expedition.status === 'REJECTED',
             'item-balanced': expedition.status === 'COMPLETE'
             }">
-            Status: {{expedition.status}}
+            Status: {{expedition.status.toLowerCase()}}
         </div>
         <button class="button button-block button-clear button-positive"
                 ng-click="openNewLocationModal()">
