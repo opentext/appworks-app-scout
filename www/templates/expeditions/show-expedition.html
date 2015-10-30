@@ -1,7 +1,7 @@
 <ion-footer-bar>
     <div class="buttons">
         <button class="button button-clear item-button-right button-positive"
-                ng-disabled="expedition.status === 'complete' || expedition.status === 'submitted'"
+                ng-disabled="expedition.status !== 'NEW'"
                 ng-click="completeExpedition()">
             Complete Expedition
         </button>
@@ -12,14 +12,14 @@
         <label class="item item-input" ng-show="editTitle">
             <input type="text" placeholder="Expedition Title" ng-model="expedition.title" ng-blur="editTitle = false">
         </label>
-        <div class="item item-divider" ng-click="editTitle = true" ng-hide="editTitle">
+        <div class="item item-divider" ng-click="editTitle = true" ng-hide="editTitle" ng-class="{'disable-pointer-events': expedition.status !== 'NEW'}">
             {{expedition.title}}
         </div>
-        <label class="item item-input">
+        <label class="item item-input" ng-class="{'disable-pointer-events': expedition.status !== 'NEW'}">
             <span class="input-label">Starts</span>
             <input type="date" ng-model="expedition.starts">
         </label>
-        <label class="item item-input">
+        <label class="item item-input" ng-class="{'disable-pointer-events': expedition.status !== 'NEW'}">
             <span class="input-label">Ends</span>
             <input type="date" ng-model="expedition.ends">
         </label>
@@ -34,12 +34,17 @@
             Status: {{expedition.status.toLowerCase()}}
         </div>
         <button class="button button-block button-clear button-positive"
-                ng-click="openNewLocationModal()">
+                ng-click="openNewLocationModal()" ng-disabled="expedition.status !== 'NEW'">
             Add Location
         </button>
         <button class="button button-block button-clear button-positive"
-                ng-click="openExpensesModal()">
+                ng-click="openExpensesModal()" ng-disabled="expedition.status !== 'NEW'">
             Record Expenses
+        </button>
+        <button class="button button-block button-clear button-positive"
+                ng-disabled="expedition.status !== 'NEW'"
+                ng-click="completeExpedition()">
+            Complete Expedition
         </button>
         <div class="spacer"></div>
         <div class="item item-divider">
@@ -48,7 +53,7 @@
         <div class="item" ng-show="expedition.locations.length === 0">
             No locations added yet
         </div>
-        <ion-item ui-sref="tab.location({locationId: location.id, expeditionId: expedition.objectId})"
+        <ion-item ui-sref="tab.location({locationId: location.id, expeditionId: expedition.id})"
                   class="item-icon-right"
                   item="location"
                   ng-repeat="location in expedition.locations">

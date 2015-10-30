@@ -9,16 +9,16 @@
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
-            expeditions;
+            self = this;
 
         // initialize service by loading expeditions from device storage
         init();
 
         function init() {
-            expeditions = $appworks.cache.getItem(STORAGE_KEY);
+            self.expeditions = $appworks.cache.getItem(STORAGE_KEY);
 
-            if (!expeditions) {
-                expeditions = [];
+            if (!self.expeditions) {
+                self.expeditions = [];
                 $appworks.cache.setItem(STORAGE_KEY, expeditions);
             }
 
@@ -26,14 +26,14 @@
         }
 
         function convertDatesToDateString() {
-            expeditions.map(function (expedition) {
+            self.expeditions.map(function (expedition) {
                 expedition.starts = new Date.parse(expedition.starts, 'dd-MM-yyyy');
                 expedition.ends = new Date.parse(expedition.ends, 'dd-MM-yyyy');
             });
         }
 
         function all() {
-            return angular.copy(expeditions);
+            return angular.copy(self.expeditions);
         }
 
         function complete(completedExpedition) {
@@ -44,7 +44,7 @@
                 existingStatus = completedExpedition.status;
 
             angular.forEach(expeditions, function (expedition) {
-                if (parseInt(expedition.objectId) === parseInt(completedExpedition.objectId)) {
+                if (parseInt(expedition.id) === parseInt(completedExpedition.id)) {
 
                     showLoading();
 
@@ -78,7 +78,7 @@
                             console.info('Submission of expedition via scoutService successful', res.data);
 
                             // save expedition.json on device and in server
-                            updateObject(expedition, expedition.objectId).then(function (res) {
+                            updateObject(expedition, expedition.id).then(function (res) {
                                 hideLoading();
                                 save();
                                 promise.resolve(res);
@@ -96,107 +96,134 @@
             return promise.promise;
         }
 
-        function showLoading() {
-            $ionicLoading.show({template: 'Loading...'});
-        }
-
-        function hideLoading() {
-            $ionicLoading.hide();
-        }
-
-        function create(expedition) {
-            var promise = $q.defer(),
-                url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-                request,
-                config = {
-                    headers: {
-                        otdsticket: $auth.getOTDSTicket()
-                    }
-                };
-
-            showLoading();
-
-            // reauthenticate, then start workflow via scout service
-            $auth.reauth().then(onAuthSuccess, onAuthFail);
-
-            function onAuthSuccess() {
-                var authResponse = $auth.getAuth();
-
-                if (!authResponse.csUserId) {
-                    alert('auth response does not contain valid cs credentials');
-                    hideLoading();
-                    return promise.reject();
-                }
-
-                request = {
-                    title: expedition.title,
-                    status: STATUS.new,
-                    scoutUsername: authResponse.csUsername,
-                    scoutUserId: authResponse.csUserId,
-                    expensesReportIncluded: false,
-                    startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
-                    endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
-                };
-
-                config.headers.otdsticket = $auth.getOTDSTicket();
-
-                function onStartExpeditionWorkflowSuccess(res) {
-                    console.log('Starting expedition workflow via scoutService success: ', res);
-
-                    // store expedition model from scout service call
-                    res.starts = expedition.starts;
-                    res.ends = expedition.ends;
-                    res.locations = [];
-                    expedition = angular.copy(res);
-
-                    function onCreateExpeditionObjectSuccess(res) {
-                        console.info('Creating initial expedition.json file via contentService came back with successful response', res);
-
-                        // store this id as it is essential, the expedition.json file in CS
-                        expedition.objectId = res.id;
-                        expeditions.push(angular.copy(expedition));
-
-                        // finally, save the expeditions to local storage
-                        $appworks.cache.setItem(STORAGE_KEY, expeditions);
-
-                        promise.resolve(expedition);
-                        hideLoading();
-                    }
-
-                    function onCreateExpeditionObjectError(err) {
-                        console.error('Creating initial expedition.json via contentService failed', err);
-                        hideLoading();
-                        // retry
-                        createObject(expedition, res.folderId);
-                    }
-
-                    // upload the expedition.json file to CS
-                    console.log('Attempting to create initial expedition.json file via contentService...');
-                    createObject(expedition, res.folderId).then(onCreateExpeditionObjectSuccess, onCreateExpeditionObjectError);
-                }
-
-                function onStartExpeditionWorkflowError(err) {
-                    console.error('Starting expedition workflow via scoutService failed', err);
-                    hideLoading();
-                    // retry
-                    create(expedition);
-                }
-
-                console.log('Attempting to start expedition workflow via scoutService...');
-                $http.post(url, request, config).success(onStartExpeditionWorkflowSuccess).error(onStartExpeditionWorkflowError);
-            }
-
-            function onAuthFail(err) {
-                console.error('authentication failed. retrying', err);
-                create(expedition);
-            }
+        function startExpeditionWorkflow(expedition) {
+            var promise = $q.defer();
 
             return promise.promise;
         }
 
+        function onStartWorkflowSuccess() {
+            // TODO store values from response in expedition, persist model, upload expedition.json
+        }
+
+        function onStartWorkflowFail() {
+            // TODO retry
+        }
+
+        function create(expedition) {
+            var promise = $q.defer(),
+                copiedExpedition;
+
+            // set defaults
+            expedition.id = Math.ceil(Math.random() * 100000);
+            expedition.locations = [];
+            expedition.status = STATUS.new;
+            // prevent dupes errors
+            copiedExpedition = angular.copy(expedition);
+            // update the model
+            self.expeditions.push(copiedExpedition);
+            save();
+            // start a workflow via scout service
+            startExpeditionWorkflow(expedition).then(onStartWorkflowSuccess, onStartWorkflowFail);
+
+            promise.resolve(copiedExpedition);
+
+            return promise.promise;
+        }
+
+        //function create(expedition) {
+        //    var promise = $q.defer(),
+        //        url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
+        //        request,
+        //        config = {
+        //            headers: {
+        //                otdsticket: $auth.getOTDSTicket()
+        //            }
+        //        };
+        //
+        //    showLoading();
+        //
+        //    // reauthenticate, then start workflow via scout service
+        //    $auth.reauth().then(onAuthSuccess, onAuthFail);
+        //
+        //    function onAuthSuccess() {
+        //        var authResponse = $auth.getAuth();
+        //
+        //        if (!authResponse.csUserId) {
+        //            alert('auth response does not contain valid cs credentials');
+        //            hideLoading();
+        //            return promise.reject();
+        //        }
+        //
+        //        request = {
+        //            title: expedition.title,
+        //            status: STATUS.new,
+        //            scoutUsername: authResponse.csUsername,
+        //            scoutUserId: authResponse.csUserId,
+        //            expensesReportIncluded: false,
+        //            startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
+        //            endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
+        //        };
+        //
+        //        config.headers.otdsticket = $auth.getOTDSTicket();
+        //
+        //        function onStartExpeditionWorkflowSuccess(res) {
+        //            console.log('Starting expedition workflow via scoutService success: ', res);
+        //
+        //            // store expedition model from scout service call
+        //            res.starts = expedition.starts;
+        //            res.ends = expedition.ends;
+        //            res.locations = [];
+        //            expedition = angular.copy(res);
+        //
+        //            function onCreateExpeditionObjectSuccess(res) {
+        //                console.info('Creating initial expedition.json file via contentService came back with successful response', res);
+        //
+        //                // store this id as it is essential, the expedition.json file in CS
+        //                expedition.objectId = res.id;
+        //                expeditions.push(angular.copy(expedition));
+        //
+        //                // finally, save the expeditions to local storage
+        //                $appworks.cache.setItem(STORAGE_KEY, expeditions);
+        //
+        //                promise.resolve(expedition);
+        //                hideLoading();
+        //            }
+        //
+        //            function onCreateExpeditionObjectError(err) {
+        //                console.error('Creating initial expedition.json via contentService failed', err);
+        //                hideLoading();
+        //                // retry
+        //                createObject(expedition, res.folderId);
+        //            }
+        //
+        //            // upload the expedition.json file to CS
+        //            console.log('Attempting to create initial expedition.json file via contentService...');
+        //            createObject(expedition, res.folderId).then(onCreateExpeditionObjectSuccess, onCreateExpeditionObjectError);
+        //        }
+        //
+        //        function onStartExpeditionWorkflowError(err) {
+        //            console.error('Starting expedition workflow via scoutService failed', err);
+        //            hideLoading();
+        //            // retry
+        //            create(expedition);
+        //        }
+        //
+        //        console.log('Attempting to start expedition workflow via scoutService...');
+        //        $http.post(url, request, config).success(onStartExpeditionWorkflowSuccess).error(onStartExpeditionWorkflowError);
+        //    }
+        //
+        //    function onAuthFail(err) {
+        //        console.error('authentication failed. retrying', err);
+        //        create(expedition);
+        //    }
+        //
+        //    return promise.promise;
+        //}
+
         function get(id) {
-            var list = expeditions.filter(function (expedition) {
-                return parseInt(expedition.objectId) === parseInt(id);
+            var list = self.expeditions.filter(function (expedition) {
+                return parseInt(expedition.id) === parseInt(id);
             });
             return angular.copy(list.pop());
         }
@@ -204,38 +231,36 @@
         function update(updated) {
             var promise = $q.defer();
 
-            angular.forEach(expeditions, function (expedition, i) {
+            angular.forEach(self.expeditions, function (expedition, i) {
 
-                if (expedition.objectId === updated.objectId) {
+                if (expedition.id === updated.id) {
                     // update the model
-                    expeditions[i] = angular.copy(updated);
+                    self.expeditions[i] = angular.copy(updated);
                     // persist the model's json file in CS
-                    showLoading();
-                    $auth.reauth().then(function () {
-                        console.log('Updating expedition.json via contentService...');
-                        updateObject(expeditions[i], expedition.objectId).then(function (res) {
-                            console.info('Update to expedition.json via contentService success', res);
-                            hideLoading();
-                            // save the model in local storage
-                            save();
-                            promise.resolve(expeditions[i]);
-                        });
-                    }, function (err) {
-                        console.error('Update to expedition.json via contentService failed. Retrying', err);
-                        // failed, retry
-                        update(updated);
-                    });
+                    //$auth.reauth().then(function () {
+                    //    console.log('Updating expedition.json via contentService...');
+                    //    updateObject(self.expeditions[i], expedition.objectId).then(function (res) {
+                    //        console.info('Update to expedition.json via contentService success', res);
+                    //        // save the model in local storage
+                    //        save();
+                    //        promise.resolve(self.expeditions[i]);
+                    //    });
+                    //}, function (err) {
+                    //    console.error('Update to expedition.json via contentService failed. Retrying', err);
+                    //    // failed, retry
+                    //    update(updated);
+                    //});
                 }
             });
             return promise.promise;
         }
 
         function save(updateBackend) {
-            $appworks.cache.setItem(STORAGE_KEY, expeditions);
+            $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
 
             if (updateBackend) {
                 $auth.reauth().then(function () {
-                    angular.forEach(expeditions, function (expedition) {
+                    angular.forEach(self.expeditions, function (expedition) {
                         createObject(expedition, expedition.objectId, true);
                     });
                 });

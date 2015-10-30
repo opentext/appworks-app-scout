@@ -31,7 +31,7 @@
             newAsset.locationId = locationId;
             newAsset.expeditionId = expeditionId;
             angular.forEach(Expedition.all(), function (expedition) {
-                if (parseInt(expeditionId) === parseInt(expedition.objectId)) {
+                if (parseInt(expeditionId) === parseInt(expedition.id)) {
                     angular.forEach(expedition.locations, function (location) {
                         if (parseInt(locationId) === parseInt(location.id)) {
                             location.assets.push(angular.copy(newAsset));

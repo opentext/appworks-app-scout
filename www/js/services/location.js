@@ -29,7 +29,7 @@
             newLocation.id = Math.ceil(Math.random() * 1000);
             newLocation.assets = [];
             angular.forEach(Expedition.all(), function (expedition) {
-                if (parseInt(expeditionId) === parseInt(expedition.objectId)) {
+                if (parseInt(expeditionId) === parseInt(expedition.id)) {
                     expedition.locations.push(newLocation);
                     console.log('Adding location, will now update expedition.json...');
                     Expedition.update(expedition).then(function () {
