@@ -7,63 +7,71 @@
 
     function Asset(Expedition, Location, $q, $http, $auth, $ionicLoading) {
 
-        var assets = [];
+        var self = this;
+
+        self.assets = [];
+        self.expeditions = Expedition.all();
 
         loadAssets();
 
         function loadAssets() {
-            assets = [];
+            self.assets = [];
             angular.forEach(Location.all(), function (location) {
                 angular.forEach(location.assets, function (asset) {
-                    assets.push(asset);
+                    self.assets.push(asset);
                 });
             });
         }
 
         function all() {
-            return assets;
+            return self.assets;
         }
 
         function create(newAsset, locationId, expeditionId) {
-            var promise = $q.defer();
+            var promise = $q.defer(),
+                copiedAsset;
 
             newAsset.id = Math.ceil(Math.random() * 1000);
             newAsset.locationId = locationId;
             newAsset.expeditionId = expeditionId;
-            angular.forEach(Expedition.all(), function (expedition) {
+
+            copiedAsset = angular.copy(newAsset);
+
+            angular.forEach(self.expeditions, function (expedition, i) {
+
                 if (parseInt(expeditionId) === parseInt(expedition.id)) {
-                    angular.forEach(expedition.locations, function (location) {
+
+                    angular.forEach(expedition.locations, function (location, j) {
+
                         if (parseInt(locationId) === parseInt(location.id)) {
-                            location.assets.push(angular.copy(newAsset));
-                            console.log('Added a new asset, will now update expedition.json...');
-                            Expedition.update(expedition).then(function () {
-                                console.info('Expedition update from within asset add successful');
-                            }, function () {
-                                console.error('Expedition update from within asset add failed');
-                            });
+                            self.expeditions[i].locations[j].assets.push(copiedAsset);
+                            self.assets.push(copiedAsset);
+                            console.log('Added a new asset');
+                            promise.resolve(angular.copy(newAsset));
+                            Expedition.update(expedition);
                         }
                     });
                 }
             });
             loadAssets();
-            promise.resolve(angular.copy(newAsset));
+
             return promise.promise;
         }
 
         function get(params) {
             // get resource by id, locationId, or list all based on params
             if (angular.isDefined(params.locationId)) {
-                return assets.filter(function (asset) {
+                return self.assets.filter(function (asset) {
                     return parseInt(asset.locationId) === parseInt(params.locationId);
                 });
             } else if (angular.isDefined(params.id)) {
-                var list = assets.filter(function (asset) {
+                var list = self.assets.filter(function (asset) {
                     console.log(asset);
                     return parseInt(asset.id) === parseInt(params.id);
                 });
                 return list.pop();
             } else {
-                return assets;
+                return self.assets;
             }
         }
 
