@@ -9,9 +9,12 @@
 </ion-footer-bar>
 <ion-content>
     <ion-list>
-        <label class="item item-input">
-            <input type="text" placeholder="Expedition Title" ng-model="expedition.title">
+        <label class="item item-input" ng-show="editTitle">
+            <input type="text" placeholder="Expedition Title" ng-model="expedition.title" ng-blur="editTitle = false">
         </label>
+        <div class="item item-divider" ng-click="editTitle = true" ng-hide="editTitle">
+            {{expedition.title}}
+        </div>
         <label class="item item-input">
             <span class="input-label">Starts</span>
             <input type="date" ng-model="expedition.starts">
