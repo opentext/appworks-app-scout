@@ -35,8 +35,10 @@
 
             angular.forEach(self.expeditions, function (expedition, i) {
                 if (parseInt(expeditionId) === parseInt(expedition.id)) {
-                    self.expeditions[i].locations.push(newLocation);
+                    expedition.locations.push(newLocation);
+                    console.log('Adding a location');
                     Expedition.update(expedition).then(function () {
+                        console.info('Location add success');
                         loadLocations();
                         promise.resolve(angular.copy(newLocation));
                     });

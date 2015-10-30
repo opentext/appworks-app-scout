@@ -9,7 +9,8 @@
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
-            self = this;
+            self = this,
+            retryAttempts = 0;
 
         // initialize service by loading expeditions from device storage
         init();
@@ -46,8 +47,6 @@
             angular.forEach(expeditions, function (expedition) {
                 if (parseInt(expedition.id) === parseInt(completedExpedition.id)) {
 
-                    showLoading();
-
                     $auth.reauth().then(function () {
 
                         expedition.status = STATUS.submitted;
@@ -79,7 +78,6 @@
 
                             // save expedition.json on device and in server
                             updateObject(expedition, expedition.id).then(function (res) {
-                                hideLoading();
                                 save();
                                 promise.resolve(res);
                             });
@@ -87,10 +85,9 @@
                         }, function (err) {
                             console.error('Submission of expedition via scoutService failed', err);
                             expedition.status = existingStatus;
-                            hideLoading();
                         });
 
-                    }, hideLoading);
+                    });
                 }
             });
             return promise.promise;
@@ -98,16 +95,66 @@
 
         function startExpeditionWorkflow(expedition) {
             var promise = $q.defer();
+            // get fresh credentials, form the request, and then post to scout service to start the expedition workflow
+            $auth.reauth().then(function () {
+                var authResponse = $auth.getAuth(),
+                    url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
+                    config = {
+                        headers: {
+                            otdsticket: $auth.getOTDSTicket()
+                        }
+                    },
+                    request = {
+                        title: expedition.title,
+                        status: expedition.status,
+                        scoutUsername: authResponse.csUsername,
+                        scoutUserId: authResponse.csUserId,
+                        expensesReportIncluded: false,
+                        startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
+                        endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
+                    };
+                // send request
+                console.log('Attempting to start expedition workflow via scoutService...');
+                $http.post(url, request, config).then(workflowSuccess, workflowFail);
+
+                function workflowSuccess(res) {
+                    console.info('Succesfully started workflow');
+                    expedition = angular.merge(expedition, res.data);
+                    console.log(expedition);
+                    save();
+                    promise.resolve(expedition);
+                    retryAttempts = 0;
+                }
+
+                function workflowFail(err) {
+                    console.error('Failed to start workflow');
+                    promise.reject(err, expedition);
+                }
+            });
 
             return promise.promise;
         }
 
-        function onStartWorkflowSuccess() {
+        function uploadInitialExpeditionModel(expedition) {
             // TODO store values from response in expedition, persist model, upload expedition.json
+            console.log('Attempting to create initial expedition.json via content service...');
+            createObject(expedition, expedition.folderId).then(function (res) {
+                console.info('Upload of initial expedition.json was successful', res.data);
+                expedition.objectId = res.data.id;
+                expedition.ready = true;
+                update(expedition);
+            }, function () {
+                console.error('Upload of initial expedition.json failed');
+                // TODO retry?
+            });
         }
 
-        function onStartWorkflowFail() {
-            // TODO retry
+        function onStartWorkflowFail(err, expedition) {
+            // retry
+            if (retryAttempts < 10) {
+                startExpeditionWorkflow(expedition);
+                retryAttempts += 1;
+            }
         }
 
         function create(expedition) {
@@ -124,102 +171,12 @@
             self.expeditions.push(copiedExpedition);
             save();
             // start a workflow via scout service
-            startExpeditionWorkflow(expedition).then(onStartWorkflowSuccess, onStartWorkflowFail);
+            startExpeditionWorkflow(expedition).then(uploadInitialExpeditionModel, onStartWorkflowFail);
 
             promise.resolve(copiedExpedition);
 
             return promise.promise;
         }
-
-        //function create(expedition) {
-        //    var promise = $q.defer(),
-        //        url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-        //        request,
-        //        config = {
-        //            headers: {
-        //                otdsticket: $auth.getOTDSTicket()
-        //            }
-        //        };
-        //
-        //    showLoading();
-        //
-        //    // reauthenticate, then start workflow via scout service
-        //    $auth.reauth().then(onAuthSuccess, onAuthFail);
-        //
-        //    function onAuthSuccess() {
-        //        var authResponse = $auth.getAuth();
-        //
-        //        if (!authResponse.csUserId) {
-        //            alert('auth response does not contain valid cs credentials');
-        //            hideLoading();
-        //            return promise.reject();
-        //        }
-        //
-        //        request = {
-        //            title: expedition.title,
-        //            status: STATUS.new,
-        //            scoutUsername: authResponse.csUsername,
-        //            scoutUserId: authResponse.csUserId,
-        //            expensesReportIncluded: false,
-        //            startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
-        //            endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
-        //        };
-        //
-        //        config.headers.otdsticket = $auth.getOTDSTicket();
-        //
-        //        function onStartExpeditionWorkflowSuccess(res) {
-        //            console.log('Starting expedition workflow via scoutService success: ', res);
-        //
-        //            // store expedition model from scout service call
-        //            res.starts = expedition.starts;
-        //            res.ends = expedition.ends;
-        //            res.locations = [];
-        //            expedition = angular.copy(res);
-        //
-        //            function onCreateExpeditionObjectSuccess(res) {
-        //                console.info('Creating initial expedition.json file via contentService came back with successful response', res);
-        //
-        //                // store this id as it is essential, the expedition.json file in CS
-        //                expedition.objectId = res.id;
-        //                expeditions.push(angular.copy(expedition));
-        //
-        //                // finally, save the expeditions to local storage
-        //                $appworks.cache.setItem(STORAGE_KEY, expeditions);
-        //
-        //                promise.resolve(expedition);
-        //                hideLoading();
-        //            }
-        //
-        //            function onCreateExpeditionObjectError(err) {
-        //                console.error('Creating initial expedition.json via contentService failed', err);
-        //                hideLoading();
-        //                // retry
-        //                createObject(expedition, res.folderId);
-        //            }
-        //
-        //            // upload the expedition.json file to CS
-        //            console.log('Attempting to create initial expedition.json file via contentService...');
-        //            createObject(expedition, res.folderId).then(onCreateExpeditionObjectSuccess, onCreateExpeditionObjectError);
-        //        }
-        //
-        //        function onStartExpeditionWorkflowError(err) {
-        //            console.error('Starting expedition workflow via scoutService failed', err);
-        //            hideLoading();
-        //            // retry
-        //            create(expedition);
-        //        }
-        //
-        //        console.log('Attempting to start expedition workflow via scoutService...');
-        //        $http.post(url, request, config).success(onStartExpeditionWorkflowSuccess).error(onStartExpeditionWorkflowError);
-        //    }
-        //
-        //    function onAuthFail(err) {
-        //        console.error('authentication failed. retrying', err);
-        //        create(expedition);
-        //    }
-        //
-        //    return promise.promise;
-        //}
 
         function get(id) {
             var list = self.expeditions.filter(function (expedition) {
@@ -269,7 +226,9 @@
                 url = generateUrl(nodeId, update),
                 req = generateUploadReq(blob);
 
-            //$http.post(url, req.request, req.options).success(deferred.resolve).error(deferred.reject);
+            $auth.reauth().then(function () {
+                $http.post(url, req.request, req.options).then(deferred.resolve, deferred.reject);
+            });
 
             return deferred.promise;
         }
