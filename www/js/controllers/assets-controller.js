@@ -2,8 +2,9 @@ angular
     .module('scout.controllers')
     .controller('AssetsController', AssetsController);
 
-function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition) {
+function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition, $ionicHistory) {
     $scope.StockImage = StockImage;
+    $scope.goBack = $ionicHistory.goBack;
 
     // we are viewing a list of assets for a location, or all of the assets for the app
     if ($stateParams.locationId) {

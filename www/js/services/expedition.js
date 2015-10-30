@@ -232,26 +232,18 @@
             var promise = $q.defer();
 
             angular.forEach(self.expeditions, function (expedition, i) {
-
                 if (expedition.id === updated.id) {
                     // update the model
                     self.expeditions[i] = angular.copy(updated);
-                    // persist the model's json file in CS
-                    //$auth.reauth().then(function () {
-                    //    console.log('Updating expedition.json via contentService...');
-                    //    updateObject(self.expeditions[i], expedition.objectId).then(function (res) {
-                    //        console.info('Update to expedition.json via contentService success', res);
-                    //        // save the model in local storage
-                    //        save();
-                    //        promise.resolve(self.expeditions[i]);
-                    //    });
-                    //}, function (err) {
-                    //    console.error('Update to expedition.json via contentService failed. Retrying', err);
-                    //    // failed, retry
-                    //    update(updated);
-                    //});
+                    // persist the model
+                    save();
+                    // update expedition.json
+                    updateObject(self.expeditions[i], expedition.objectId);
+
+                    promise.resolve(self.expeditions[i]);
                 }
             });
+            promise.reject('Could not find expedition');
             return promise.promise;
         }
 
@@ -277,7 +269,7 @@
                 url = generateUrl(nodeId, update),
                 req = generateUploadReq(blob);
 
-            $http.post(url, req.request, req.options).success(deferred.resolve).error(deferred.reject);
+            //$http.post(url, req.request, req.options).success(deferred.resolve).error(deferred.reject);
 
             return deferred.promise;
         }

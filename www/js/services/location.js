@@ -7,33 +7,36 @@
 
     function Location(Expedition, $q) {
 
-        var locations = [];
+        var self = this;
+
+        self.locations = [];
+        self.expeditions = Expedition.all();
         loadLocations();
 
         function loadLocations() {
-            locations = [];
-            angular.forEach(Expedition.all(), function (expedition) {
+            self.locations = [];
+            angular.forEach(self.expeditions, function (expedition) {
                 angular.forEach(expedition.locations, function (location) {
-                    locations.push(location);
+                    self.locations.push(location);
                 });
             });
         }
 
         function all() {
-            return locations;
+            return self.locations;
         }
 
         function create(newLocation, expeditionId) {
             var promise = $q.defer();
+            // set defaults
             newLocation.expeditionId = expeditionId;
             newLocation.id = Math.ceil(Math.random() * 1000);
             newLocation.assets = [];
-            angular.forEach(Expedition.all(), function (expedition) {
+
+            angular.forEach(self.expeditions, function (expedition, i) {
                 if (parseInt(expeditionId) === parseInt(expedition.id)) {
-                    expedition.locations.push(newLocation);
-                    console.log('Adding location, will now update expedition.json...');
+                    self.expeditions[i].locations.push(newLocation);
                     Expedition.update(expedition).then(function () {
-                        console.info('Expedition update from within location add successful');
                         loadLocations();
                         promise.resolve(angular.copy(newLocation));
                     });
@@ -44,23 +47,23 @@
 
         function get(params) {
             if (angular.isDefined(params.expeditionId)) {
-                return locations.filter(function (location) {
+                return self.locations.filter(function (location) {
                     return parseInt(location.expeditionId) === parseInt(params.expeditionId);
                 });
             } else if (angular.isDefined(params.id)) {
-                var list = locations.filter(function (location) {
+                var list = self.locations.filter(function (location) {
                     return parseInt(location.id) === parseInt(params.id);
                 });
                 return list.pop();
             } else {
-                return locations;
+                return self.locations;
             }
         }
 
         function update(updatedLocation) {
-            angular.forEach(locations, function (location, index) {
+            angular.forEach(self.locations, function (location, index) {
                 if (parseInt(location.id) === parseInt(updatedLocation.id)) {
-                    locations[index] = updatedLocation;
+                    self.locations[index] = updatedLocation;
                     console.log('Location updated, will now update expedition.json');
                     Expedition.update(Expedition.get(updatedLocation.expeditionId)).then(function () {
                         console.info('Expedition update from within location update successful');

@@ -1,3 +1,11 @@
+<ion-footer-bar>
+    <div class="buttons">
+        <button class="button button-clear item-button-right button-positive"
+                ng-click="goBack()">
+            Back
+        </button>
+    </div>
+</ion-footer-bar>
 <ion-content>
     <div class="card" ng-hide="isEditing">
         <div class="item item-divider">
@@ -23,7 +31,7 @@
                   ng-focus="isEditing = true"
                   ng-blur="isEditing = false"
                   placeholder="Notes, description, comments"
-                  style="width: 100%; height: 164px;"></textarea>
+                  style="width: 100%; height: 128px;"></textarea>
     </div>
     <button class="button button-block button-positive button-clear"
             ui-sref="tab.assetsForLocation({expeditionId: expedition.id, locationId: location.id})">

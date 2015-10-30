@@ -2,8 +2,8 @@
     <ion-footer-bar>
         <div class="buttons">
             <button class="button button-clear item-button-right button-positive"
-                    ng-click="openModal()">
-                Add a New Asset
+                    ng-click="goBack()">
+                Back
             </button>
         </div>
     </ion-footer-bar>
@@ -14,6 +14,10 @@
                     No assets have been added yet
                 </div>
             </div>
+            <button class="button button-block button-clear item-button-right button-positive"
+                    ng-click="openModal()">
+                Add a New Asset
+            </button>
             <div class="list" ng-repeat="asset in assets" ui-sref="tab.asset({id: asset.id})">
                 <img ng-src="{{StockImage.notes()}}" width="100%">
                 <a class="item item-icon-right">
@@ -21,6 +25,7 @@
                     {{asset.name}}
                 </a>
             </div>
+
         </ion-list>
     </ion-content>
 </ion-view>
