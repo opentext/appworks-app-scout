@@ -7,14 +7,7 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
     $scope.goBack = $ionicHistory.goBack;
 
     // we are viewing a list of assets for a location, or all of the assets for the app
-    if ($stateParams.locationId) {
-        $scope.expedition = Expedition.get($stateParams.expeditionId);
-        $scope.location = Location.get({id: $stateParams.locationId});
-        $scope.assets = Asset.get({locationId: $stateParams.locationId});
-        $scope.newAsset = {};
-    } else {
-        $scope.assets = Asset.all();
-    }
+    loadData();
 
     $ionicModal.fromTemplateUrl('templates/assets/new-asset.html', {
         scope: $scope,
@@ -27,6 +20,21 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
     $scope.closeModal = closeModal;
     $scope.handleCamera = handleCamera;
     $scope.saveAsset = saveAsset;
+    $scope.reload = loadData;
+
+    function loadData() {
+        if ($stateParams.locationId) {
+            $scope.expedition = Expedition.get($stateParams.expeditionId);
+            $scope.location = Location.get({id: $stateParams.locationId});
+            $scope.assets = Asset.get({locationId: $stateParams.locationId});
+            $scope.newAsset = {};
+        } else {
+            $scope.assets = Asset.all();
+            $scope.expeditions = Expedition.all();
+        }
+        $scope.$broadcast('scroll.refreshComplete');
+        return true;
+    }
 
     function handleCamera(newAsset) {
         var name = 'photo-' + new Date().getTime() + '.jpg';

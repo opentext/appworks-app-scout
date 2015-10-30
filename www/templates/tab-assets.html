@@ -1,12 +1,29 @@
 <ion-view view-title="Assets">
     <ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="reload()">
+        </ion-refresher>
         <ion-list>
-            <a class="item item-thumbnail-left" ng-repeat="asset in assets" ui-sref="tab.asset({id: asset.id})">
-                <img ng-src="{{asset.imgSrc || StockImage.notes()}}" height="200" width="100%">
-                <h4 class="padding">
-                    {{asset.name}}
-                </h4>
-            </a>
+            <div ng-repeat="expedition in expeditions">
+                <div class="item item-divider" >
+                    {{expedition.title}}
+                </div>
+                <div class="item" ng-show="expedition.locations.length === 0">
+                    No Locations Added
+                </div>
+                <div ng-repeat="location in expedition.locations">
+                    <a class="item item-thumbnail-left" ng-repeat="asset in location.assets" ui-sref="tab.asset({id: asset.id})">
+                        <img ng-src="{{asset.imgSrc || StockImage.notes()}}" height="200" width="100%">
+                        <h4 class="padding">
+                            {{asset.name}}
+                        </h4>
+                    </a>
+                    <div class="item" ng-show="location.assets.length === 0">
+                        No Assets Added
+                    </div>
+                </div>
+            </div>
         </ion-list>
     </ion-content>
 </ion-view>

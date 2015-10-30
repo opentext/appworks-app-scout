@@ -45,7 +45,7 @@
 
                         if (parseInt(locationId) === parseInt(location.id)) {
                             self.expeditions[i].locations[j].assets.push(copiedAsset);
-                            self.assets.push(copiedAsset);
+                            loadAssets();
                             console.log('Added a new asset');
                             promise.resolve(angular.copy(newAsset));
                             Expedition.update(expedition);

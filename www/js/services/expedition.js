@@ -19,7 +19,7 @@
 
             if (!self.expeditions) {
                 self.expeditions = [];
-                $appworks.cache.setItem(STORAGE_KEY, expeditions);
+                $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
             }
 
             convertDatesToDateString();
