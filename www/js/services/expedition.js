@@ -37,58 +37,50 @@
             return angular.copy(self.expeditions);
         }
 
+        function find(queryObj) {
+            angular.forEach(self.expeditions, function (expedition, index) {
+                if (parseInt(expedition.id) === parseInt(queryObj.id)) {
+                    return self.expeditions[index];
+                }
+            });
+            return -1;
+        }
+
         function complete(completedExpedition) {
             var promise = $q.defer(),
                 url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-                config,
-                data,
-                existingStatus = completedExpedition.status;
+                data = {
+                    workflowId: completedExpedition.workflowId,
+                    startDate: Date.parse(completedExpedition.starts, 'dd-MM-yyyy').getTime(),
+                    endDate: Date.parse(completedExpedition.ends, 'dd-MM-yyyy').getTime(),
+                    status: STATUS.submitted,
+                    scoutUsername: completedExpedition.scoutUsername,
+                    scoutUserId: completedExpedition.scoutUserId,
+                    expensesReportIncluded: completedExpedition.expensesReportIncluded,
+                    reviewComments: completedExpedition.reviewComments,
+                    title: completedExpedition.title,
+                    folderId: completedExpedition.folderId,
+                    completed: completedExpedition.completed
+                },
+                config = {
+                    headers: {
+                        otdsticket: null
+                    }
+                };
 
-            angular.forEach(expeditions, function (expedition) {
-                if (parseInt(expedition.id) === parseInt(completedExpedition.id)) {
+            $auth.reauth().then(function () {
+                config.headers.otdsticket = $auth.getOTDSTicket();
+                // move the expedition along to the next step in the workflow
+                console.log('Attempting to submit expedition via scoutService...');
+                $http.put(url, data, config).then(function (res) {
+                    console.info('Submission of expedition via scoutService successful', res.data);
+                    // save expedition.json on device and in server
+                    update(completedExpedition);
+                }, function (err) {
+                    console.error('Submission of expedition via scoutService failed', err);
+                    expedition.status = STATUS.new;
+                });
 
-                    $auth.reauth().then(function () {
-
-                        expedition.status = STATUS.submitted;
-
-                        data = {
-                            workflowId: expedition.workflowId,
-                            startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
-                            endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime(),
-                            status: expedition.status,
-                            scoutUsername: expedition.scoutUsername,
-                            scoutUserId: expedition.scoutUserId,
-                            expensesReportIncluded: expedition.expensesReportIncluded,
-                            reviewComments: expedition.reviewComments,
-                            title: expedition.title,
-                            folderId: expedition.folderId,
-                            completed: expedition.completed
-                        };
-
-                        config = {
-                            headers: {
-                                otdsticket: $auth.getOTDSTicket()
-                            }
-                        };
-
-                        // move the expedition along to the next step in the workflow
-                        console.log('Attempting to submit expedition via scoutService...');
-                        $http.put(url, data, config).then(function (res) {
-                            console.info('Submission of expedition via scoutService successful', res.data);
-
-                            // save expedition.json on device and in server
-                            updateObject(expedition, expedition.id).then(function (res) {
-                                save();
-                                promise.resolve(res);
-                            });
-
-                        }, function (err) {
-                            console.error('Submission of expedition via scoutService failed', err);
-                            expedition.status = existingStatus;
-                        });
-
-                    });
-                }
             });
             return promise.promise;
         }
@@ -118,9 +110,8 @@
                 $http.post(url, request, config).then(workflowSuccess, workflowFail);
 
                 function workflowSuccess(res) {
-                    console.info('Succesfully started workflow');
+                    console.info('Succesfully started workflow', res);
                     expedition = angular.merge(expedition, res.data);
-                    console.log(expedition);
                     save();
                     promise.resolve(expedition);
                     retryAttempts = 0;
@@ -142,7 +133,7 @@
                 console.info('Upload of initial expedition.json was successful', res.data);
                 expedition.objectId = res.data.id;
                 expedition.ready = true;
-                update(expedition);
+                update(expedition, {local: true});
             }, function () {
                 console.error('Upload of initial expedition.json failed');
                 // TODO retry?
@@ -185,18 +176,23 @@
             return angular.copy(list.pop());
         }
 
-        function update(updated) {
+        function update(updated, options) {
             var promise = $q.defer();
+
+            options = options || {};
 
             angular.forEach(self.expeditions, function (expedition, i) {
                 if (expedition.id === updated.id) {
                     // update the model
                     self.expeditions[i] = angular.copy(updated);
+                    // upload expedition.json unless specified in options
+                    if (!options.local) {
+                        // update expedition.json
+                        updateObject(self.expeditions[i], expedition.objectId);
+                    }
                     // persist the model
                     save();
-                    // update expedition.json
-                    updateObject(self.expeditions[i], expedition.objectId);
-
+                    // send back updated expedition from source
                     promise.resolve(self.expeditions[i]);
                 }
             });
@@ -204,16 +200,8 @@
             return promise.promise;
         }
 
-        function save(updateBackend) {
+        function save() {
             $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
-
-            if (updateBackend) {
-                $auth.reauth().then(function () {
-                    angular.forEach(self.expeditions, function (expedition) {
-                        createObject(expedition, expedition.objectId, true);
-                    });
-                });
-            }
         }
 
         function updateObject(obj, objId) {
@@ -221,16 +209,17 @@
         }
 
         function createObject(obj, nodeId, update) {
-            var deferred = $q.defer(),
+            var promise = $q.defer(),
                 blob = new Blob([JSON.stringify(obj)], {type: "application/json;charset=utf-8"}),
                 url = generateUrl(nodeId, update),
-                req = generateUploadReq(blob);
+                req;
 
             $auth.reauth().then(function () {
-                $http.post(url, req.request, req.options).then(deferred.resolve, deferred.reject);
+                req = generateUploadReq(blob);
+                $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
             });
 
-            return deferred.promise;
+            return promise.promise;
         }
 
         function generateUrl(nodeId, addVersion) {
