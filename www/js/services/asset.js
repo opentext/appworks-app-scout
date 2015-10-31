@@ -5,14 +5,14 @@
         .module('scout.services')
         .factory('Asset', Asset);
 
-    function Asset(Expedition, Location, $q, $http, $auth, $scope) {
+    function Asset(Expedition, Location, $q, $http, $auth, $rootScope) {
 
         var self = this;
 
         self.assets = [];
         self.expeditions = Expedition.all();
 
-        $scope.$on('Asset.uploadPendingImages', uploadPendingImages);
+        $rootScope.$on('Asset.uploadPendingImages', uploadPendingImages);
 
         loadAssets();
 
