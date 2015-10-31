@@ -7,6 +7,12 @@ angular
 
 angular
     .module('scout')
+    .run(function ($rootScope) {
+        $rootScope.version = '0.7.0';
+    });
+
+angular
+    .module('scout')
     .config(function($compileProvider){
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|assets-library):|data:image\//);
     });

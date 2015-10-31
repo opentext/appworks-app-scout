@@ -101,7 +101,7 @@
             }
         }
 
-        function update(expeditionId, locationId, assetToUpdate) {
+        function update(expeditionId, locationId, assetToUpdate, options) {
             self.expeditions = Expedition.all();
 
             angular.forEach(self.expeditions, function (expedition, i) {
@@ -111,7 +111,7 @@
                             angular.forEach(location.assets, function (asset, k) {
                                 if (parseInt(asset.id) === parseInt(assetToUpdate.id)) {
                                     self.expeditions[i].locations[j].assets[k] = assetToUpdate;
-                                    Expedition.update(self.expeditions[i]);
+                                    Expedition.update(self.expeditions[i], options);
                                 }
                             });
                         }

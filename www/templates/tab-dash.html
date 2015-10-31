@@ -4,6 +4,9 @@
             pulling-text="Pull to refresh..."
             on-refresh="reload()">
         </ion-refresher>
+        <div class="item">
+            <p>v {{$root.version}}</p>
+        </div>
         <div class="item item-image">
             <img ng-src="{{image}}">
         </div>

@@ -52,7 +52,7 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
         Asset.upload($scope.expedition.folderId, asset.fileName, asset.imgSrc).then(function () {
             console.info('Image upload succeeded');
             asset.pendingUpload = false;
-            Asset.update(asset);
+            Asset.update($scope.expedition.id, $scope.location.id, asset, {local: true});
         });
     }
 
