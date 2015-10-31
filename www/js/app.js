@@ -5,6 +5,12 @@ angular
     .module('scout')
     .run(onIonicReady);
 
+angular
+    .module('scout')
+    .config(function($compileProvider){
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|file|blob|cdvfile|assets-library):|data:image\//);
+    });
+
 function onIonicReady($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

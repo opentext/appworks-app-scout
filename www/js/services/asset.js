@@ -24,6 +24,7 @@
         }
 
         function all() {
+            loadAssets();
             return self.assets;
         }
 

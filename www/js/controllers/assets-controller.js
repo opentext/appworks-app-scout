@@ -3,11 +3,8 @@ angular
     .controller('AssetsController', AssetsController);
 
 function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition, $ionicHistory) {
-    $scope.StockImage = StockImage;
-    $scope.goBack = $ionicHistory.goBack;
-    $scope.go = $state.go;
 
-    // we are viewing a list of assets for a location, or all of the assets for the app
+    // we are either viewing a list of assets for a location or all of the assets for the app
     loadData();
 
     $ionicModal.fromTemplateUrl('templates/assets/new-asset.html', {
@@ -22,6 +19,9 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     $scope.handleCamera = handleCamera;
     $scope.saveAsset = saveAsset;
     $scope.reload = loadData;
+    $scope.StockImage = StockImage;
+    $scope.goBack = $ionicHistory.goBack;
+    $scope.go = $state.go;
 
     function loadData() {
         if ($stateParams.locationId) {
@@ -38,26 +38,39 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     }
 
     function handleCamera(newAsset) {
-        var name = 'photo-' + new Date().getTime() + '.jpg';
-        if ($appworks.camera) {
-            $appworks.camera.takePicture(function (dataUrl) {
-                Asset.upload($scope.expedition.folderId, name, dataUrl).then(function (res) {
-                    newAsset.attachments = newAsset.attachments || [];
-                    newAsset.attachments.push(res.id);
-                    $scope.coverImage = dataUrl;
-                });
-            });
-        }
+        $appworks.camera.takePicture(function (fileUrl) {
+            newAsset.imgSrc = fileUrl;
+            newAsset.fileName = 'photo-' + new Date().getTime() + '.jpg';
+            newAsset.pendingUpload = true;
+            $scope.$apply();
+        });
+    }
+
+    function uploadAsset(asset) {
+        //console.log('Uploading image...');
+        //Asset.upload($scope.expedition.folderId, asset.fileName, asset.imgSrc).then(function (res) {
+        //    console.info('Image upload succeeded');
+        //});
     }
 
     function saveAsset(asset) {
+        // refresh the models
         loadData();
+
+        // set location id for association
         asset.locationId = $scope.location.id;
+
+        if (asset.pendingUpload) {
+            // TODO upload imgSrc to backend
+            //uploadAsset(asset);
+        }
+
         Asset.create(asset, $stateParams.locationId, $stateParams.expeditionId).then(function (newAsset) {
+            loadData();
             $scope.assets.push(newAsset);
             closeModal();
+            $scope.newAsset = {};
         });
-        $scope.newAsset = {};
     }
 
     function clearNewAsset() {
@@ -70,7 +83,9 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     }
 
     function openModal() {
+        // refresh the models
         loadData();
+
         if ($scope.expedition && $scope.expedition.status === 'NEW') {
             $scope.modal.show();
         }

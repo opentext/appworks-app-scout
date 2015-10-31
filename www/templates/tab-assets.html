@@ -13,7 +13,7 @@
                     No Locations Added
                 </div>
                 <div ng-repeat="location in expedition.locations">
-                    <a class="item item-thumbnail-left" ng-repeat="asset in location.assets" ui-sref="tab.asset({id: asset.id})">
+                    <a class="item item-thumbnail-left" ng-repeat="asset in location.assets" ng-click="go('tab.asset', {id: asset.id})">
                         <img ng-src="{{asset.imgSrc || StockImage.notes()}}" height="200" width="100%">
                         <h4 class="padding">
                             {{asset.name}}

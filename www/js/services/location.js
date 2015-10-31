@@ -23,6 +23,7 @@
         }
 
         function all() {
+            loadLocations();
             return self.locations;
         }
 
