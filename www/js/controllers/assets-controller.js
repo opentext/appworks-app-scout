@@ -67,9 +67,8 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
             uploadAsset(asset);
         }
 
-        Asset.create(asset, $stateParams.locationId, $stateParams.expeditionId).then(function (newAsset) {
+        Asset.create(asset, $stateParams.locationId, $stateParams.expeditionId).then(function () {
             loadData();
-            //$scope.assets.push(newAsset);
             closeModal();
             $scope.newAsset = {};
         });
