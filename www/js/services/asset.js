@@ -5,12 +5,14 @@
         .module('scout.services')
         .factory('Asset', Asset);
 
-    function Asset(Expedition, Location, $q, $http, $auth) {
+    function Asset(Expedition, Location, $q, $http, $auth, $scope) {
 
         var self = this;
 
         self.assets = [];
         self.expeditions = Expedition.all();
+
+        $scope.$on('Asset.uploadPendingImages', uploadPendingImages);
 
         loadAssets();
 
@@ -21,6 +23,36 @@
                     self.assets.push(asset);
                 });
             });
+        }
+
+        function uploadPendingImages() {
+            var promise = $q.defer(),
+                numberOfImagesToUpload = 0,
+                numberUploaded = 0;
+
+            loadAssets();
+
+            angular.forEach(self.assets, function (asset) {
+                if (asset.pendingUpload) {
+                    numberOfImagesToUpload += 1;
+                }
+            });
+
+            angular.forEach(self.assets, function (asset) {
+                if (asset.pendingUpload) {
+                    var expedition = Expedition.get(asset.expeditionId);
+                    console.log('Uploading: ', asset);
+                    upload(expedition.folderId, asset.fileName, asset.imgSrc).then(function () {
+                        numberUploaded += 1;
+                        if (numberUploaded === numberOfImagesToUpload) {
+                            console.info('Uploaded all images');
+                            promise.resolve();
+                        }
+                    });
+                }
+            });
+
+            return promise.promise;
         }
 
         function all() {

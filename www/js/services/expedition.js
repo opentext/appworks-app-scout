@@ -87,7 +87,8 @@
                         console.error('Submission of expedition via scoutService failed', err);
                         expedition.status = STATUS.new;
                     });
-
+                    console.log('Uploading pending assets...');
+                    $rootScope.$broadcast('Asset.uploadPendingImages');
                 });
             } else {
                 // TODO call this function again when the device comes back online
@@ -153,7 +154,6 @@
                 $rootScope.$broadcast('expedition.ready', expedition);
             }, function () {
                 console.error('Upload of initial expedition.json failed');
-                // TODO retry?
             });
         }
 
@@ -232,14 +232,13 @@
                 url = generateUrl(nodeId, update),
                 req;
 
+            // dont care about updating expedition.json, we do this in complete()
             if ($appworks.network.online) {
                 $auth.reauth().then(function () {
                     req = generateUploadReq(blob);
                     console.log('Uploading expedition.json...');
                     $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
                 });
-            } else {
-                // TODO call this function again when the device comes back online
             }
 
             return promise.promise;
