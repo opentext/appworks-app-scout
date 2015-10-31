@@ -73,20 +73,25 @@
                 data = generateCompletionReq(completedExpedition),
                 config = {headers: {otdsticket: null}};
 
-            $auth.reauth().then(function () {
-                config.headers.otdsticket = $auth.getOTDSTicket();
-                // move the expedition along to the next step in the workflow
-                console.log('Attempting to submit expedition via scoutService...');
-                $http.put(url, data, config).then(function (res) {
-                    console.info('Submission of expedition via scoutService successful', res.data);
-                    // save expedition.json on device and in server
-                    update(completedExpedition);
-                }, function (err) {
-                    console.error('Submission of expedition via scoutService failed', err);
-                    expedition.status = STATUS.new;
-                });
+            if ($appworks.network.online) {
+                $auth.reauth().then(function () {
+                    config.headers.otdsticket = $auth.getOTDSTicket();
+                    // move the expedition along to the next step in the workflow
+                    console.log('Attempting to submit expedition via scoutService...');
+                    $http.put(url, data, config).then(function (res) {
+                        console.info('Submission of expedition via scoutService successful', res.data);
+                        // save expedition.json on device and in server
+                        update(completedExpedition);
+                    }, function (err) {
+                        console.error('Submission of expedition via scoutService failed', err);
+                        expedition.status = STATUS.new;
+                    });
 
-            });
+                });
+            } else {
+                // TODO call this function again when the device comes back online
+            }
+
             return promise.promise;
         }
 
@@ -104,30 +109,35 @@
 
         function startExpeditionWorkflow(expedition) {
             var promise = $q.defer();
-            // get fresh credentials, form the request, and then post to scout service to start the expedition workflow
-            $auth.reauth().then(function () {
-                var authResponse = $auth.getAuth(),
-                    url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-                    config = {headers: {otdsticket: $auth.getOTDSTicket()}},
-                    request = generateWorkflowReq(expedition, authResponse);
 
-                // send request
-                console.log('Attempting to start expedition workflow via scoutService...');
-                $http.post(url, request, config).then(workflowSuccess, workflowFail);
+            if ($appworks.network.online) {
+                // get fresh credentials, form the request, and then post to scout service to start the expedition workflow
+                $auth.reauth().then(function () {
+                    var authResponse = $auth.getAuth(),
+                        url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
+                        config = {headers: {otdsticket: $auth.getOTDSTicket()}},
+                        request = generateWorkflowReq(expedition, authResponse);
 
-                function workflowSuccess(res) {
-                    console.info('Succesfully started workflow', res);
-                    expedition = angular.merge(expedition, res.data);
-                    save();
-                    promise.resolve(expedition);
-                    retryAttempts = 0;
-                }
+                    // send request
+                    console.log('Attempting to start expedition workflow via scoutService...');
+                    $http.post(url, request, config).then(workflowSuccess, workflowFail);
 
-                function workflowFail(err) {
-                    console.error('Failed to start workflow');
-                    promise.reject(err, expedition);
-                }
-            });
+                    function workflowSuccess(res) {
+                        console.info('Succesfully started workflow', res);
+                        expedition = angular.merge(expedition, res.data);
+                        save();
+                        promise.resolve(expedition);
+                        retryAttempts = 0;
+                    }
+
+                    function workflowFail(err) {
+                        console.error('Failed to start workflow');
+                        promise.reject(err, expedition);
+                    }
+                });
+            } else {
+                // TODO call this function again when the device comes back online
+            }
 
             return promise.promise;
         }
@@ -221,11 +231,15 @@
                 url = generateUrl(nodeId, update),
                 req;
 
-            $auth.reauth().then(function () {
-                req = generateUploadReq(blob);
-                console.log('Uploading expedition.json...');
-                $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
-            });
+            if ($appworks.network.online) {
+                $auth.reauth().then(function () {
+                    req = generateUploadReq(blob);
+                    console.log('Uploading expedition.json...');
+                    $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
+                });
+            } else {
+                // TODO call this function again when the device comes back online
+            }
 
             return promise.promise;
         }

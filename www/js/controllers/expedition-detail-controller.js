@@ -69,9 +69,8 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
     }
 
     function addNewLocation(newLocation) {
-        Location.create(newLocation, $scope.expedition.id).then(function (newLocation) {
+        Location.create(newLocation, $scope.expedition).then(function () {
             closeNewLocationModal();
-            $scope.expedition.locations.push(newLocation);
             $scope.newLocation = {};
         });
     }

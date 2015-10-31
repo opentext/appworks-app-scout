@@ -26,24 +26,21 @@
             return self.locations;
         }
 
-        function create(newLocation, expeditionId) {
+        function create(newLocation, expedition) {
             var promise = $q.defer();
             // set defaults
-            newLocation.expeditionId = expeditionId;
+            newLocation.expeditionId = expedition.id;
             newLocation.id = Math.ceil(Math.random() * 1000);
             newLocation.assets = [];
 
-            angular.forEach(self.expeditions, function (expedition) {
-                if (parseInt(expeditionId) === parseInt(expedition.id)) {
-                    expedition.locations.push(newLocation);
-                    console.log('Adding a location');
-                    Expedition.update(expedition).then(function () {
-                        console.info('Location add success');
-                        loadLocations();
-                        promise.resolve(angular.copy(newLocation));
-                    });
-                }
+            expedition.locations.push(newLocation);
+            console.log('Adding a location');
+            Expedition.update(expedition).then(function () {
+                console.info('Location add success');
+                loadLocations();
+                promise.resolve(angular.copy(newLocation));
             });
+
             return promise.promise;
         }
 
