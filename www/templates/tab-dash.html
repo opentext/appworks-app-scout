@@ -1,5 +1,9 @@
 <ion-view view-title="Dashboard">
     <ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="reload()">
+        </ion-refresher>
         <div class="item item-image">
             <img ng-src="{{image}}">
         </div>

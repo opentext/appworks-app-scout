@@ -1,5 +1,9 @@
 <ion-view view-title="Expeditions">
     <ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="reload()">
+        </ion-refresher>
         <ion-list>
             <ion-item class="item-icon-right" ng-repeat="expedition in expeditions | filter: filterFn"
                       type="item-text-wrap" ui-sref="tab.expedition({id: expedition.id})">
