@@ -58,10 +58,10 @@
         <div class="item" ng-show="expedition.locations.length === 0">
             No locations added yet
         </div>
-        <ion-item ui-sref="tab.location({locationId: location.id, expeditionId: expedition.id})"
+        <ion-item ng-repeat="location in expedition.locations"
+                  ng-click="go('tab.location', {locationId: location.id, expeditionId: expedition.id})"
                   class="item-icon-right"
-                  item="location"
-                  ng-repeat="location in expedition.locations">
+                  item="location">
             <ion-option-button class="button-assertive"
                                ng-click="removeLocation(location, $index)">
                 Delete

@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionsController', ExpeditionsController);
 
-function ExpeditionsController($scope, Expedition, $stateParams) {
+function ExpeditionsController($scope, Expedition, $stateParams, $state) {
     $scope.expeditions = Expedition.all();
     $scope.remove = function ($index) {
         $scope.expeditions.splice($index, 1);
@@ -11,6 +11,7 @@ function ExpeditionsController($scope, Expedition, $stateParams) {
     $scope.filterFn = filter;
     $scope.clearFilter = clearFilter;
     $scope.reload = reload;
+    $scope.go = $state.go;
 
     setFilter();
 

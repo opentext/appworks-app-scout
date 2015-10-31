@@ -5,6 +5,7 @@ angular
 function DashboardController($scope, Expedition, StockImage, $ionicModal, $state) {
     $scope.recentExpeditions = Expedition.recent();
     $scope.image = StockImage.random();
+    $scope.go = $state.go;
 
     $scope.newExpedition = {};
 

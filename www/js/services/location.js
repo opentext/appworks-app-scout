@@ -15,7 +15,7 @@
 
         function loadLocations() {
             self.locations = [];
-            angular.forEach(self.expeditions, function (expedition) {
+            angular.forEach(Expedition.all(), function (expedition) {
                 angular.forEach(expedition.locations, function (location) {
                     self.locations.push(location);
                 });
@@ -30,7 +30,7 @@
             var promise = $q.defer();
             // set defaults
             newLocation.expeditionId = expedition.id;
-            newLocation.id = Math.ceil(Math.random() * 1000);
+            newLocation.id = Math.ceil(Math.random() * 100000);
             newLocation.assets = [];
 
             expedition.locations.push(newLocation);
@@ -38,7 +38,7 @@
             Expedition.update(expedition).then(function () {
                 console.info('Location add success');
                 loadLocations();
-                promise.resolve(angular.copy(newLocation));
+                promise.resolve(angular.copy(expedition));
             });
 
             return promise.promise;

@@ -31,7 +31,7 @@
             var promise = $q.defer(),
                 copiedAsset;
 
-            newAsset.id = Math.ceil(Math.random() * 1000);
+            newAsset.id = Math.ceil(Math.random() * 100000);
             newAsset.locationId = locationId;
             newAsset.expeditionId = expeditionId;
 
@@ -53,7 +53,6 @@
                     });
                 }
             });
-            loadAssets();
 
             return promise.promise;
         }

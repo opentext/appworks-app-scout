@@ -2,9 +2,10 @@ angular
     .module('scout.controllers')
     .controller('AssetsController', AssetsController);
 
-function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition, $ionicHistory) {
+function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition, $ionicHistory) {
     $scope.StockImage = StockImage;
     $scope.goBack = $ionicHistory.goBack;
+    $scope.go = $state.go;
 
     // we are viewing a list of assets for a location, or all of the assets for the app
     loadData();
@@ -50,6 +51,7 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
     }
 
     function saveAsset(asset) {
+        loadData();
         asset.locationId = $scope.location.id;
         Asset.create(asset, $stateParams.locationId, $stateParams.expeditionId).then(function (newAsset) {
             $scope.assets.push(newAsset);
@@ -68,6 +70,9 @@ function AssetsController($scope, Asset, $stateParams, $ionicModal, Location, $a
     }
 
     function openModal() {
-        $scope.modal.show();
+        loadData();
+        if ($scope.expedition && $scope.expedition.status === 'NEW') {
+            $scope.modal.show();
+        }
     }
 }

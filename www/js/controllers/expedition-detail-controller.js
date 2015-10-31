@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicHistory, $ionicPopup) {
+function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicHistory, $ionicPopup) {
 
     $scope.expedition = Expedition.get($stateParams.id);
     console.log($scope.expedition);
@@ -27,6 +27,7 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
     $scope.goBack = $ionicHistory.goBack;
     $scope.isEnabled = isEnabled;
     $scope.reload = reload;
+    $scope.go = $state.go;
 
     // update expedition if user changes title or dates
     $scope.$watch('expedition.title', updateExpedition);
@@ -43,12 +44,14 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
 
     function reload() {
         if ($scope.expedition.ready) {
-            console.log('updating expedition and uploading expedition.json');
-            Expedition.update($scope.expedition).then(function (expedition) {
-                console.info('update of expedition succeeded');
-                $scope.expedition = expedition;
-                $scope.$broadcast('scroll.refreshComplete');
-            });
+            $scope.expedition = Expedition.get($stateParams.id);
+            $scope.$broadcast('scroll.refreshComplete');
+            //console.log('updating expedition and uploading expedition.json');
+            //Expedition.update($scope.expedition).then(function (expedition) {
+            //    console.info('update of expedition succeeded');
+            //    $scope.expedition = expedition;
+            //    $scope.$broadcast('scroll.refreshComplete');
+            //});
         } else {
             console.log('retrying create of expedition');
             Expedition.destroy($scope.expedition);
@@ -69,9 +72,10 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
     }
 
     function addNewLocation(newLocation) {
-        Location.create(newLocation, $scope.expedition).then(function () {
-            closeNewLocationModal();
+        Location.create(newLocation, $scope.expedition).then(function (expedition) {
+            $scope.expedition = expedition;
             $scope.newLocation = {};
+            closeNewLocationModal();
         });
     }
 
