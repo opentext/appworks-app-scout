@@ -33,7 +33,7 @@
             newLocation.id = Math.ceil(Math.random() * 1000);
             newLocation.assets = [];
 
-            angular.forEach(self.expeditions, function (expedition, i) {
+            angular.forEach(self.expeditions, function (expedition) {
                 if (parseInt(expeditionId) === parseInt(expedition.id)) {
                     expedition.locations.push(newLocation);
                     console.log('Adding a location');

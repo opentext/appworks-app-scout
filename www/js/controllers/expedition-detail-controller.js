@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicHistory) {
+function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicHistory, $ionicPopup) {
 
     $scope.expedition = Expedition.get($stateParams.id);
     console.log($scope.expedition);
@@ -25,11 +25,42 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
     $scope.addNewLocation = addNewLocation;
     $scope.removeLocation = removeLocation;
     $scope.goBack = $ionicHistory.goBack;
+    $scope.isEnabled = isEnabled;
+    $scope.reload = reload;
 
     // update expedition if user changes title or dates
     $scope.$watch('expedition.title', updateExpedition);
     $scope.$watch('expedition.starts', updateExpedition);
     $scope.$watch('expedition.ends', updateExpedition);
+
+    $scope.$on('expedition.ready', function (evt, expedition) {
+        console.log('expedition is ready', expedition);
+        $scope.$broadcast('scroll.refreshComplete');
+        if ($scope.expedition.id === expedition.id) {
+            $scope.expedition = expedition;
+        }
+    });
+
+    function reload() {
+        if ($scope.expedition.ready) {
+            console.log('updating expedition and uploading expedition.json');
+            Expedition.update($scope.expedition).then(function (expedition) {
+                console.info('update of expedition succeeded');
+                $scope.expedition = expedition;
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        } else {
+            console.log('retrying create of expedition');
+            Expedition.destroy($scope.expedition);
+            Expedition.create($scope.expedition).then(function (expedition) {
+                console.info('creation of expedition succeeded');
+            });
+        }
+    }
+
+    function isEnabled(expedition) {
+        return expedition.status === 'NEW' && expedition.ready;
+    }
 
     function updateExpedition(newVal, oldVal) {
         if (newVal && newVal !== oldVal) {
@@ -53,10 +84,15 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
     }
 
     function completeExpedition() {
-        if (confirm('Are you sure you want to submit this expedition?')) {
-            $scope.expedition.status = Expedition.STATUS.submitted;
-            Expedition.complete($scope.expedition);
-        }
+        $ionicPopup.confirm({
+            title: 'Submit expedition',
+            template: 'Are you sure you want to submit this expedition?'
+        }).then(function(res) {
+            if(res) {
+                $scope.expedition.status = Expedition.STATUS.submitted;
+                Expedition.complete($scope.expedition);
+            }
+        });
     }
 
     function getCurrentLocation() {
@@ -84,7 +120,10 @@ function ExpeditionDetailController($scope, $stateParams, $ionicModal, $ionicAct
                 console.log('downloading expense report spreadsheet...');
                 $csDocument.get($scope.expedition.folderId, 'expense-tracking.xlsx').then(function (res) {
                     console.log('download of expense report succeeded', res);
-                    alert('Download succeeded');
+                    $ionicPopup.alert({
+                        title: 'Success',
+                        template: 'Download succeeded.'
+                    });
                 });
                 closeExpensesModal();
             }

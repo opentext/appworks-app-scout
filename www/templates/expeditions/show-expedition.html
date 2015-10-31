@@ -7,18 +7,22 @@
     </div>
 </ion-footer-bar>
 <ion-content>
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="reload()">
+    </ion-refresher>
     <ion-list>
         <label class="item item-input" ng-show="editTitle">
             <input type="text" placeholder="Expedition Title" ng-model="expedition.title" ng-blur="editTitle = false">
         </label>
-        <div class="item item-divider" ng-click="editTitle = true" ng-hide="editTitle" ng-class="{'disable-pointer-events': expedition.status !== 'NEW'}">
+        <div class="item item-divider" ng-click="editTitle = true" ng-hide="editTitle" ng-class="{'disable-pointer-events': !isEnabled(expedition)}">
             {{expedition.title}}
         </div>
-        <label class="item item-input" ng-class="{'disable-pointer-events': expedition.status !== 'NEW'}">
+        <label class="item item-input" ng-class="{'disable-pointer-events': !isEnabled(expedition)}">
             <span class="input-label">Starts</span>
             <input type="date" ng-model="expedition.starts">
         </label>
-        <label class="item item-input" ng-class="{'disable-pointer-events': expedition.status !== 'NEW'}">
+        <label class="item item-input" ng-class="{'disable-pointer-events': !isEnabled(expedition)}">
             <span class="input-label">Ends</span>
             <input type="date" ng-model="expedition.ends">
         </label>
@@ -33,15 +37,17 @@
             Status: {{expedition.status.toLowerCase()}}
         </div>
         <button class="button button-block button-clear button-positive"
-                ng-click="openNewLocationModal()" ng-disabled="expedition.status !== 'NEW'">
+                ng-disabled="!isEnabled(expedition)"
+                ng-click="openNewLocationModal()">
             Add Location
         </button>
         <button class="button button-block button-clear button-positive"
-                ng-click="openExpensesModal()" ng-disabled="expedition.status !== 'NEW'">
+                ng-disabled="!isEnabled(expedition)"
+                ng-click="openExpensesModal()">
             Record Expenses
         </button>
         <button class="button button-block button-clear button-positive"
-                ng-disabled="expedition.status !== 'NEW'"
+                ng-disabled="!isEnabled(expedition)"
                 ng-click="completeExpedition()">
             Complete Expedition
         </button>

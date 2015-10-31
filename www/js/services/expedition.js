@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Expedition', Expedition);
 
-    function Expedition($appworks, $q, $http, Blob, $auth, $ionicLoading) {
+    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope) {
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
@@ -40,10 +40,15 @@
         function find(queryObj) {
             angular.forEach(self.expeditions, function (expedition, index) {
                 if (parseInt(expedition.id) === parseInt(queryObj.id)) {
-                    return self.expeditions[index];
+                    return index;
                 }
             });
             return -1;
+        }
+
+        function destroy(expedition) {
+            var index = find(expedition);
+            return self.expeditions.splice(index, 1);
         }
 
         function complete(completedExpedition) {
@@ -105,6 +110,7 @@
                         startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
                         endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
                     };
+
                 // send request
                 console.log('Attempting to start expedition workflow via scoutService...');
                 $http.post(url, request, config).then(workflowSuccess, workflowFail);
@@ -127,13 +133,13 @@
         }
 
         function uploadInitialExpeditionModel(expedition) {
-            // TODO store values from response in expedition, persist model, upload expedition.json
             console.log('Attempting to create initial expedition.json via content service...');
             createObject(expedition, expedition.folderId).then(function (res) {
                 console.info('Upload of initial expedition.json was successful', res.data);
                 expedition.objectId = res.data.id;
                 expedition.ready = true;
                 update(expedition, {local: true});
+                $rootScope.$broadcast('expedition.ready', expedition);
             }, function () {
                 console.error('Upload of initial expedition.json failed');
                 // TODO retry?
@@ -202,6 +208,7 @@
 
         function save() {
             $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
+            console.info('Expedition saved locally');
         }
 
         function updateObject(obj, objId) {
@@ -216,6 +223,7 @@
 
             $auth.reauth().then(function () {
                 req = generateUploadReq(blob);
+                console.log('Uploading expedition.json...');
                 $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
             });
 
@@ -255,6 +263,7 @@
             recent: all,
             update: update,
             save: save,
+            destroy: destroy,
             STATUS: STATUS
         }
     }
