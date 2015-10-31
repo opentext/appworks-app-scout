@@ -54,6 +54,8 @@
             var promise = $q.defer(),
                 copiedAsset;
 
+            self.expeditions = Expedition.all();
+
             newAsset.id = Math.ceil(Math.random() * 100000);
             newAsset.locationId = locationId;
             newAsset.expeditionId = expeditionId;
