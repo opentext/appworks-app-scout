@@ -46,32 +46,32 @@
             return -1;
         }
 
-        function destroy(expedition) {
+        function destroyLocal(expedition) {
             var index = find(expedition);
             return self.expeditions.splice(index, 1);
+        }
+
+        function generateCompletionReq(expedition) {
+            return {
+                workflowId: expedition.workflowId,
+                startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
+                endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime(),
+                status: STATUS.submitted,
+                scoutUsername: expedition.scoutUsername,
+                scoutUserId: expedition.scoutUserId,
+                expensesReportIncluded: expedition.expensesReportIncluded,
+                reviewComments: expedition.reviewComments,
+                title: expedition.title,
+                folderId: expedition.folderId,
+                completed: expedition.completed
+            };
         }
 
         function complete(completedExpedition) {
             var promise = $q.defer(),
                 url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-                data = {
-                    workflowId: completedExpedition.workflowId,
-                    startDate: Date.parse(completedExpedition.starts, 'dd-MM-yyyy').getTime(),
-                    endDate: Date.parse(completedExpedition.ends, 'dd-MM-yyyy').getTime(),
-                    status: STATUS.submitted,
-                    scoutUsername: completedExpedition.scoutUsername,
-                    scoutUserId: completedExpedition.scoutUserId,
-                    expensesReportIncluded: completedExpedition.expensesReportIncluded,
-                    reviewComments: completedExpedition.reviewComments,
-                    title: completedExpedition.title,
-                    folderId: completedExpedition.folderId,
-                    completed: completedExpedition.completed
-                },
-                config = {
-                    headers: {
-                        otdsticket: null
-                    }
-                };
+                data = generateCompletionReq(completedExpedition),
+                config = {headers: {otdsticket: null}};
 
             $auth.reauth().then(function () {
                 config.headers.otdsticket = $auth.getOTDSTicket();
@@ -90,26 +90,26 @@
             return promise.promise;
         }
 
+        function generateWorkflowReq(expedition, authResponse) {
+            return {
+                title: expedition.title,
+                status: expedition.status,
+                scoutUsername: authResponse.csUsername,
+                scoutUserId: authResponse.csUserId,
+                expensesReportIncluded: false,
+                startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
+                endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
+            };
+        }
+
         function startExpeditionWorkflow(expedition) {
             var promise = $q.defer();
             // get fresh credentials, form the request, and then post to scout service to start the expedition workflow
             $auth.reauth().then(function () {
                 var authResponse = $auth.getAuth(),
                     url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-                    config = {
-                        headers: {
-                            otdsticket: $auth.getOTDSTicket()
-                        }
-                    },
-                    request = {
-                        title: expedition.title,
-                        status: expedition.status,
-                        scoutUsername: authResponse.csUsername,
-                        scoutUserId: authResponse.csUserId,
-                        expensesReportIncluded: false,
-                        startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
-                        endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
-                    };
+                    config = {headers: {otdsticket: $auth.getOTDSTicket()}},
+                    request = generateWorkflowReq(expedition, authResponse);
 
                 // send request
                 console.log('Attempting to start expedition workflow via scoutService...');
@@ -263,7 +263,7 @@
             recent: all,
             update: update,
             save: save,
-            destroy: destroy,
+            destroy: destroyLocal,
             STATUS: STATUS
         }
     }
