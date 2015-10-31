@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Asset', Asset);
 
-    function Asset(Expedition, Location, $q, $http, $auth, $ionicLoading) {
+    function Asset(Expedition, Location, $q, $http, $auth) {
 
         var self = this;
 
@@ -26,6 +26,28 @@
         function all() {
             loadAssets();
             return self.assets;
+        }
+
+        function convertFileUriToDataUri(fileUrl, successCallback, errorCallback) {
+            window.resolveLocalFileSystemURL(fileUrl, gotFileEntry, fail);
+
+            function gotFileEntry(fileEntry) {
+                fileEntry.file(gotFile, fail);
+            }
+
+            function gotFile(file) {
+                var reader = new FileReader();
+                reader.onloadend = function(evt) {
+                    if (successCallback) {
+                        successCallback(evt.target.result);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function fail(err) {
+                console.error(err);
+            }
         }
 
         function create(newAsset, locationId, expeditionId) {
@@ -59,6 +81,8 @@
         }
 
         function get(params) {
+            loadAssets();
+
             // get resource by id, locationId, or list all based on params
             if (angular.isDefined(params.locationId)) {
                 return self.assets.filter(function (asset) {
@@ -75,26 +99,48 @@
             }
         }
 
-        function upload(folderId, name, dataUrl) {
+        function update(expeditionId, locationId, assetToUpdate) {
+            self.expeditions = Expedition.all();
+
+            angular.forEach(self.expeditions, function (expedition, i) {
+                if (parseInt(expeditionId) === parseInt(expedition.id)) {
+                    angular.forEach(expedition.locations, function (location, j) {
+                        if (parseInt(locationId) === parseInt(location.id)) {
+                            angular.forEach(location.assets, function (asset, k) {
+                                if (parseInt(asset.id) === parseInt(assetToUpdate.id)) {
+                                    self.expeditions[i].locations[j].assets[k] = assetToUpdate;
+                                    Expedition.update(self.expeditions[i]);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        function upload(folderId, name, fileUrl) {
             var promise = $q.defer(),
                 blob,
                 req,
-                url;
+                url,
+                dataUrl;
+
+            convertFileUriToDataUri(fileUrl, function (uri) {
+                dataUrl = uri;
+                $auth.reauth().then(onAuthSuccess, onAuthFail);
+            });
 
             function onUploadSuccess(res) {
                 console.info('Image upload via contentService succeeded', res);
-                hideLoading();
                 promise.resolve(res);
             }
 
             function onUploadFail(err) {
                 console.error('Image upload via contentService failed', err);
-                hideLoading();
                 promise.reject(err);
             }
 
             function onAuthFail(err) {
-                hideLoading();
                 console.log('couldnt reauth', err);
             }
 
@@ -106,19 +152,7 @@
                 $http.post(url, req.request, req.options).success(onUploadSuccess).error(onUploadFail);
             }
 
-            showLoading();
-
-            $auth.reauth().then(onAuthSuccess, onAuthFail);
-
             return promise.promise;
-        }
-
-        function showLoading() {
-            $ionicLoading.show({template: 'Loading...'});
-        }
-
-        function hideLoading() {
-            $ionicLoading.hide();
         }
 
         function generateUrl(folderId) {
@@ -168,7 +202,8 @@
             all: all,
             create: create,
             get: get,
-            upload: upload
+            upload: upload,
+            update: update
         }
     }
 

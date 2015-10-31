@@ -47,10 +47,13 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     }
 
     function uploadAsset(asset) {
-        //console.log('Uploading image...');
-        //Asset.upload($scope.expedition.folderId, asset.fileName, asset.imgSrc).then(function (res) {
-        //    console.info('Image upload succeeded');
-        //});
+        console.log('Uploading image...');
+
+        Asset.upload($scope.expedition.folderId, asset.fileName, asset.imgSrc).then(function () {
+            console.info('Image upload succeeded');
+            asset.pendingUpload = false;
+            Asset.update(asset);
+        });
     }
 
     function saveAsset(asset) {
@@ -61,13 +64,12 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
         asset.locationId = $scope.location.id;
 
         if (asset.pendingUpload) {
-            // TODO upload imgSrc to backend
-            //uploadAsset(asset);
+            uploadAsset(asset);
         }
 
         Asset.create(asset, $stateParams.locationId, $stateParams.expeditionId).then(function (newAsset) {
             loadData();
-            $scope.assets.push(newAsset);
+            //$scope.assets.push(newAsset);
             closeModal();
             $scope.newAsset = {};
         });

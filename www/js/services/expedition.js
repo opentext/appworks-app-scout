@@ -34,6 +34,7 @@
         }
 
         function all() {
+            init();
             return angular.copy(self.expeditions);
         }
 
