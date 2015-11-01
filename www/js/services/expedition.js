@@ -88,7 +88,7 @@
                         update(completedExpedition);
                     }, function (err) {
                         console.error('Submission of expedition via scoutService failed', err);
-                        expedition.status = STATUS.new;
+                        completedExpedition.status = STATUS.new;
                     });
                     console.log('Uploading pending assets...');
                     $rootScope.$broadcast('Asset.uploadPendingImages');
