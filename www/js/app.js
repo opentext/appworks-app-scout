@@ -8,7 +8,7 @@ angular
 angular
     .module('scout')
     .run(function ($rootScope) {
-        $rootScope.version = '0.8.0';
+        $rootScope.version = '0.8.2';
     });
 
 angular

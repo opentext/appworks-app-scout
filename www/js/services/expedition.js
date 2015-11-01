@@ -81,8 +81,11 @@
                     console.log('Attempting to submit expedition via scoutService...');
                     $http.put(url, data, config).then(function (res) {
                         console.info('Submission of expedition via scoutService successful', res.data);
+                        // refresh model to get latest changes
+                        completedExpedition = get(completedExpedition.id);
+                        completedExpedition.status = STATUS.submitted;
                         // save expedition.json on device and in server
-                        update(get(completedExpedition.id));
+                        update(completedExpedition);
                     }, function (err) {
                         console.error('Submission of expedition via scoutService failed', err);
                         expedition.status = STATUS.new;
@@ -187,7 +190,11 @@
         }
 
         function get(id) {
-            var list = self.expeditions.filter(function (expedition) {
+            var list;
+
+            init();
+
+            list = self.expeditions.filter(function (expedition) {
                 return parseInt(expedition.id) === parseInt(id);
             });
             return angular.copy(list.pop());
