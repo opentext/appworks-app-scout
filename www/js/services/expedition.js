@@ -82,7 +82,7 @@
                     $http.put(url, data, config).then(function (res) {
                         console.info('Submission of expedition via scoutService successful', res.data);
                         // save expedition.json on device and in server
-                        update(completedExpedition);
+                        update(get(completedExpedition.id));
                     }, function (err) {
                         console.error('Submission of expedition via scoutService failed', err);
                         expedition.status = STATUS.new;
