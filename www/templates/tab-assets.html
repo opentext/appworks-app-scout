@@ -5,6 +5,14 @@
             on-refresh="reload()">
         </ion-refresher>
         <ion-list>
+            <div ng-show="expeditions.length === 0" style="text-align: center">
+                <div class="item">
+                    No assets have been added
+                    <button class="button button-positive button-block" ui-sref="tab.expeditions">
+                        Start an Expedition
+                    </button>
+                </div>
+            </div>
             <div ng-repeat="expedition in expeditions">
                 <div class="item item-divider" >
                     {{expedition.title}}
