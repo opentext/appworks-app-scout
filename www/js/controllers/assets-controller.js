@@ -86,9 +86,6 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     function openModal() {
         // refresh the models
         loadData();
-
-        if ($scope.expedition && $scope.expedition.status === 'NEW') {
-            $scope.modal.show();
-        }
+        $scope.modal.show();
     }
 }
