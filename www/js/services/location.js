@@ -36,7 +36,7 @@
 
             expedition.locations.push(newLocation);
             console.log('Adding a location');
-            Expedition.update(expedition).then(function () {
+            Expedition.update(expedition, {local: true}).then(function () {
                 console.info('Location add success');
                 loadLocations();
                 promise.resolve(angular.copy(expedition));

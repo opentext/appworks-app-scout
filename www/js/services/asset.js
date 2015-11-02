@@ -104,7 +104,7 @@
                             self.expeditions[i].locations[j].assets.push(copiedAsset);
                             loadAssets();
                             console.log('Added a new asset');
-                            Expedition.update(expedition);
+                            Expedition.update(expedition, {local: true});
                             promise.resolve(angular.copy(newAsset));
                         }
                     });

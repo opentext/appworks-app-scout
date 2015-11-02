@@ -81,17 +81,18 @@
                     console.log('Attempting to submit expedition via scoutService...');
                     $http.put(url, data, config).then(function (res) {
                         console.info('Submission of expedition via scoutService successful', res.data);
-                        // refresh model to get latest changes
+                        // refresh model to get latest
                         completedExpedition = get(completedExpedition.id);
                         completedExpedition.status = STATUS.submitted;
                         // save expedition.json on device and in server
                         update(completedExpedition);
+                        // upload any pending images
+                        console.log('Uploading pending assets...');
+                        $rootScope.$broadcast('Asset.uploadPendingImages');
                     }, function (err) {
                         console.error('Submission of expedition via scoutService failed', err);
                         completedExpedition.status = STATUS.new;
                     });
-                    console.log('Uploading pending assets...');
-                    $rootScope.$broadcast('Asset.uploadPendingImages');
                 });
             } else {
                 // TODO call this function again when the device comes back online

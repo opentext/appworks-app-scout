@@ -15,6 +15,11 @@ navigation history that also transitions its views in and out.
         <ion-nav-view name="tab-expeditions"></ion-nav-view>
     </ion-tab>
 
+    <!-- New Expedition Tab -->
+    <ion-tab title="New" icon-off="ion-plus" icon-on="ion-plus" ng-click="openNewExpeditionModal()"
+             ng-controller="NewExpeditionController">
+    </ion-tab>
+
     <!-- Assets Tab -->
     <ion-tab title="Assets" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" ui-sref="tab.assets">
         <ion-nav-view name="tab-assets"></ion-nav-view>

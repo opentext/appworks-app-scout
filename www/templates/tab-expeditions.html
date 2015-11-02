@@ -5,24 +5,19 @@
             on-refresh="reload()">
         </ion-refresher>
         <ion-list>
-            <div style="text-align: center; padding: 4px 0 0px 0;">
+            <div style="text-align: center; padding: 4px 0 0 0;">
                 <p>Scout v {{$root.version}}</p>
             </div>
             <div class="item item-image">
                 <img ng-src="{{image}}">
             </div>
-            <button class="button button-block button-positive"
-                    style="margin: 2px 0 4px 0;"
-                    ng-click="openNewExpeditionModal()">
-                Start a new expedition
-            </button>
             <div class="item item-divider">
                 Expeditions
             </div>
             <div class="item" ng-show="expeditions.length === 0">
                 No expeditions have been started
             </div>
-            <ion-item class="item-icon-right" ng-repeat="expedition in expeditions | filter: filterFn"
+            <ion-item class="item-icon-right" ng-repeat="expedition in expeditions | orderBy:'':true"
                       type="item-text-wrap" ng-click="go('tab.expedition', {id: expedition.id})">
 
                 <h2>{{expedition.title}}</h2>
