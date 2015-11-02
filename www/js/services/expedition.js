@@ -15,27 +15,138 @@
         // initialize service by loading expeditions from device storage
         init();
 
-        function init() {
-            self.expeditions = $appworks.cache.getItem(STORAGE_KEY);
+        // api
 
-            if (!self.expeditions) {
-                self.expeditions = [];
-                $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
+        function all() {
+            init();
+            return angular.copy(self.expeditions);
+        }
+
+        function complete(completedExpedition) {
+            var promise = $q.defer(),
+                url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
+                data = generateCompletionReq(completedExpedition),
+                config = {headers: {otdsticket: null}};
+
+            if ($appworks.network.online) {
+                $auth.reauth().then(completeExpeditionAfterReauth);
+            } else {
+                console.log('Deferring completion of expedition until device comes back online');
+                promise.resolve(completedExpedition);
+                // TODO call this function again when the device comes back online
             }
 
-            convertDatesToDateString();
+            function completeExpeditionAfterReauth() {
+                config.headers.otdsticket = $auth.getOTDSTicket();
+                // move the expedition along to the next step in the workflow
+                console.log('Attempting to submit expedition via scoutService...');
+                $http.put(url, data, config).then(onSubmitSuccess, onSubmitFail);
+            }
+
+            function onSubmitSuccess(res) {
+                console.info('Submission of expedition via scoutService successful', res.data);
+                // refresh model to get latest
+                completedExpedition = get(completedExpedition.id);
+                completedExpedition.status = STATUS.submitted;
+                // save expedition.json on device and in server
+                update(completedExpedition, {returnDeferredUpdate: true}).then(uploadPendingImagesAfterUpdate);
+            }
+
+            function uploadPendingImagesAfterUpdate() {
+                // upload any pending images
+                console.log('Uploading pending assets...');
+                $rootScope.$broadcast('Asset.uploadPendingImages');
+                $rootScope.$on('Asset.uploadPendingImages.complete', function () {
+                    promise.resolve(angular.copy(get(completedExpedition.id)));
+                });
+            }
+
+            function onSubmitFail(err) {
+                console.error('Submission of expedition via scoutService failed', err);
+                completedExpedition.status = STATUS.new;
+            }
+
+            return promise.promise;
         }
+
+        function create(expedition) {
+            var promise = $q.defer(),
+                copiedExpedition;
+
+            // set defaults
+            expedition.id = Math.ceil(Math.random() * 100000);
+            expedition.locations = [];
+            expedition.status = STATUS.new;
+            // prevent dupes errors
+            copiedExpedition = angular.copy(expedition);
+            // update the model
+            self.expeditions.push(copiedExpedition);
+            save();
+            // start a workflow via scout service
+            startExpeditionWorkflow(expedition).then(uploadInitialExpeditionModel, onStartWorkflowFail);
+
+            promise.resolve(copiedExpedition);
+
+            return promise.promise;
+        }
+
+        function destroyLocal(expedition) {
+            var index = find(expedition);
+            return self.expeditions.splice(index, 1);
+        }
+
+        function get(id) {
+            var list;
+
+            init();
+
+            list = self.expeditions.filter(function (expedition) {
+                return parseInt(expedition.id) === parseInt(id);
+            });
+            return angular.copy(list.pop());
+        }
+
+        function save() {
+            $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
+            console.info('Expedition saved locally');
+        }
+
+        function update(updated, options) {
+            var promise = $q.defer(),
+                updatePromise;
+
+            options = options || {};
+
+            angular.forEach(self.expeditions, function (expedition, i) {
+                if (expedition.id === updated.id) {
+                    // update the model
+                    self.expeditions[i] = angular.copy(updated);
+                    // upload expedition.json unless specified in options
+                    if (!options.local) {
+                        // update expedition.json
+                        updatePromise = updateObject(self.expeditions[i], expedition.objectId);
+                    }
+                    // persist the model
+                    save();
+                    // return deferred backend update
+                    if (options.returnDeferredUpdate) {
+                        return updatePromise;
+                    }
+                    // send back updated expedition from source
+                    promise.resolve(self.expeditions[i]);
+                }
+            });
+            promise.reject('Could not find expedition');
+            return promise.promise;
+        }
+
+        // helpers
 
         function convertDatesToDateString() {
             self.expeditions.map(function (expedition) {
                 expedition.starts = new Date.parse(expedition.starts, 'dd-MM-yyyy');
                 expedition.ends = new Date.parse(expedition.ends, 'dd-MM-yyyy');
             });
-        }
-
-        function all() {
-            init();
-            return angular.copy(self.expeditions);
         }
 
         function find(queryObj) {
@@ -45,11 +156,6 @@
                 }
             });
             return -1;
-        }
-
-        function destroyLocal(expedition) {
-            var index = find(expedition);
-            return self.expeditions.splice(index, 1);
         }
 
         function generateCompletionReq(expedition) {
@@ -68,39 +174,6 @@
             };
         }
 
-        function complete(completedExpedition) {
-            var promise = $q.defer(),
-                url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
-                data = generateCompletionReq(completedExpedition),
-                config = {headers: {otdsticket: null}};
-
-            if ($appworks.network.online) {
-                $auth.reauth().then(function () {
-                    config.headers.otdsticket = $auth.getOTDSTicket();
-                    // move the expedition along to the next step in the workflow
-                    console.log('Attempting to submit expedition via scoutService...');
-                    $http.put(url, data, config).then(function (res) {
-                        console.info('Submission of expedition via scoutService successful', res.data);
-                        // refresh model to get latest
-                        completedExpedition = get(completedExpedition.id);
-                        completedExpedition.status = STATUS.submitted;
-                        // save expedition.json on device and in server
-                        update(completedExpedition);
-                        // upload any pending images
-                        console.log('Uploading pending assets...');
-                        $rootScope.$broadcast('Asset.uploadPendingImages');
-                    }, function (err) {
-                        console.error('Submission of expedition via scoutService failed', err);
-                        completedExpedition.status = STATUS.new;
-                    });
-                });
-            } else {
-                // TODO call this function again when the device comes back online
-            }
-
-            return promise.promise;
-        }
-
         function generateWorkflowReq(expedition, authResponse) {
             return {
                 title: expedition.title,
@@ -111,6 +184,70 @@
                 startDate: Date.parse(expedition.starts, 'dd-MM-yyyy').getTime(),
                 endDate: Date.parse(expedition.ends, 'dd-MM-yyyy').getTime()
             };
+        }
+
+        function generateUrl(nodeId, addVersion) {
+            var url = $auth.gatewayUrl() + '/content/v4/nodes/' + nodeId;
+            if (addVersion) {
+                url += '/content';
+            } else {
+                url += '/children';
+            }
+            return url;
+        }
+
+        function generateUploadReq(file, name) {
+            var formData = new FormData();
+            formData.append('file', file, (name || 'expedition.json'));
+            return {
+                options: {
+                    headers: {
+                        'Content-Type': undefined,
+                        'otcsticket': $auth.getOTCSTicket()
+                    },
+                    transformRequest: angular.identity
+                },
+                request: formData
+            };
+        }
+
+        function init() {
+            self.expeditions = $appworks.cache.getItem(STORAGE_KEY);
+
+            if (!self.expeditions) {
+                self.expeditions = [];
+                $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
+            }
+
+            convertDatesToDateString();
+        }
+
+        // server communication
+
+        function createObject(obj, nodeId, update) {
+            var promise = $q.defer(),
+                blob = new Blob([JSON.stringify(obj)], {type: "application/json;charset=utf-8"}),
+                url = generateUrl(nodeId, update),
+                req;
+
+            // dont care about updating expedition.json, we do this in complete()
+            if ($appworks.network.online) {
+                $auth.reauth().then(function () {
+                    req = generateUploadReq(blob);
+                    console.log('Uploading expedition.json...');
+                    $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
+                });
+            }
+
+            return promise.promise;
+        }
+
+        function onStartWorkflowFail(err, expedition) {
+            // retry
+            if (retryAttempts < 10) {
+                startExpeditionWorkflow(expedition);
+                retryAttempts += 1;
+            }
         }
 
         function startExpeditionWorkflow(expedition) {
@@ -143,6 +280,8 @@
                 });
             } else {
                 // TODO call this function again when the device comes back online
+                console.log('Deferring start of expedition until device comes back online');
+                promise.resolve(expedition);
             }
 
             return promise.promise;
@@ -161,131 +300,18 @@
             });
         }
 
-        function onStartWorkflowFail(err, expedition) {
-            // retry
-            if (retryAttempts < 10) {
-                startExpeditionWorkflow(expedition);
-                retryAttempts += 1;
-            }
-        }
-
-        function create(expedition) {
-            var promise = $q.defer(),
-                copiedExpedition;
-
-            // set defaults
-            expedition.id = Math.ceil(Math.random() * 100000);
-            expedition.locations = [];
-            expedition.status = STATUS.new;
-            // prevent dupes errors
-            copiedExpedition = angular.copy(expedition);
-            // update the model
-            self.expeditions.push(copiedExpedition);
-            save();
-            // start a workflow via scout service
-            startExpeditionWorkflow(expedition).then(uploadInitialExpeditionModel, onStartWorkflowFail);
-
-            promise.resolve(copiedExpedition);
-
-            return promise.promise;
-        }
-
-        function get(id) {
-            var list;
-
-            init();
-
-            list = self.expeditions.filter(function (expedition) {
-                return parseInt(expedition.id) === parseInt(id);
-            });
-            return angular.copy(list.pop());
-        }
-
-        function update(updated, options) {
-            var promise = $q.defer();
-
-            options = options || {};
-
-            angular.forEach(self.expeditions, function (expedition, i) {
-                if (expedition.id === updated.id) {
-                    // update the model
-                    self.expeditions[i] = angular.copy(updated);
-                    // upload expedition.json unless specified in options
-                    if (!options.local) {
-                        // update expedition.json
-                        updateObject(self.expeditions[i], expedition.objectId);
-                    }
-                    // persist the model
-                    save();
-                    // send back updated expedition from source
-                    promise.resolve(self.expeditions[i]);
-                }
-            });
-            promise.reject('Could not find expedition');
-            return promise.promise;
-        }
-
-        function save() {
-            $appworks.cache.setItem(STORAGE_KEY, self.expeditions);
-            console.info('Expedition saved locally');
-        }
-
         function updateObject(obj, objId) {
             return createObject(obj, objId, true);
-        }
-
-        function createObject(obj, nodeId, update) {
-            var promise = $q.defer(),
-                blob = new Blob([JSON.stringify(obj)], {type: "application/json;charset=utf-8"}),
-                url = generateUrl(nodeId, update),
-                req;
-
-            // dont care about updating expedition.json, we do this in complete()
-            if ($appworks.network.online) {
-                $auth.reauth().then(function () {
-                    req = generateUploadReq(blob);
-                    console.log('Uploading expedition.json...');
-                    $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
-                });
-            }
-
-            return promise.promise;
-        }
-
-        function generateUrl(nodeId, addVersion) {
-            var url = $auth.gatewayUrl() + '/content/v4/nodes/' + nodeId;
-            if (addVersion) {
-                url += '/content';
-            } else {
-                url += '/children';
-            }
-            return url;
-        }
-
-        function generateUploadReq(file, name) {
-            var formData = new FormData();
-            formData.append('file', file, (name || 'expedition.json'));
-            return {
-                options: {
-                    headers: {
-                        'Content-Type': undefined,
-                        'otcsticket': $auth.getOTCSTicket()
-                    },
-                    transformRequest: angular.identity
-                },
-                request: formData
-            };
         }
 
         return {
             all: all,
             complete: complete,
             create: create,
+            destroy: destroyLocal,
             get: get,
-            recent: all,
             update: update,
             save: save,
-            destroy: destroyLocal,
             STATUS: STATUS
         }
     }

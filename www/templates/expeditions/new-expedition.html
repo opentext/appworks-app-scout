@@ -18,7 +18,11 @@
                 <input type="date" step="any" ng-model="newExpedition.ends">
             </label>
             <div class="spacer"></div>
-            <button class="button button-block button-positive" ng-click="startNewExpedition(newExpedition)">Start Expedition</button>
+            <button class="button button-full button-positive"
+                    ng-disabled="!(newExpedition.starts && newExpedition.ends && newExpedition.title)"
+                    ng-click="startNewExpedition(newExpedition)">
+                Start Expedition
+            </button>
         </div>
     </ion-content>
 </ion-modal-view>

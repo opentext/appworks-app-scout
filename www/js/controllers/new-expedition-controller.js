@@ -20,6 +20,7 @@ function NewExpeditionController($scope, $ionicModal, $state, $rootScope, Expedi
 
     function closeNewExpeditionModal() {
         $scope.modal.hide();
+        $scope.newExpedition = {};
     }
 
     function openNewExpeditionModal() {

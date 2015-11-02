@@ -16,70 +16,11 @@
 
         loadAssets();
 
-        function loadAssets() {
-            self.assets = [];
-            angular.forEach(Location.all(), function (location) {
-                angular.forEach(location.assets, function (asset) {
-                    self.assets.push(asset);
-                });
-            });
-        }
-
-        function uploadPendingImages() {
-            var promise = $q.defer(),
-                numberOfImagesToUpload = 0,
-                numberUploaded = 0;
-
-            loadAssets();
-
-            angular.forEach(self.assets, function (asset) {
-                if (asset.pendingUpload) {
-                    numberOfImagesToUpload += 1;
-                }
-            });
-
-            angular.forEach(self.assets, function (asset) {
-                if (asset.pendingUpload) {
-                    var expedition = Expedition.get(asset.expeditionId);
-                    console.log('Uploading: ', asset);
-                    upload(expedition.folderId, asset.fileName, asset.imgSrc).then(function () {
-                        numberUploaded += 1;
-                        if (numberUploaded === numberOfImagesToUpload) {
-                            console.info('Uploaded all images');
-                            promise.resolve();
-                        }
-                    });
-                }
-            });
-
-            return promise.promise;
-        }
+        // api
 
         function all() {
             loadAssets();
             return self.assets;
-        }
-
-        function convertFileUriToDataUri(fileUrl, successCallback, errorCallback) {
-            window.resolveLocalFileSystemURL(fileUrl, gotFileEntry, fail);
-
-            function gotFileEntry(fileEntry) {
-                fileEntry.file(gotFile, fail);
-            }
-
-            function gotFile(file) {
-                var reader = new FileReader();
-                reader.onloadend = function(evt) {
-                    if (successCallback) {
-                        successCallback(evt.target.result);
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-
-            function fail(err) {
-                console.error(err);
-            }
         }
 
         function create(newAsset, locationId, expeditionId) {
@@ -116,7 +57,6 @@
 
         function get(params) {
             loadAssets();
-
             // get resource by id, locationId, or list all based on params
             if (angular.isDefined(params.locationId)) {
                 return self.assets.filter(function (asset) {
@@ -189,8 +129,66 @@
             return promise.promise;
         }
 
-        function generateUrl(folderId) {
-            return $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children';
+        function uploadPendingImages() {
+            var promise = $q.defer(),
+                pendingAssets = [];
+
+            loadAssets();
+
+            angular.forEach(self.assets, function (asset) {
+                if (asset.pendingUpload) {
+                    pendingAssets.push(asset);
+                }
+            });
+
+            angular.forEach(pendingAssets, function (asset, index) {
+                var expedition = Expedition.get(asset.expeditionId);
+                console.log('Uploading: ', asset);
+                upload(expedition.folderId, asset.fileName, asset.imgSrc).then(function () {
+                    asset.pendingUpload = false;
+                    update(asset.expeditionId, asset.locationId, asset, {local: true});
+                    if (index === pendingAssets.length - 1) {
+                        console.info('Uploaded all images');
+                        $rootScope.$broadcast('Asset.uploadPendingImages.complete');
+                        promise.resolve();
+                    }
+                });
+            });
+
+            return promise.promise;
+        }
+
+        // helpers
+
+        function loadAssets() {
+            self.assets = [];
+            angular.forEach(Location.all(), function (location) {
+                angular.forEach(location.assets, function (asset) {
+                    self.assets.push(asset);
+                });
+            });
+        }
+
+        function convertFileUriToDataUri(fileUrl, successCallback, errorCallback) {
+            window.resolveLocalFileSystemURL(fileUrl, gotFileEntry, fail);
+
+            function gotFileEntry(fileEntry) {
+                fileEntry.file(gotFile, fail);
+            }
+
+            function gotFile(file) {
+                var reader = new FileReader();
+                reader.onloadend = function(evt) {
+                    if (successCallback) {
+                        successCallback(evt.target.result);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function fail(err) {
+                console.error(err);
+            }
         }
 
         function dataUrlToBlob(dataURL) {
@@ -217,6 +215,10 @@
             return new Blob([uInt8Array], {type: contentType});
         }
 
+        function generateUrl(folderId) {
+            return $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children';
+        }
+
         function generateUploadReq(name, file) {
             var formData = new FormData();
             formData.append('file', file, name);
@@ -236,8 +238,9 @@
             all: all,
             create: create,
             get: get,
+            update: update,
             upload: upload,
-            update: update
+            uploadPendingImages: uploadPendingImages
         }
     }
 

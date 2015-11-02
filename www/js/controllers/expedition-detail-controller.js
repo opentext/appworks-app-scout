@@ -114,7 +114,9 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
             cancel: closeCompleteExpeditionActionSheet,
             buttonClicked: function () {
                 $scope.expedition.status = Expedition.STATUS.submitted;
-                Expedition.complete($scope.expedition);
+                Expedition.complete($scope.expedition).then(function (completedExpedition) {
+                    $scope.expedition = completedExpedition;
+                });
                 closeCompleteExpeditionActionSheet();
             }
         });
