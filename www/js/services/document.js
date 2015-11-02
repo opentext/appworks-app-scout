@@ -5,7 +5,7 @@
         .module('scout.services')
         .service('$csDocument', documentService);
 
-    function documentService($q, $http, $auth, $appworks, $document) {
+    function documentService($q, $http, $auth, $appworks) {
 
         var offlineEvents = {
                 get: '$csDocument.getDocument'
@@ -17,11 +17,11 @@
         this.get = getDocument;
 
         // events that are fired when the device comes back online
-        $document.addEventListener(offlineEvents.get, evalFnFromOfflineEvent);
+        document.addEventListener(offlineEvents.get, evalFnFromOfflineEvent);
 
         function evalFnFromOfflineEvent(functionName, args, eventName, eventListener) {
             offlineFns[functionName].apply(self, args);
-            $document.removeEventListener(eventName, eventListener);
+            document.removeEventListener(eventName, eventListener);
         }
 
         function downloadFile(fileId, filename, success, fail) {

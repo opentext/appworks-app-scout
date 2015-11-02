@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Expedition', Expedition);
 
-    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope, $document) {
+    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope) {
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
@@ -25,12 +25,12 @@
         init();
 
         // events that are fired when the device comes back online
-        $document.addEventListener(offlineEvents.complete, evalFnFromOfflineEvent);
-        $document.addEventListener(offlineEvents.start, evalFnFromOfflineEvent);
+        document.addEventListener(offlineEvents.complete, evalFnFromOfflineEvent);
+        document.addEventListener(offlineEvents.start, evalFnFromOfflineEvent);
 
         function evalFnFromOfflineEvent(functionName, args, eventName, eventListener) {
             offlineFns[functionName].apply(self, args);
-            $document.removeEventListener(eventName, eventListener);
+            document.removeEventListener(eventName, eventListener);
         }
 
         // api
