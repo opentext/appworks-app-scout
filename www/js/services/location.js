@@ -65,7 +65,7 @@
                 if (parseInt(location.id) === parseInt(updatedLocation.id)) {
                     self.locations[index] = updatedLocation;
                     console.log('Location updated, will now update expedition.json');
-                    Expedition.update(Expedition.get(updatedLocation.expeditionId)).then(function () {
+                    Expedition.update(Expedition.get(updatedLocation.expeditionId), {local: true}).then(function () {
                         console.info('Expedition update from within location update successful');
                     }, function (err) {
                         console.error('Expedition update from within location update failed', err);

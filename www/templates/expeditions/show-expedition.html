@@ -45,7 +45,7 @@
             Add Location
         </button>
         <button class="button button-block button-clear button-positive"
-                ng-disabled="!isEnabled(expedition)"
+                ng-disabled="!isEnabled(expedition) || downloadingExpenseReport"
                 ng-click="openExpensesModal()">
             Record Expenses
         </button>

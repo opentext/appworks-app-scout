@@ -10,7 +10,11 @@
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
             self = this,
-            retryAttempts = 0;
+            retryAttempts = 0,
+            offlineEvents = {
+                complete: 'expedition.complete',
+                start: 'expedition.start'
+            };
 
         // initialize service by loading expeditions from device storage
         init();
@@ -34,6 +38,7 @@
                 console.log('Deferring completion of expedition until device comes back online');
                 promise.resolve(completedExpedition);
                 // TODO call this function again when the device comes back online
+                $appworks.offline.defer(complete.toString(), arguments, offlineEvents.complete);
             }
 
             function completeExpeditionAfterReauth() {
@@ -281,6 +286,7 @@
             } else {
                 // TODO call this function again when the device comes back online
                 console.log('Deferring start of expedition until device comes back online');
+                $appworks.offline.defer(startExpeditionWorkflow.toString(), arguments, offlineEvents.start);
                 promise.resolve(expedition);
             }
 

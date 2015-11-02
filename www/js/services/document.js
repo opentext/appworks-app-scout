@@ -5,17 +5,9 @@
         .module('scout.services')
         .service('$csDocument', documentService);
 
-    function documentService($q, $http, $auth, $appworks, $ionicLoading) {
+    function documentService($q, $http, $auth, $appworks) {
 
         this.get = getDocument;
-
-        function showLoading() {
-            $ionicLoading.show({template: 'Loading...'});
-        }
-
-        function hideLoading() {
-            $ionicLoading.hide();
-        }
 
         function downloadFile(fileId, filename, success, fail) {
             var downloadUrl = $auth.gatewayUrl() + '/content/v4/nodes/' + fileId + '/content?versionNum=1&cstoken=' + $auth.getOTCSTicket(),
@@ -26,11 +18,9 @@
             $appworks.storage.storeFile(filename, downloadUrl, success, fail, options, true);
         }
 
-        function getDocument(folderId, filename) {
+        function getDocument(folderId, filename, saveAsFilename) {
 
             var promise = $q.defer();
-
-            showLoading();
 
             $auth.reauth().then(function () {
                 var url = $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children',
@@ -45,12 +35,11 @@
                     console.info('Got children of expedition root folder via contentService', res.data);
                     angular.forEach(res.data.contents, function (item) {
                         if (item.name === filename) {
-                            downloadFile(item.id, filename, promise.resolve, promise.reject);
-                            hideLoading();
+                            downloadFile(item.id, saveAsFilename, promise.resolve, promise.reject);
                         }
                     });
-                }, hideLoading);
-            }, hideLoading);
+                });
+            });
 
             return promise.promise;
         }
