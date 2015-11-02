@@ -4,9 +4,9 @@ angular
 
 function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicHistory, $ionicPopup) {
 
+    // variable bindings
     $scope.expedition = Expedition.get($stateParams.id);
-    console.log($scope.expedition);
-
+    $scope.newLocation = {};
     $ionicModal.fromTemplateUrl('templates/expeditions/new-location.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -14,8 +14,7 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
         $scope.newLocationModal = modal;
     });
 
-    $scope.newLocation = {};
-
+    // function bindings
     $scope.openExpensesModal = openExpensesModal;
     $scope.closeExpensesModal = closeExpensesModal;
     $scope.openNewLocationModal = openNewLocationModal;
@@ -35,78 +34,29 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
     $scope.$watch('expedition.ends', updateExpedition);
 
     $scope.$on('expedition.ready', function (evt, expedition) {
-        console.log('expedition is ready', expedition);
         $scope.$broadcast('scroll.refreshComplete');
         if ($scope.expedition.id === expedition.id) {
+            console.log('expedition is ready', expedition);
             $scope.expedition = expedition;
         }
     });
 
-    function reload() {
-        if ($scope.expedition.ready) {
-            $scope.expedition = Expedition.get($stateParams.id);
-            $scope.$broadcast('scroll.refreshComplete');
-            //console.log('updating expedition and uploading expedition.json');
-            //Expedition.update($scope.expedition).then(function (expedition) {
-            //    console.info('update of expedition succeeded');
-            //    $scope.expedition = expedition;
-            //    $scope.$broadcast('scroll.refreshComplete');
-            //});
-        } else {
-            console.log('retrying create of expedition');
-            Expedition.destroy($scope.expedition);
-            Expedition.create($scope.expedition).then(function (expedition) {
-                console.info('creation of expedition succeeded');
-            });
-        }
+    // ui/utility
+
+    function closeExpensesModal() {
+        $scope.hideExpenseReportActionSheet();
+    }
+
+    function closeCompleteExpeditionActionSheet() {
+        $scope.hideCompleteExpeditionActionSheet();
+    }
+
+    function closeNewLocationModal() {
+        $scope.newLocationModal.hide();
     }
 
     function isEnabled(expedition) {
         return expedition.status === 'NEW' && expedition.ready;
-    }
-
-    function updateExpedition(newVal, oldVal) {
-        if (newVal && newVal !== oldVal) {
-            Expedition.update($scope.expedition);
-        }
-    }
-
-    function addNewLocation(newLocation) {
-        Location.create(newLocation, $scope.expedition).then(function (expedition) {
-            $scope.expedition = expedition;
-            $scope.newLocation = {};
-            closeNewLocationModal();
-        });
-    }
-
-    function removeLocation(location, $index) {
-        if ($window.confirm('Delete this location?')) {
-            Location.remove(location);
-            $scope.expedition.locations.splice($index, 1);
-        }
-    }
-
-    function completeExpedition() {
-        $ionicPopup.confirm({
-            title: 'Submit expedition',
-            template: 'Are you sure you want to submit this expedition?'
-        }).then(function(res) {
-            if(res) {
-                $scope.expedition.status = Expedition.STATUS.submitted;
-                Expedition.complete($scope.expedition);
-            }
-        });
-    }
-
-    function getCurrentLocation() {
-        return $appworks.geolocation.getCurrentPosition(function (position) {
-            console.log('current position', position);
-            $scope.$apply($scope.newLocation.coords = angular.copy(position.coords));
-        });
-    }
-
-    function recordCurrentLocation(newLocation) {
-        newLocation.coords = getCurrentLocation();
     }
 
     function openExpensesModal() {
@@ -133,15 +83,72 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
         });
     }
 
-    function closeExpensesModal() {
-        $scope.hideExpenseReportActionSheet();
-    }
-
     function openNewLocationModal() {
         $scope.newLocationModal.show();
     }
 
-    function closeNewLocationModal() {
-        $scope.newLocationModal.hide();
+
+    function reload() {
+        if ($scope.expedition.ready) {
+            $scope.expedition = Expedition.get($stateParams.id);
+            $scope.$broadcast('scroll.refreshComplete');
+        } else {
+            console.log('retrying create of expedition');
+            Expedition.destroy($scope.expedition);
+            Expedition.create($scope.expedition).then(function (expedition) {
+                console.info('creation of expedition succeeded');
+            });
+        }
     }
+
+    // expeditions
+
+    function completeExpedition() {
+        $scope.hideCompleteExpeditionActionSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: 'Submit expedition?' }
+            ],
+            titleText: 'Complete Expedition',
+            cancelText: 'Cancel',
+            cancel: function () {
+                closeCompleteExpeditionActionSheet();
+            },
+            buttonClicked: function () {
+                $scope.expedition.status = Expedition.STATUS.submitted;
+                Expedition.complete($scope.expedition);
+                closeCompleteExpeditionActionSheet();
+            }
+        });
+    }
+
+    function updateExpedition(newVal, oldVal) {
+        if (newVal && newVal !== oldVal) {
+            Expedition.update($scope.expedition, {local: true});
+        }
+    }
+
+    // locations
+
+    function addNewLocation(newLocation) {
+        Location.create(newLocation, $scope.expedition).then(function (expedition) {
+            $scope.expedition = expedition;
+            $scope.newLocation = {};
+            closeNewLocationModal();
+        });
+    }
+
+    function recordCurrentLocation() {
+        $appworks.geolocation.getCurrentPosition(function (position) {
+            console.log('current position', position);
+            $scope.$apply($scope.newLocation.coords = angular.copy(position.coords));
+        });
+    }
+
+    function removeLocation(location, $index) {
+        if ($window.confirm('Delete this location?')) {
+            Location.remove(location);
+            $scope.expedition.locations.splice($index, 1);
+        }
+    }
+
 }

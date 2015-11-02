@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72c3c809-4e56-4e8f-a35b-66c34ff7a974" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/scoutApp.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.properties" afterPath="$PROJECT_DIR$/app.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/assets/assets.html" afterPath="$PROJECT_DIR$/www/templates/assets/assets.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" afterPath="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/locations/show-location.html" afterPath="$PROJECT_DIR$/www/templates/locations/show-location.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" afterPath="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
     </list>
     <ignored path="scoutApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expedition.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
+      <file leaf-file-name="expedition-detail-controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="90" column="75" selection-start-line="90" selection-start-column="75" selection-end-line="90" selection-end-column="75" />
+              <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -112,8 +104,8 @@
       <file leaf-file-name="show-expedition.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.25">
-              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="78" />
+            <state vertical-scroll-proportion="-3.0392158">
+              <caret line="49" column="18" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="18" />
               <folding>
                 <marker date="1446447045000" expanded="true" signature="1296:1588" placeholder="{&quot;item&quot;: true...}" />
               </folding>
@@ -121,12 +113,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="location.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/services/location.js">
+      <file leaf-file-name="new-location.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="75" selection-start-line="38" selection-start-column="75" selection-end-line="38" selection-end-column="75" />
-              <folding />
+            <state vertical-scroll-proportion="-5.3137255">
+              <caret line="34" column="66" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="66" />
+              <folding>
+                <element signature="n#style#0;n#textarea#0;n#label#1;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -182,7 +176,6 @@
         <option value="$PROJECT_DIR$/www/templates/expeditions/new-location.html" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/dashboard-controller.js" />
-        <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/location-detail-controller.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/assets-controller.js" />
@@ -200,6 +193,7 @@
         <option value="$PROJECT_DIR$/www/templates/locations/show-location.html" />
         <option value="$PROJECT_DIR$/www/templates/assets/new-asset.html" />
         <option value="$PROJECT_DIR$/www/templates/assets/assets.html" />
+        <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
         <option value="$PROJECT_DIR$/app.properties" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
       </list>
@@ -619,12 +613,18 @@
       <option name="project" value="LOCAL" />
       <updated>1446446077427</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="styling updates">
+      <created>1446447248426</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1446447248426</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="863" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -632,7 +632,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294423" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2931258" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2931258" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2508809" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -675,7 +675,8 @@
     <MESSAGE value="added auth service to pass back cstoken" />
     <MESSAGE value="added an action sheet to confirm that a user wants to open the expense report" />
     <MESSAGE value="improved navigation, eliminated button in middle of expeditions list in favor of adding a tab item to action new expedition. expedition.json only saved locally until completion step." />
-    <option name="LAST_COMMIT_MESSAGE" value="improved navigation, eliminated button in middle of expeditions list in favor of adding a tab item to action new expedition. expedition.json only saved locally until completion step." />
+    <MESSAGE value="styling updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="styling updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -850,13 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.916667">
-          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/services/document.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -868,13 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3662791">
-          <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -1014,16 +1001,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.25">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="78" />
-          <folding>
-            <marker date="1446447045000" expanded="true" signature="1296:1588" placeholder="{&quot;item&quot;: true...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/locations/show-location.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875">
@@ -1048,6 +1025,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875">
           <caret line="3" column="82" selection-start-line="3" selection-start-column="82" selection-end-line="3" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.0392158">
+          <caret line="49" column="18" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="18" />
+          <folding>
+            <marker date="1446447045000" expanded="true" signature="1296:1588" placeholder="{&quot;item&quot;: true...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.3137255">
+          <caret line="34" column="66" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="66" />
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#label#1;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
           <folding />
         </state>
       </provider>
