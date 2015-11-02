@@ -19,9 +19,10 @@
         // events that are fired when the device comes back online
         document.addEventListener(offlineEvents.get, evalFnFromOfflineEvent);
 
-        function evalFnFromOfflineEvent(functionName, args, eventName, eventListener) {
-            offlineFns[functionName].apply(self, args);
-            document.removeEventListener(eventName, eventListener);
+        function evalFnFromOfflineEvent(evt) {
+            var evt = evt.detail.data.detail;
+            offlineFns[evt.identifier].apply(self, evt.args);
+            document.removeEventListener(evt.eventListener, offlineFns[evt.eventListener]);
         }
 
         function downloadFile(fileId, filename, success, fail) {
@@ -38,7 +39,6 @@
         }
 
         function getDocument(folderId, filename, saveAsFilename) {
-
             var promise = $q.defer();
 
             if ($appworks.network.online) {

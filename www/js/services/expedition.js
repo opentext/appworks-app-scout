@@ -28,9 +28,10 @@
         document.addEventListener(offlineEvents.complete, evalFnFromOfflineEvent);
         document.addEventListener(offlineEvents.start, evalFnFromOfflineEvent);
 
-        function evalFnFromOfflineEvent(functionName, args, eventName, eventListener) {
-            offlineFns[functionName].apply(self, args);
-            document.removeEventListener(eventName, eventListener);
+        function evalFnFromOfflineEvent(evt) {
+            var evt = evt.detail.data.detail;
+            offlineFns[evt.identifier].apply(self, evt.args);
+            document.removeEventListener(evt.eventListener, offlineFns[evt.eventListener]);
         }
 
         // api
