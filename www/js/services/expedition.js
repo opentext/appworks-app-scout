@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Expedition', Expedition);
 
-    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope) {
+    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope, $document) {
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
@@ -14,10 +14,24 @@
             offlineEvents = {
                 complete: 'expedition.complete',
                 start: 'expedition.start'
-            };
+            },
+            offlineFns = {
+                complete: complete,
+                start: startExpeditionWorkflow
+            },
+            self = this;
 
         // initialize service by loading expeditions from device storage
         init();
+
+        // events that are fired when the device comes back online
+        $document.addEventListener(offlineEvents.complete, evalFnFromOfflineEvent);
+        $document.addEventListener(offlineEvents.start, evalFnFromOfflineEvent);
+
+        function evalFnFromOfflineEvent(functionName, args, eventName, eventListener) {
+            offlineFns[functionName].apply(self, args);
+            $document.removeEventListener(eventName, eventListener);
+        }
 
         // api
 
@@ -38,7 +52,7 @@
                 console.log('Deferring completion of expedition until device comes back online');
                 promise.resolve(completedExpedition);
                 // TODO call this function again when the device comes back online
-                $appworks.offline.defer(complete.toString(), arguments, offlineEvents.complete);
+                $appworks.offline.defer('complete', arguments, offlineEvents.complete);
             }
 
             function completeExpeditionAfterReauth() {
@@ -286,7 +300,7 @@
             } else {
                 // TODO call this function again when the device comes back online
                 console.log('Deferring start of expedition until device comes back online');
-                $appworks.offline.defer(startExpeditionWorkflow.toString(), arguments, offlineEvents.start);
+                $appworks.offline.defer('start', arguments, offlineEvents.start);
                 promise.resolve(expedition);
             }
 

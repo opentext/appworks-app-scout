@@ -5,9 +5,24 @@
         .module('scout.services')
         .service('$csDocument', documentService);
 
-    function documentService($q, $http, $auth, $appworks) {
+    function documentService($q, $http, $auth, $appworks, $document) {
+
+        var offlineEvents = {
+                get: '$csDocument.getDocument'
+            },
+            offlineFns = {
+                get: getDocument
+            };
 
         this.get = getDocument;
+
+        // events that are fired when the device comes back online
+        $document.addEventListener(offlineEvents.get, evalFnFromOfflineEvent);
+
+        function evalFnFromOfflineEvent(functionName, args, eventName, eventListener) {
+            offlineFns[functionName].apply(self, args);
+            $document.removeEventListener(eventName, eventListener);
+        }
 
         function downloadFile(fileId, filename, success, fail) {
             var downloadUrl = $auth.gatewayUrl() + '/content/v4/nodes/' + fileId + '/content?versionNum=1&cstoken=' + $auth.getOTCSTicket(),
@@ -22,13 +37,20 @@
 
             var promise = $q.defer();
 
-            $auth.reauth().then(function () {
+            if ($appworks.network.online) {
+                $auth.reauth().then(getDocumentOnReauth);
+            } else {
+                $appworks.offline.defer('get', arguments, offlineEvents.get);
+            }
+
+            function getDocumentOnReauth() {
                 var url = $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children',
                     config = {
                         headers: {
                             otcsticket: $auth.getOTCSTicket()
                         }
                     };
+
                 // find the node id for file named => filename
                 console.log('Attempting to fetch children of expedition root folder via contentService');
                 $http.get(url, config).then(function (res) {
@@ -39,7 +61,7 @@
                         }
                     });
                 });
-            });
+            }
 
             return promise.promise;
         }

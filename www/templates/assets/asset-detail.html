@@ -1,13 +1,11 @@
 <ion-content>
-    <ion-list>
-        <div class="list">
-            <img ng-src="{{asset.imgSrc}}" width="100%" ng-show="asset.imgSrc">
-            <div class="item-divider padding">
-                {{asset.name}}
-            </div>
-            <div class="item item-text-wrap" ng-show="asset.notes">
-                {{asset.notes}}
-            </div>
+    <div class="list">
+        <img ng-src="{{asset.imgSrc}}" width="100%" ng-show="asset.imgSrc">
+        <div class="item-divider">
+            {{asset.name}}
         </div>
-    </ion-list>
+        <div class="item item-text-wrap" ng-show="asset.notes">
+            {{asset.notes}}
+        </div>
+    </div>
 </ion-content>
