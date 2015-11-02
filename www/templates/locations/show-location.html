@@ -1,9 +1,13 @@
-<ion-footer-bar>
+<ion-footer-bar align-title="left" class="bar-positive">
     <div class="buttons">
-        <button class="button button-clear item-button-right button-positive"
+        <button class="button button-clear button-icon icon ion-ios-arrow-left"
                 ng-click="goBack()">
             Back
         </button>
+    </div>
+    <h1 class="title"></h1>
+    <div class="buttons" ui-sref="tab.expedition({id: location.expeditionId})">
+        <button class="button button-clear">Save</button>
     </div>
 </ion-footer-bar>
 <ion-content>
@@ -37,10 +41,6 @@
     <button class="button button-block button-positive button-clear"
             ui-sref="tab.assetsForLocation({expeditionId: expedition.id, locationId: location.id})">
         View assets for this location
-    </button>
-    <button class="button button-block button-positive"
-            ui-sref="tab.expedition({id: location.expeditionId})">
-        Save
     </button>
 </ion-content>
 
