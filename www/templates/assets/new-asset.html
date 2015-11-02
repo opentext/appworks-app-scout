@@ -21,8 +21,10 @@
             <div class="item item-divider">
                 Add a New Asset to {{location.name}}
             </div>
-            <img ng-src="{{newAsset.imgSrc}}" style="display:block;max-width:100%;max-height:300px;width:auto;height: auto;"
-                 ng-show="newAsset.imgSrc"/>
+            <div style="text-align: center;">
+                <img ng-src="{{newAsset.imgSrc}}" style="display:block;max-width:100%;max-height:300px;width:auto;height: auto;"
+                     ng-show="newAsset.imgSrc"/>
+            </div>
             <label class="item item-input">
                 <input type="text" ng-model="newAsset.name" placeholder="Name">
             </label>
@@ -32,9 +34,11 @@
                           placeholder="Notes, description, comments"
                           style="height: 128px;"></textarea>
             </label>
-            <button class="button button-full button-outline button-positive" ng-click="handleCamera(newAsset)">
+            <br/>
+            <button class="button button-large button-outline button-positive" ng-click="openPhotoOptionsActionSheet()">
                 <i class="icon ion-ios-camera"></i>
             </button>
+            <p class="positive">Add a Photo</p>
         </div>
     </ion-content>
 </ion-modal-view>

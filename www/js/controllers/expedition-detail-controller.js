@@ -61,25 +61,26 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
 
     function openExpensesModal() {
         $scope.hideExpenseReportActionSheet = $ionicActionSheet.show({
-            buttons: [
-                { text: 'Download Expense Report?' }
-            ],
+            buttons: [{text: 'Download Expense Report?'}],
             titleText: 'Open Expense Report',
             cancelText: 'Cancel',
-            cancel: function () {
-                closeExpensesModal();
-            },
+            cancel: closeExpensesModal,
             buttonClicked: function () {
-                console.log('downloading expense report spreadsheet...');
-                $csDocument.get($scope.expedition.folderId, 'expense-tracking.xlsx').then(function (res) {
-                    console.log('download of expense report succeeded', res);
-                    $ionicPopup.alert({
-                        title: 'Success',
-                        template: 'Download succeeded.'
-                    });
-                });
+                downloadExpenseReport();
                 closeExpensesModal();
             }
+        });
+    }
+
+    function downloadExpenseReport() {
+        var filename = 'expense-tracking-' + new Date().getTime() + '.xlsx';
+        console.log('downloading expense report spreadsheet...');
+        $csDocument.get($scope.expedition.folderId, filename).then(function (res) {
+            console.log('download of expense report succeeded', res);
+            $ionicPopup.alert({
+                title: 'Success',
+                template: 'Download succeeded.'
+            });
         });
     }
 
@@ -110,9 +111,7 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
             ],
             titleText: 'Complete Expedition',
             cancelText: 'Cancel',
-            cancel: function () {
-                closeCompleteExpeditionActionSheet();
-            },
+            cancel: closeCompleteExpeditionActionSheet,
             buttonClicked: function () {
                 $scope.expedition.status = Expedition.STATUS.submitted;
                 Expedition.complete($scope.expedition);
