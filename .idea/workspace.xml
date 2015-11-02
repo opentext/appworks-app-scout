@@ -4,7 +4,10 @@
     <list default="true" id="72c3c809-4e56-4e8f-a35b-66c34ff7a974" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.properties" afterPath="$PROJECT_DIR$/app.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" afterPath="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/assets/new-asset.html" afterPath="$PROJECT_DIR$/www/templates/assets/new-asset.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" afterPath="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/locations/show-location.html" afterPath="$PROJECT_DIR$/www/templates/locations/show-location.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scoutApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,53 +38,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29013538">
+            <state vertical-scroll-proportion="0.0">
               <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expedition-detail-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tab-expeditions.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/tab-expeditions.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.0">
-              <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#ion-list#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assets.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/assets/assets.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875">
-              <caret line="3" column="82" selection-start-line="3" selection-start-column="82" selection-end-line="3" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="new-asset.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="new-asset.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/templates/assets/new-asset.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75">
-              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.36511156">
+              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
@@ -91,11 +62,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="new-expedition.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-expedition.html">
+      <file leaf-file-name="new-location.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.625">
-              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+            <state vertical-scroll-proportion="-21.25">
+              <caret line="34" column="66" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show-location.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/templates/locations/show-location.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.25">
+              <caret line="10" column="10" selection-start-line="1" selection-start-column="4" selection-end-line="10" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -104,33 +85,11 @@
       <file leaf-file-name="show-expedition.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.0392158">
-              <caret line="49" column="18" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="18" />
+            <state vertical-scroll-proportion="-23.75">
+              <caret line="38" column="8" selection-start-line="38" selection-start-column="12" selection-end-line="40" selection-end-column="18" />
               <folding>
-                <marker date="1446447045000" expanded="true" signature="1296:1588" placeholder="{&quot;item&quot;: true...}" />
+                <marker date="1446449195000" expanded="true" signature="699:1116" placeholder="{&quot;item&quot;: true...}" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="new-location.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.3137255">
-              <caret line="34" column="66" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="66" />
-              <folding>
-                <element signature="n#style#0;n#textarea#0;n#label#1;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show-location.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/templates/locations/show-location.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875">
-              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -189,13 +148,13 @@
         <option value="$PROJECT_DIR$/www/js/controllers/new-expedition-controller.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/www/templates/expeditions/new-expedition.html" />
-        <option value="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" />
-        <option value="$PROJECT_DIR$/www/templates/locations/show-location.html" />
-        <option value="$PROJECT_DIR$/www/templates/assets/new-asset.html" />
         <option value="$PROJECT_DIR$/www/templates/assets/assets.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
+        <option value="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" />
         <option value="$PROJECT_DIR$/app.properties" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/www/templates/locations/show-location.html" />
+        <option value="$PROJECT_DIR$/www/templates/assets/new-asset.html" />
       </list>
     </option>
   </component>
@@ -983,17 +942,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-expedition.html">
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.7678917">
+          <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/tab-expeditions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0">
+        <state vertical-scroll-proportion="0.7261663">
           <caret line="35" column="14" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#div#0;n#ion-list#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="true" />
@@ -1001,58 +960,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/locations/show-location.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.875">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/assets/new-asset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#label#1;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/assets/assets.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.875">
+        <state vertical-scroll-proportion="0.09127789">
           <caret line="3" column="82" selection-start-line="3" selection-start-column="82" selection-end-line="3" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0392158">
-          <caret line="49" column="18" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="18" />
-          <folding>
-            <marker date="1446447045000" expanded="true" signature="1296:1588" placeholder="{&quot;item&quot;: true...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.3137255">
-          <caret line="34" column="66" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="66" />
-          <folding>
-            <element signature="n#style#0;n#textarea#0;n#label#1;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1067,9 +978,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29013538">
+        <state vertical-scroll-proportion="0.0">
           <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-location.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.25">
+          <caret line="34" column="66" selection-start-line="34" selection-start-column="65" selection-end-line="34" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/new-expedition.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.030425964">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/locations/show-location.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.25">
+          <caret line="10" column="10" selection-start-line="1" selection-start-column="4" selection-end-line="10" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-23.75">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="12" selection-end-line="40" selection-end-column="18" />
+          <folding>
+            <marker date="1446449195000" expanded="true" signature="699:1116" placeholder="{&quot;item&quot;: true...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/assets/new-asset.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36511156">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#label#1;n#div#0;n#ion-content#0;n#ion-modal-view#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

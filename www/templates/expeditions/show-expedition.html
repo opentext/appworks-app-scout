@@ -15,7 +15,17 @@
         <label class="item item-input" ng-show="editTitle">
             <input type="text" placeholder="Expedition Title" ng-model="expedition.title" ng-blur="editTitle = false">
         </label>
-        <div class="item item-divider" ng-click="editTitle = true" ng-hide="editTitle" ng-class="{'disable-pointer-events': !isEnabled(expedition)}">
+        <div ng-click="editTitle = true"
+             ng-hide="editTitle"
+             ng-class="{
+                'disable-pointer-events': !isEnabled(expedition),
+                'item': true,
+                'item-divider': true,
+                'item-stable': expedition.status === 'PENDING',
+                'item-energized': expedition.status === 'SUBMITTED',
+                'item-assertive': expedition.status === 'REJECTED',
+                'item-balanced': expedition.status === 'COMPLETE'
+             }">
             {{expedition.title}}
         </div>
         <label class="item item-input" ng-class="{'disable-pointer-events': !isEnabled(expedition)}">
@@ -26,16 +36,9 @@
             <span class="input-label">Ends</span>
             <input type="date" ng-model="expedition.ends">
         </label>
-        <div
-             ng-class="{
-            'item': true,
-            'item-stable': expedition.status === 'PENDING',
-            'item-energized': expedition.status === 'SUBMITTED',
-            'item-assertive': expedition.status === 'REJECTED',
-            'item-balanced': expedition.status === 'COMPLETE'
-            }">
-            Status: {{expedition.status.toLowerCase()}}
-        </div>
+        <!--<div class="item">-->
+            <!--Status: {{expedition.status.toLowerCase()}}-->
+        <!--</div>-->
         <button class="button button-block button-clear button-positive"
                 ng-disabled="!isEnabled(expedition)"
                 ng-click="openNewLocationModal()">
