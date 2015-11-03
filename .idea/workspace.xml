@@ -4,8 +4,8 @@
     <list default="true" id="72c3c809-4e56-4e8f-a35b-66c34ff7a974" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/app.js" afterPath="$PROJECT_DIR$/www/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.properties" afterPath="$PROJECT_DIR$/app.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/document.js" afterPath="$PROJECT_DIR$/www/js/services/document.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/services/expedition.js" afterPath="$PROJECT_DIR$/www/js/services/expedition.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers/expeditions-controller.js" afterPath="$PROJECT_DIR$/www/js/controllers/expeditions-controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="scoutApp.iws" />
@@ -37,31 +37,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42881945">
-              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expedition.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="expedition.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="115" column="19" selection-start-line="115" selection-start-column="19" selection-end-line="115" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.4025501">
+              <caret line="336" column="81" selection-start-line="336" selection-start-column="81" selection-end-line="336" selection-end-column="81" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="expeditions-controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/controllers/expeditions-controller.js">
+      <file leaf-file-name="asset.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+              <caret line="172" column="19" selection-start-line="172" selection-start-column="19" selection-end-line="172" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="document.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/services/document.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -119,16 +129,16 @@
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/www/templates/tab-assets.html" />
         <option value="$PROJECT_DIR$/www/templates/assets/asset-detail.html" />
-        <option value="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" />
         <option value="$PROJECT_DIR$/www/js/controllers/location-detail-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/assets-controller.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js" />
         <option value="$PROJECT_DIR$/www/js/services/asset.js" />
-        <option value="$PROJECT_DIR$/www/js/services/document.js" />
         <option value="$PROJECT_DIR$/www/js/controllers/expeditions-controller.js" />
-        <option value="$PROJECT_DIR$/www/js/services/expedition.js" />
-        <option value="$PROJECT_DIR$/app.properties" />
+        <option value="$PROJECT_DIR$/www/templates/expeditions/show-expedition.html" />
+        <option value="$PROJECT_DIR$/www/js/services/document.js" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
+        <option value="$PROJECT_DIR$/app.properties" />
+        <option value="$PROJECT_DIR$/www/js/services/expedition.js" />
       </list>
     </option>
   </component>
@@ -374,7 +384,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/auth_response_format_update.patch" />
+    <property name="last_opened_file_path" value="$USER_HOME$/workspace/appworks-js" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="SearchEverywhereHistoryKey" value="routes&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/routes.js&#10;expe&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services/expedition.js&#10;dashboard&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/controllers/dashboard-controller.js&#10;index&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/index.html&#10;rou&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/routes.js&#10;expedition.js&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services/expedition.js&#10;auth.js&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services/auth.js&#10;auth&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services/auth.js&#10;exped&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services/expedition.js&#10;location.js&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services/location.js&#10;exp&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/controllers/expedition-detail-controller.js&#10;ser&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services.js&#10;serv&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services.js&#10;services&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/services.js&#10;expeditio&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/templates/expeditions/show-expedition.html&#10;app&#9;FILE&#9;file:///Users/jibrahim/appworks apps/scoutApp/www/js/app.js" />
@@ -399,7 +409,10 @@
       <recent name="$PROJECT_DIR$/www/js" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.expedition.js">
+    <configuration default="false" name="expedition.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="expedition.js" working-dir="$PROJECT_DIR$/www/js/services">
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -438,6 +451,14 @@
       <envs />
       <method />
     </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.expedition.js" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.expedition.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -582,7 +603,13 @@
       <option name="project" value="LOCAL" />
       <updated>1446509933983</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="showing expedition status next to title">
+      <created>1446575524364</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1446575524364</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -594,7 +621,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294423" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32891566" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27228916" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2508809" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -644,7 +671,8 @@
     <MESSAGE value="bug fixes around unique file names" />
     <MESSAGE value="changed $document to document" />
     <MESSAGE value="auth response format update" />
-    <option name="LAST_COMMIT_MESSAGE" value="auth response format update" />
+    <MESSAGE value="showing expedition status next to title" />
+    <option name="LAST_COMMIT_MESSAGE" value="showing expedition status next to title" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -807,14 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5780933">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/locations/show-location.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30425963">
@@ -895,14 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/tab-assets.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45030427">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/templates/assets/new-asset.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9878296">
@@ -923,24 +935,6 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#ion-content#0;n#ion-view#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9583333">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding>
-            <marker date="1446512094000" expanded="true" signature="-1:-1" placeholder="{&quot;item&quot;: true...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -968,26 +962,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="75" column="96" selection-start-line="75" selection-start-column="96" selection-end-line="75" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/new-expedition-controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/document.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3090278">
-          <caret line="51" column="102" selection-start-line="51" selection-start-column="102" selection-end-line="51" selection-end-column="102" />
           <folding />
         </state>
       </provider>
@@ -1002,26 +980,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
+    <entry file="file://$PROJECT_DIR$/www/templates/tab-assets.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8645833">
-          <caret line="222" column="42" selection-start-line="222" selection-start-column="42" selection-end-line="222" selection-end-column="42" />
+        <state vertical-scroll-proportion="-10.833333">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46401027">
+          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14214464">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/templates/expeditions/show-expedition.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7916667">
+          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#ion-list#0;n#ion-content#0;n#!!top" expanded="true" />
+            <marker date="1446575445000" expanded="true" signature="-1:-1" placeholder="{&quot;item&quot;: true...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers/expeditions-controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.39583334">
           <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
+    <entry file="file://$PROJECT_DIR$/www/js/controllers/expedition-detail-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27604166">
+          <caret line="34" column="16" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/asset.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="115" column="19" selection-start-line="115" selection-start-column="19" selection-end-line="115" selection-end-column="19" />
+          <caret line="172" column="19" selection-start-line="172" selection-start-column="19" selection-end-line="172" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -1034,10 +1055,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/app.js">
+    <entry file="file://$PROJECT_DIR$/www/js/services/document.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42881945">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/services/expedition.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4025501">
+          <caret line="336" column="81" selection-start-line="336" selection-start-column="81" selection-end-line="336" selection-end-column="81" />
           <folding />
         </state>
       </provider>

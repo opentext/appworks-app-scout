@@ -5,7 +5,7 @@
         .module('scout.services')
         .factory('Expedition', Expedition);
 
-    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope) {
+    function Expedition($appworks, $q, $http, Blob, $auth, $rootScope, $csDocument) {
 
         var STORAGE_KEY = 'scoutApp.expeditions',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
@@ -60,23 +60,32 @@
                 config.headers.otdsticket = $auth.getOTDSTicket();
                 // move the expedition along to the next step in the workflow
                 console.log('Attempting to submit expedition via scoutService...');
-                $http.put(url, data, config).then(onSubmitSuccess, onSubmitFail);
+                $http.put(url, data, config).then(uploadExpeditionModel, onSubmitFail);
             }
 
-            function onSubmitSuccess(res) {
+            function uploadExpeditionModel(res) {
                 console.info('Submission of expedition via scoutService successful', res.data);
                 // refresh model to get latest
                 completedExpedition = get(completedExpedition.id);
                 completedExpedition.status = STATUS.submitted;
                 // save expedition.json on device and in server
-                update(completedExpedition, {returnDeferredUpdate: true}).then(uploadPendingImagesAfterUpdate);
+                update(completedExpedition, {returnDeferredUpdate: true}).then(function () {
+                    console.info('Upload of expedition.json was successful');
+                    uploadPendingImagesAfterUpdate();
+                });
             }
 
             function uploadPendingImagesAfterUpdate() {
                 // upload any pending images
                 console.log('Uploading pending assets...');
                 $rootScope.$broadcast('Asset.uploadPendingImages');
-                $rootScope.$on('Asset.uploadPendingImages.complete', function () {
+                $rootScope.$on('Asset.uploadPendingImages.complete', uploadExpenseReport);
+            }
+
+            function uploadExpenseReport() {
+                var saveAsFilename = 'expense-tracking-expedition-' + completedExpedition.title + '.xlsx',
+                    filename = 'expense-tracking.xlsx';
+                $csDocument.upload(completedExpedition.folderId, filename, saveAsFilename).then(function () {
                     promise.resolve(angular.copy(get(completedExpedition.id)));
                 });
             }
@@ -151,6 +160,7 @@
                     save();
                     // return deferred backend update
                     if (options.returnDeferredUpdate) {
+                        console.log('returning promise from updateObject()');
                         return updatePromise;
                     }
                     // send back updated expedition from source
@@ -323,7 +333,9 @@
         }
 
         function updateObject(obj, objId) {
-            return createObject(obj, objId, true);
+            var promise = $q.defer();
+            createObject(obj, objId, true).then(promise.resolve, promise.reject);
+            return promise.promise;
         }
 
         return {
