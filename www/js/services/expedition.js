@@ -46,6 +46,8 @@
                 config = {headers: {otdsticket: null}},
                 url;
 
+            $rootScope.$on('Expedition.updated', uploadPendingAfterUpdate);
+
             if ($appworks.network.online) {
                 $auth.reauth().then(completeExpeditionAfterReauth);
             } else {
@@ -69,25 +71,28 @@
                 completedExpedition = get(completedExpedition.id);
                 completedExpedition.status = STATUS.submitted;
                 // save expedition.json on device and in server
-                update(completedExpedition, {returnDeferredUpdate: true}).then(function () {
-                    console.info('Upload of expedition.json was successful');
-                    uploadPendingImagesAfterUpdate();
-                });
+                update(completedExpedition);
             }
 
-            function uploadPendingImagesAfterUpdate() {
-                // upload any pending images
-                console.log('Uploading pending assets...');
-                $rootScope.$broadcast('Asset.uploadPendingImages');
-                $rootScope.$on('Asset.uploadPendingImages.complete', uploadExpenseReport);
+            function uploadPendingAfterUpdate() {
+                console.log('Uploading expense report...');
+                uploadExpenseReport().then(function () {
+                    // upload any pending images
+                    console.log('Uploading pending assets...');
+                    $rootScope.$broadcast('Asset.uploadPendingImages');
+                    // upload any changes made to the expense report
+                    $rootScope.$on('Asset.uploadPendingImages.complete', promise.resolve);
+                });
             }
 
             function uploadExpenseReport() {
-                var saveAsFilename = 'expense-tracking-expedition-' + completedExpedition.title + '.xlsx',
+                var promise = $q.defer(),
+                    saveAsFilename = 'expense-tracking-expedition-' + completedExpedition.title + '.xlsx',
                     filename = 'expense-tracking.xlsx';
                 $csDocument.upload(completedExpedition.folderId, filename, saveAsFilename).then(function () {
                     promise.resolve(angular.copy(get(completedExpedition.id)));
-                });
+                }, promise.reject);
+                return promise.promise;
             }
 
             function onSubmitFail(err) {
@@ -266,7 +271,11 @@
                 $auth.reauth().then(function () {
                     req = generateUploadReq(blob);
                     console.log('Uploading expedition.json...');
-                    $http.post(url, req.request, req.options).then(promise.resolve, promise.reject);
+                    $http.post(url, req.request, req.options).then(function (res) {
+                        console.log('Upload of expedition.json was successful');
+                        $rootScope.$broadcast('Expedition.updated');
+                        promise.resolve(res);
+                    }, promise.reject);
                 });
             }
 

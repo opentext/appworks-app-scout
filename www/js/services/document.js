@@ -71,8 +71,8 @@
                 options = new FileUploadOptions();
 
             options.headers = {'otcsticket': $auth.getOTCSTicket()};
-            console.log('Attempting to download file via contentService...');
-            $appworks.storage.upload(filename, uploadUrl, success, fail, options, true);
+            console.log('Attempting to upload file via contentService...');
+            $appworks.storage.uploadFile(filename, uploadUrl, success, fail, options, true);
         }
 
         function downloadFile(fileId, filename, success, fail) {

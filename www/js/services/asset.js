@@ -141,6 +141,10 @@
                 }
             });
 
+            if (pendingAssets.length === 0) {
+                broadcastCompletion();
+            }
+
             angular.forEach(pendingAssets, function (asset, index) {
                 var expedition = Expedition.get(asset.expeditionId);
                 console.log('Uploading: ', asset);
@@ -148,12 +152,16 @@
                     asset.pendingUpload = false;
                     update(asset.expeditionId, asset.locationId, asset, {local: true});
                     if (index === pendingAssets.length - 1) {
-                        console.info('Uploaded all images');
-                        $rootScope.$broadcast('Asset.uploadPendingImages.complete');
+                        broadcastCompletion();
                         promise.resolve();
                     }
                 });
             });
+
+            function broadcastCompletion() {
+                console.info('Uploaded all images');
+                $rootScope.$broadcast('Asset.uploadPendingImages.complete');
+            }
 
             return promise.promise;
         }
