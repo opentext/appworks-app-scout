@@ -84,8 +84,9 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
                 template: 'Download succeeded.'
             });
         }, function () {
+            $scope.downloadingExpenseReport = false;
             $ionicPopup.alert({
-                title: 'Waiting...',
+                title: 'Not Ready',
                 template: 'This expedition is not yet ready for expenses. Get online before downloading the expense report.'
             });
         });
