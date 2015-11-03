@@ -85,16 +85,20 @@
 
             options.headers = {'otcsticket': $auth.getOTCSTicket()};
             console.log('Attempting to download file via contentService...');
-            $appworks.storage.storeFile(filename, downloadUrl, success, fail, options, true);
+            $appworks.storage.storeFile(encodeURI(filename), downloadUrl, success, fail, options, true);
         }
 
         function getDocument(folderId, filename, saveAsFilename) {
             var promise = $q.defer();
 
-            if ($appworks.network.online) {
-                $auth.reauth().then(getDocumentOnReauth);
+            if (folderId && filename && saveAsFilename) {
+                if ($appworks.network.online) {
+                    $auth.reauth().then(getDocumentOnReauth);
+                } else {
+                    $appworks.offline.defer('get', arguments, offlineEvents.get);
+                }
             } else {
-                $appworks.offline.defer('get', arguments, offlineEvents.get);
+                promise.reject('Did not provide one of: folderId, filename, saveAsFilename');
             }
 
             function getDocumentOnReauth() {
@@ -111,7 +115,7 @@
                     console.info('Got children of expedition root folder via contentService', res.data);
                     angular.forEach(res.data.contents, function (item) {
                         if (item.name === filename) {
-                            downloadFile(item.id, saveAsFilename, promise.resolve, promise.reject);
+                            downloadFile(item.id, encodeURI(saveAsFilename), promise.resolve, promise.reject);
                         }
                     });
                 });

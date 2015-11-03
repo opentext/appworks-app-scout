@@ -25,9 +25,12 @@
             </button>
             <div class="list" ng-repeat="asset in assets">
                 <img ng-src="{{asset.imgSrc}}" width="100%">
-                <a class="item item-icon-right">
+                <p class="item-text-wrap positive">
                     {{asset.name}}
-                </a>
+                </p>
+                <p class="item-text-wrap">
+                    {{asset.notes}}
+                </p>
             </div>
 
         </ion-list>
