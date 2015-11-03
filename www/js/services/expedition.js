@@ -44,9 +44,12 @@
 
         function complete(completedExpedition) {
             var promise = $q.defer(),
-                data = generateCompletionReq(completedExpedition),
                 config = {headers: {otdsticket: null}},
+                data,
                 url;
+
+            completedExpedition = angular.copy(get(completedExpedition.id));
+            data = generateCompletionReq(completedExpedition);
 
             $rootScope.$on('Expedition.updated', uploadPendingAfterUpdate);
 
@@ -55,7 +58,6 @@
             } else {
                 console.log('Deferring completion of expedition until device comes back online');
                 promise.resolve(completedExpedition);
-                // TODO call this function again when the device comes back online
                 $appworks.offline.defer('complete', arguments, offlineEvents.complete);
             }
 
