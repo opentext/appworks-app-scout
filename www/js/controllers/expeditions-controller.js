@@ -8,7 +8,8 @@ function ExpeditionsController($scope, Expedition, $state, StockImage) {
     $scope.expeditions = Expedition.all();
     $scope.image = StockImage.random();
     $scope.remove = function ($index) {
-        $scope.expeditions.splice($index, 1);
+        Expedition.destroy($scope.expeditions[$index]);
+        $scope.expeditions = Expedition.all();
     };
 
     // function bindings

@@ -8,7 +8,7 @@ angular
 angular
     .module('scout')
     .run(function ($rootScope) {
-        $rootScope.version = '0.9.9';
+        $rootScope.version = '1.0.0';
         $rootScope.contentServicePath = '/content/v5/nodes/';
         $rootScope.scoutServicePath = '/scoutService/api/expeditions';
     });

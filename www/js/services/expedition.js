@@ -112,7 +112,8 @@
 
         function destroyLocal(expedition) {
             var index = find(expedition);
-            return self.expeditions.splice(index, 1);
+            self.expeditions.splice(index, 1);
+            save();
         }
 
         function get(id) {
