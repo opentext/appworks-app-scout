@@ -18,8 +18,7 @@
             offlineFns = {
                 complete: complete,
                 start: startExpeditionWorkflow
-            },
-            self = this;
+            };
 
         // initialize service by loading expeditions from device storage
         init();
@@ -43,9 +42,9 @@
 
         function complete(completedExpedition) {
             var promise = $q.defer(),
-                url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
                 data = generateCompletionReq(completedExpedition),
-                config = {headers: {otdsticket: null}};
+                config = {headers: {otdsticket: null}},
+                url;
 
             if ($appworks.network.online) {
                 $auth.reauth().then(completeExpeditionAfterReauth);
@@ -57,6 +56,7 @@
             }
 
             function completeExpeditionAfterReauth() {
+                url = $auth.gatewayUrl() + '/scoutService/api/expeditions';
                 config.headers.otdsticket = $auth.getOTDSTicket();
                 // move the expedition along to the next step in the workflow
                 console.log('Attempting to submit expedition via scoutService...');

@@ -12,7 +12,8 @@
             },
             offlineFns = {
                 get: getDocument
-            };
+            },
+            self = this;
 
         this.get = getDocument;
 
