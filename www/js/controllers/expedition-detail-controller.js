@@ -73,7 +73,7 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
 
     function downloadExpenseReport() {
         var filename = 'expense-tracking.xlsx',
-            saveAsFilename = 'expense-tracking-' + new Date().getTime() + '.xlsx';
+            saveAsFilename = 'expense-tracking-expedition-' + $scope.expedition.title + '.xlsx';
         console.log('downloading expense report spreadsheet...');
         $scope.downloadingExpenseReport = true;
         $csDocument.get($scope.expedition.folderId, filename, saveAsFilename).then(function (res) {

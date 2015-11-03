@@ -216,7 +216,7 @@
         }
 
         function generateUrl(folderId) {
-            return $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children';
+            return $auth.gatewayUrl() + $rootScope.contentServicePath + folderId + '/children';
         }
 
         function generateUploadReq(name, file) {

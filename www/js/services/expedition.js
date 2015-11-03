@@ -56,7 +56,7 @@
             }
 
             function completeExpeditionAfterReauth() {
-                url = $auth.gatewayUrl() + '/scoutService/api/expeditions';
+                url = $auth.gatewayUrl() + $rootScope.scoutServicePath;
                 config.headers.otdsticket = $auth.getOTDSTicket();
                 // move the expedition along to the next step in the workflow
                 console.log('Attempting to submit expedition via scoutService...');
@@ -207,7 +207,7 @@
         }
 
         function generateUrl(nodeId, addVersion) {
-            var url = $auth.gatewayUrl() + '/content/v4/nodes/' + nodeId;
+            var url = $auth.gatewayUrl() + $rootScope.contentServicePath + nodeId;
             if (addVersion) {
                 url += '/content';
             } else {
@@ -277,7 +277,7 @@
                 // get fresh credentials, form the request, and then post to scout service to start the expedition workflow
                 $auth.reauth().then(function () {
                     var authResponse = $auth.getAuth(),
-                        url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
+                        url = $auth.gatewayUrl() + $rootScope.scoutServicePath,
                         config = {headers: {otdsticket: $auth.getOTDSTicket()}},
                         request = generateWorkflowReq(expedition, authResponse.addtl.contentServerConnector);
 

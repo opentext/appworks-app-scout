@@ -5,7 +5,7 @@
         .module('scout.services')
         .service('$csDocument', documentService);
 
-    function documentService($q, $http, $auth, $appworks) {
+    function documentService($q, $http, $auth, $appworks, $rootScope) {
 
         var offlineEvents = {
                 get: '$csDocument.getDocument'
@@ -28,7 +28,7 @@
 
         function downloadFile(fileId, filename, success, fail) {
             var downloadUrl = $auth.gatewayUrl() +
-                    '/content/v4/nodes/' +
+                    $rootScope.contentServicePath +
                     fileId +
                     '/content?versionNum=1&cstoken=' +
                     $auth.getOTCSTicket(),
@@ -49,7 +49,7 @@
             }
 
             function getDocumentOnReauth() {
-                var url = $auth.gatewayUrl() + '/content/v4/nodes/' + folderId + '/children',
+                var url = $auth.gatewayUrl() + $rootScope.contentServicePath + folderId + '/children',
                     config = {
                         headers: {
                             otcsticket: $auth.getOTCSTicket()
