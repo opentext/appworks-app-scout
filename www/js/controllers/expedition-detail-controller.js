@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('ExpeditionDetailController', ExpeditionDetailController);
 
-function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicHistory, $ionicPopup) {
+function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $ionicActionSheet, Expedition, Location, $window, $appworks, $csDocument, $ionicPopup) {
 
     // variable bindings
     $scope.expedition = Expedition.get($stateParams.id);
@@ -23,7 +23,6 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
     $scope.recordCurrentLocation = recordCurrentLocation;
     $scope.addNewLocation = addNewLocation;
     $scope.removeLocation = removeLocation;
-    $scope.goBack = $ionicHistory.goBack;
     $scope.isEnabled = isEnabled;
     $scope.reload = reload;
     $scope.go = $state.go;

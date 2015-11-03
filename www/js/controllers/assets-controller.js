@@ -2,7 +2,7 @@ angular
     .module('scout.controllers')
     .controller('AssetsController', AssetsController);
 
-function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition, $ionicHistory, $ionicActionSheet) {
+function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Location, $appworks, StockImage, Expedition, $ionicActionSheet) {
 
     // variable bindings
     $scope.StockImage = StockImage;
@@ -22,10 +22,14 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     $scope.handleCamera = handleCamera;
     $scope.saveAsset = saveAsset;
     $scope.reload = loadData;
-    $scope.goBack = $ionicHistory.goBack;
+    $scope.goBack = goBack;
     $scope.go = $state.go;
 
     // ui/utility
+
+    function goBack() {
+        $state.go('tab.location', {expeditionId: $stateParams.expeditionId, locationId: $stateParams.locationId});
+    }
 
     function closeNewAssetModal() {
         clearNewAsset();
