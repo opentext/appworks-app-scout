@@ -17,7 +17,9 @@
             },
             offlineFns = {
                 complete: complete,
-                start: startExpeditionWorkflow
+                start: function (expedition) {
+                    startExpeditionWorkflow(expedition).then(uploadInitialExpeditionModel, onStartWorkflowFail);
+                }
             };
 
         // initialize service by loading expeditions from device storage
