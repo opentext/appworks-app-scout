@@ -27,6 +27,9 @@
                 'item-balanced': expedition.status === 'COMPLETE'
              }">
             {{expedition.title}}
+            <div style="float: right; color: #4f4f4f; font-style: italic;">
+                {{expedition.status.toLowerCase()}}
+            </div>
         </div>
         <label class="item item-input" ng-class="{'disable-pointer-events': !isEnabled(expedition)}">
             <span class="input-label">Starts</span>
