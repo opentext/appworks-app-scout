@@ -12,8 +12,8 @@
             self = this,
             retryAttempts = 0,
             offlineEvents = {
-                complete: 'expedition.complete',
-                start: 'expedition.start'
+                complete: 'Expedition.complete',
+                start: 'Expedition.start'
             },
             offlineFns = {
                 complete: complete,
@@ -279,7 +279,7 @@
                     var authResponse = $auth.getAuth(),
                         url = $auth.gatewayUrl() + '/scoutService/api/expeditions',
                         config = {headers: {otdsticket: $auth.getOTDSTicket()}},
-                        request = generateWorkflowReq(expedition, authResponse);
+                        request = generateWorkflowReq(expedition, authResponse.addtl.contentServerConnector);
 
                     // send request
                     console.log('Attempting to start expedition workflow via scoutService...');
