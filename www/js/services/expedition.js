@@ -111,7 +111,7 @@
             expedition.id = Math.ceil(Math.random() * 100000);
             expedition.locations = [];
             expedition.status = STATUS.new;
-            expedition.ready = true;
+            expedition.offlineReady = true;
             // prevent dupes errors
             copiedExpedition = angular.copy(expedition);
             // update the model

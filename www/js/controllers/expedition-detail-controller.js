@@ -55,7 +55,7 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
     }
 
     function isEnabled(expedition) {
-        return expedition.status === 'NEW' && expedition.ready;
+        return expedition.status === 'NEW' && (expedition.ready || expedition.offlineReady);
     }
 
     function openExpensesModal() {
