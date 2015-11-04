@@ -70,7 +70,8 @@
                 var promise = $q.defer();
                 console.log('Uploading expense report...');
                 uploadExpenseReport().then(function () {
-                    uploadExpeditionModel().then(function () {
+                    uploadExpeditionModel();
+                    $rootScope.$on('Expedition.updated', function () {
                         // upload any pending images
                         console.log('Uploading pending assets...');
                         $rootScope.$broadcast('Asset.uploadPendingImages');
