@@ -54,7 +54,9 @@
                 // go through with completion if expedition workflow has been started
                 if (completedExpedition.ready) {
                     data = generateCompletionReq(completedExpedition);
-                    $auth.reauth().then(uploadPending).then(completeExpeditionAfterReauth);
+                    $auth.reauth().then(function () {
+                        uploadPending().then(completeExpeditionAfterReauth);
+                    });
                 } else {
                     startExpeditionWorkflow(completedExpedition).then(uploadInitialExpeditionModel).then(complete);
                 }
@@ -67,12 +69,14 @@
             function uploadPending() {
                 var promise = $q.defer();
                 console.log('Uploading expense report...');
-                uploadExpenseReport().then(uploadExpeditionModel).then(function () {
-                    // upload any pending images
-                    console.log('Uploading pending assets...');
-                    $rootScope.$broadcast('Asset.uploadPendingImages');
-                    // upload any changes made to the expense report
-                    $rootScope.$on('Asset.uploadPendingImages.complete', promise.resolve);
+                uploadExpenseReport().then(function () {
+                    uploadExpeditionModel().then(function () {
+                        // upload any pending images
+                        console.log('Uploading pending assets...');
+                        $rootScope.$broadcast('Asset.uploadPendingImages');
+                        // upload any changes made to the expense report
+                        $rootScope.$on('Asset.uploadPendingImages.complete', promise.resolve);
+                    });
                 });
                 return promise.promise;
             }
@@ -90,7 +94,7 @@
                 completedExpedition = get(completedExpedition.id);
                 completedExpedition.status = STATUS.submitted;
                 // save expedition.json on device and in server
-                update(completedExpedition);
+                return update(completedExpedition, {returnDeferredUpdate: true});
             }
 
             function uploadExpenseReport() {
