@@ -48,17 +48,33 @@
                 data,
                 url;
 
-            completedExpedition = angular.copy(get(completedExpedition.id));
-            data = generateCompletionReq(completedExpedition);
-
-            $rootScope.$on('Expedition.updated', uploadPendingAfterUpdate);
+            completedExpedition = get(completedExpedition.id);
 
             if ($appworks.network.online) {
-                $auth.reauth().then(completeExpeditionAfterReauth);
+                // go through with completion if expedition workflow has been started
+                if (completedExpedition.ready) {
+                    data = generateCompletionReq(completedExpedition);
+                    $auth.reauth().then(uploadPending).then(completeExpeditionAfterReauth);
+                } else {
+                    startExpeditionWorkflow(completedExpedition).then(uploadInitialExpeditionModel).then(complete);
+                }
             } else {
                 console.log('Deferring completion of expedition until device comes back online');
                 promise.resolve(completedExpedition);
                 $appworks.offline.defer('complete', arguments, offlineEvents.complete);
+            }
+
+            function uploadPending() {
+                var promise = $q.defer();
+                console.log('Uploading expense report...');
+                uploadExpenseReport().then(uploadExpeditionModel).then(function () {
+                    // upload any pending images
+                    console.log('Uploading pending assets...');
+                    $rootScope.$broadcast('Asset.uploadPendingImages');
+                    // upload any changes made to the expense report
+                    $rootScope.$on('Asset.uploadPendingImages.complete', promise.resolve);
+                });
+                return promise.promise;
             }
 
             function completeExpeditionAfterReauth() {
@@ -66,11 +82,10 @@
                 config.headers.otdsticket = $auth.getOTDSTicket();
                 // move the expedition along to the next step in the workflow
                 console.log('Attempting to submit expedition via scoutService...');
-                $http.put(url, data, config).then(uploadExpeditionModel, onSubmitFail);
+                $http.put(url, data, config).then(onCompletionSuccess, onSubmitFail);
             }
 
-            function uploadExpeditionModel(res) {
-                console.info('Submission of expedition via scoutService successful', res.data);
+            function uploadExpeditionModel() {
                 // refresh model to get latest
                 completedExpedition = get(completedExpedition.id);
                 completedExpedition.status = STATUS.submitted;
@@ -78,30 +93,29 @@
                 update(completedExpedition);
             }
 
-            function uploadPendingAfterUpdate() {
-                console.log('Uploading expense report...');
-                uploadExpenseReport().then(function () {
-                    // upload any pending images
-                    console.log('Uploading pending assets...');
-                    $rootScope.$broadcast('Asset.uploadPendingImages');
-                    // upload any changes made to the expense report
-                    $rootScope.$on('Asset.uploadPendingImages.complete', promise.resolve);
-                });
-            }
-
             function uploadExpenseReport() {
                 var promise = $q.defer(),
                     saveAsFilename = 'expense-tracking-expedition-' + completedExpedition.title + '.xlsx',
-                    filename = 'expense-tracking.xlsx';
-                $csDocument.upload(completedExpedition.folderId, filename, saveAsFilename).then(function () {
-                    promise.resolve(angular.copy(get(completedExpedition.id)));
-                }, promise.reject);
+                    filename = 'expense-tracking.xlsx',
+                    folderId = completedExpedition.folderId;
+
+                // upload the expense report if one has been downloaded, otherwise skip
+                if (completedExpedition.expenseReportDownloaded) {
+                    $csDocument.upload(folderId, filename, saveAsFilename).then(null, promise.reject);
+                    $rootScope.$on('$csDocument.upload.complete', promise.resolve);
+                } else {
+                    promise.resolve();
+                }
                 return promise.promise;
             }
 
             function onSubmitFail(err) {
                 console.error('Submission of expedition via scoutService failed', err);
                 completedExpedition.status = STATUS.new;
+            }
+
+            function onCompletionSuccess(res) {
+                console.log('Expedition submission was successful', res);
             }
 
             return promise.promise;
@@ -312,6 +326,7 @@
 
                     function workflowSuccess(res) {
                         console.info('Succesfully started workflow', res);
+                        // bind workflow data to expedition - includes content server information
                         expedition = angular.merge(expedition, res.data);
                         save();
                         promise.resolve(expedition);
@@ -334,6 +349,7 @@
         }
 
         function uploadInitialExpeditionModel(expedition) {
+            var promise = $q.defer();
             console.log('Attempting to create initial expedition.json via content service...');
             createObject(expedition, expedition.folderId).then(function (res) {
                 console.info('Upload of initial expedition.json was successful', res.data);
@@ -341,9 +357,11 @@
                 expedition.ready = true;
                 update(expedition, {local: true});
                 $rootScope.$broadcast('expedition.ready', expedition);
+                promise.resolve(expedition);
             }, function () {
                 console.error('Upload of initial expedition.json failed');
             });
+            return promise.promise;
         }
 
         function updateObject(obj, objId) {

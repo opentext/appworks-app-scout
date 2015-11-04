@@ -83,6 +83,9 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
                 title: 'Success',
                 template: 'Download succeeded.'
             });
+            // mark this expedition as having an expense report downloaded
+            $scope.expedition.expenseReportDownloaded = true;
+            Expedition.update($scope.expedition, {local: true});
         }, function () {
             $scope.downloadingExpenseReport = false;
             $ionicPopup.alert({

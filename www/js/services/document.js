@@ -53,10 +53,14 @@
                     console.info('Got children of expedition root folder via contentService', res.data);
                     angular.forEach(res.data.contents, function (item) {
                         if (item.name === filename) {
-                            uploadFile(item.id, saveAsFilename, promise.resolve, promise.reject);
+                            uploadFile(item.id, saveAsFilename, broadcastCompletion, promise.reject);
                         }
                     });
                 });
+            }
+
+            function broadcastCompletion(model) {
+                $rootScope.$broadcast('$csDocument.upload.complete', model);
             }
 
             return promise.promise;
@@ -85,7 +89,7 @@
 
             options.headers = {'otcsticket': $auth.getOTCSTicket()};
             console.log('Attempting to download file via contentService...');
-            $appworks.storage.storeFile(encodeURI(filename), downloadUrl, success, fail, options, true);
+            $appworks.storage.storeFile(filename, downloadUrl, success, fail, options, true);
         }
 
         function getDocument(folderId, filename, saveAsFilename) {
@@ -115,7 +119,7 @@
                     console.info('Got children of expedition root folder via contentService', res.data);
                     angular.forEach(res.data.contents, function (item) {
                         if (item.name === filename) {
-                            downloadFile(item.id, encodeURI(saveAsFilename), promise.resolve, promise.reject);
+                            downloadFile(item.id, saveAsFilename, promise.resolve, promise.reject);
                         }
                     });
                 });
