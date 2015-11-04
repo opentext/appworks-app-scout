@@ -55,7 +55,9 @@
                 if (completedExpedition.ready) {
                     data = generateCompletionReq(completedExpedition);
                     $auth.reauth().then(function () {
-                        uploadPending().then(completeExpeditionAfterReauth);
+                        uploadPending();
+                        // last step is uploading pending images, now we can submit the expedition
+                        $rootScope.$on('Asset.uploadPendingImages.complete', submitExpedition);
                     });
                 } else {
                     startExpeditionWorkflow(completedExpedition).then(uploadInitialExpeditionModel).then(complete);
@@ -82,12 +84,14 @@
                 return promise.promise;
             }
 
-            function completeExpeditionAfterReauth() {
+            function submitExpedition() {
                 url = $auth.gatewayUrl() + $rootScope.scoutServicePath;
                 config.headers.otdsticket = $auth.getOTDSTicket();
                 // move the expedition along to the next step in the workflow
                 console.log('Attempting to submit expedition via scoutService...');
-                $http.put(url, data, config).then(onCompletionSuccess, onSubmitFail);
+                $auth.reauth().then(function () {
+                    $http.put(url, data, config).then(onCompletionSuccess, onSubmitFail);
+                });
             }
 
             function uploadExpeditionModel() {
