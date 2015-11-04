@@ -32,7 +32,9 @@
                 Record Current Coordinates
             </button>
             <div class="spacer"></div>
-            <button class="button button-full button-positive" ng-click="addNewLocation(newLocation)">
+            <button class="button button-full button-positive"
+                    ng-disabled="newLocation.name"
+                    ng-click="addNewLocation(newLocation)">
                 Add Location
             </button>
 
