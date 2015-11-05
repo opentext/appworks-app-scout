@@ -13,20 +13,15 @@ angular
         $rootScope.scoutServicePath = '/scoutService/api/expeditions';
     });
 
-//angular
-//    .module('scout')
-//    .run(function ($appworks, $state, $timeout) {
-//        $timeout(function () {
-//            $appworks.notifications.handler(function (notification) {
-//                alert(JSON.stringify(notification));
-//                // get the expedition from notification
-//                // validate expedition
-//                // get id
-//                // navigate to expedition
-//                $state.go('tab.expedition', {id: notification.expeditionId});
-//            });
-//        }, 2000);
-//    });
+angular
+    .module('scout')
+    .run(function ($ionicPlatform) {
+        $ionicPlatform.ready(function () {
+            // implement a notifications handler to process notifications sent to this app by the gateway
+            // as an example, use a notification sent to this device to navigate to an expedition by parsing
+            // the notification object for the expeditionId, then using $state to go to that expedition
+        });
+    });
 
 angular
     .module('scout')
