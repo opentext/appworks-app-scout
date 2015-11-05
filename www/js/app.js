@@ -13,21 +13,6 @@ angular
         $rootScope.scoutServicePath = '/scoutService/api/expeditions';
     });
 
-//angular
-//    .module('scout')
-//    .run(function ($appworks, $state, $timeout) {
-//        $timeout(function () {
-//            $appworks.notifications.handler(function (notification) {
-//                alert(JSON.stringify(notification));
-//                // get the expedition from notification
-//                // validate expedition
-//                // get id
-//                // navigate to expedition
-//                $state.go('tab.expedition', {id: notification.expeditionId});
-//            });
-//        }, 2000);
-//    });
-
 angular
     .module('scout')
     .config(function($compileProvider){
