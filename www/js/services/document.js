@@ -27,7 +27,6 @@
         function evalFnFromOfflineEvent(evt) {
             var evt = evt.detail.data.detail;
             offlineFns[evt.identifier].apply(self, evt.args);
-            document.removeEventListener(evt.eventListener, offlineFns[evt.eventListener]);
         }
 
         function uploadDocument(folderId, filename, saveAsFilename) {
