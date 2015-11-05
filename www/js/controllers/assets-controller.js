@@ -83,20 +83,9 @@ function AssetsController($scope, Asset, $state, $stateParams, $ionicModal, Loca
     }
 
     function handleCamera(newAsset, chooseFromGallery) {
-        var fn;
-
-        if (chooseFromGallery) {
-            fn = $appworks.camera.chooseFromLibrary;
-        } else {
-            fn = $appworks.camera.takePicture;
-        }
-
-        fn(function (fileUrl) {
-            newAsset.imgSrc = fileUrl;
-            newAsset.fileName = 'photo-' + new Date().getTime() + '.jpg';
-            newAsset.pendingUpload = true;
-            $scope.$apply();
-        });
+        // TODO
+        // implement this method by using appworksJS to open the device camera or photo gallery,
+        // then display the image on the page
     }
 
     function saveAsset(asset) {
