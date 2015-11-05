@@ -51,6 +51,7 @@ function ExpeditionDetailController($scope, $state, $stateParams, $ionicModal, $
     }
 
     function closeNewLocationModal() {
+        $scope.newLocation = {};
         $scope.newLocationModal.hide();
     }
 
