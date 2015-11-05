@@ -19,11 +19,17 @@ angular
         $timeout(function () {
             $appworks.notifications.handler(function (notification) {
                 alert(JSON.stringify(notification));
-                // get the expedition from notification
-                // validate expedition
-                // get id
-                // navigate to expedition
-                $state.go('tab.expedition', {id: notification.expeditionId});
+                /*
+                    notification should have the form:
+                    {
+                        action: 'go',
+                        state: 'tab.expedition',
+                        params: {id: id}
+                    }
+                 */
+                if (notification.action && notification.state && notification.params) {
+                    $state[notification.action](notification.state, notification.params);
+                }
             });
         }, 2000);
     });
