@@ -15,8 +15,8 @@ angular
 
 angular
     .module('scout')
-    .run(function ($ionicPlatform, $appworks, $state) {
-        $ionicPlatform.ready(function () {
+    .run(function ($timeout, $appworks, $state) {
+        $timeout(function () {
             $appworks.notifications.handler(function (notification) {
                 alert(JSON.stringify(notification));
                 // get the expedition from notification
@@ -25,7 +25,7 @@ angular
                 // navigate to expedition
                 $state.go('tab.expedition', {id: notification.expeditionId});
             });
-        });
+        }, 2000);
     });
 
 angular
