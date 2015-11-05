@@ -15,12 +15,12 @@ angular
 
 angular
     .module('scout')
-    .run(function ($ionicPlatform) {
-        $ionicPlatform.ready(function () {
+    .run(function ($timeout) {
+        $timeout(function () {
             // implement a notifications handler to process notifications sent to this app by the gateway
             // as an example, use a notification sent to this device to navigate to an expedition by parsing
             // the notification object for the expeditionId, then using $state to go to that expedition
-        });
+        }, 2000);
     });
 
 angular
