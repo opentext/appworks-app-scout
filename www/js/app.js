@@ -8,10 +8,25 @@ angular
 angular
     .module('scout')
     .run(function ($rootScope) {
-        $rootScope.version = '1.1.3';
+        $rootScope.version = '1.1.4';
         $rootScope.contentServicePath = '/content/v5/nodes/';
         $rootScope.scoutServicePath = '/scoutService/api/expeditions';
     });
+
+//angular
+//    .module('scout')
+//    .run(function ($appworks, $state, $timeout) {
+//        $timeout(function () {
+//            $appworks.notifications.handler(function (notification) {
+//                alert(JSON.stringify(notification));
+//                // get the expedition from notification
+//                // validate expedition
+//                // get id
+//                // navigate to expedition
+//                $state.go('tab.expedition', {id: notification.expeditionId});
+//            });
+//        }, 2000);
+//    });
 
 angular
     .module('scout')
