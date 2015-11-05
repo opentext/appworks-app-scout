@@ -7,7 +7,7 @@
 
     function Expedition($appworks, $q, $http, Blob, $auth, $rootScope, $csDocument) {
 
-        var STORAGE_KEY = 'scoutApp.expeditions.' + window.location.pathname,
+        var STORAGE_KEY = 'scoutApp.expeditions["' + window.location.href + '"]',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
             self = this,
             retryAttempts = 0,
