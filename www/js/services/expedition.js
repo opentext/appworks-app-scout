@@ -7,7 +7,7 @@
 
     function Expedition($appworks, $q, $http, Blob, $auth, $rootScope, $csDocument) {
 
-        var STORAGE_KEY = 'scoutApp.expeditions["' + window.location.pathname + '"]',
+        var STORAGE_KEY = 'scoutApp.expeditions["' + getAppname() + '"]',
             STATUS = {pending: 'PENDING', submitted: 'SUBMITTED', completed: 'COMPLETED', new: 'NEW'},
             self = this,
             retryAttempts = 0,
@@ -204,6 +204,11 @@
         }
 
         // helpers
+
+        function getAppname() {
+            var index = window.location.pathname.split('/').indexOf('apps');
+            return window.location.pathname.split('/')[index + 1];
+        }
 
         function convertDatesToDateString() {
             self.expeditions.map(function (expedition) {
